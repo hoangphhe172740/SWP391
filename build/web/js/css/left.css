@@ -1,0 +1,54 @@
+.col-sm-3 {
+    padding: 20px;
+    
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.list-group-item {
+    border: none;
+    padding: 10px 15px;
+    color: #007bff;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.card-product {
+    text-align: center;
+    padding: 20px;
+}
+
+.card-product img {
+    width: 100%;
+    height: auto;
+}
+
+.card-product .card-title {
+    margin: 10px 0;
+}
+
+.card-product .card-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.card-product .card-text {
+    color: #666;
+}
