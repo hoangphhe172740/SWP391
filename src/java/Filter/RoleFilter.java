@@ -113,7 +113,7 @@ public class RoleFilter implements Filter {
         HttpSession session = req.getSession();
         
         Account acc = (Account) session.getAttribute("acc");
-        if(acc.getRole().id == 1){
+        if(acc.getRoleID().equals(4)){
             res.sendRedirect("home");
         }else{
             req.getRequestDispatcher("index.html").forward(request, response);

@@ -82,7 +82,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav">
-                <c:if test="${sessionScope.acc.role == 2}">
+                <c:if test="${sessionScope.acc.roleID == 2}">
                     <li class="nav-item">
                         <b><a class="nav-link" href="manageMentor">Manage Mentor</a></b>
                     </li>

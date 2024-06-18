@@ -21,7 +21,7 @@ public class DAO extends DBContext {
                 + "      ,[user]\n"
                 + "      ,[pass]\n"
                 + "      ,[email]\n"
-                + "      ,[role]\n"
+                + "      ,[roleID]\n"
                 + "  FROM [projectSWP].[dbo].[Account]"
                 + " where [email] = ? and [pass] = ?";
         try {
@@ -49,7 +49,7 @@ public class DAO extends DBContext {
                     + "           ,[email]\n"
                     + "           ,[pass]\n"
                     + "           ,[fullname]\n"
-                    + "           ,[role]\n"
+                    + "           ,[roleID]\n"
                     + "           VALUES(?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
@@ -68,7 +68,7 @@ public class DAO extends DBContext {
                 + "      ,[user]\n"
                 + "      ,[pass]\n"
                 + "      ,[email]\n"
-                + "      ,[role]\n"
+                + "      ,[roleID]\n"
                 + "  FROM [projectSWP].[dbo].[Account]"
                 + " where [email] = ?";
         try {

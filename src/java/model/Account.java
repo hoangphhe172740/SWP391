@@ -9,17 +9,17 @@ public class Account {
     private String email;
     private String pass;
     private String user;
-    private String role;
+    private String roleID;
 
     public Account() {
     }
 
-    public Account(int id, String email, String pass, String user, String role) {
+    public Account(int id, String email, String pass, String user, String roleID) {
         this.id = id;
         this.email = email;
         this.pass = pass;
         this.user = user;
-        this.role = role;
+        this.roleID = roleID;
     }
 
     public int getId() {
@@ -54,17 +54,17 @@ public class Account {
         this.user = user;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleID() {
+        return roleID;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleID(String roleID) {
+        this.roleID = roleID;
     }
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", email=" + email + ", pass=" + pass + ", user=" + user + ", role=" + role + '}';
+        return "Account{" + "id=" + id + ", email=" + email + ", pass=" + pass + ", user=" + user + ", roleID=" + roleID + '}';
     }
     
 }
