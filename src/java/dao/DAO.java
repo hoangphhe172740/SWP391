@@ -377,4 +377,33 @@ public class DAO extends DBContext {
         }
         return list;
     }
+     public List<Course> getNewManyCourse() {
+        List<Course> list = new ArrayList<>();
+        String sql = "SELECT TOP (4) [id]\n"
+                + "      ,[name]\n"
+                + "      ,[description]\n"
+                + "      ,[price]\n"
+                + "      ,[image]\n"
+                + "      ,[title]\n"
+                + "      ,[created_by]\n"
+                + "      ,[category_id]\n"
+                + "  FROM [projectSWP].[dbo].[Course]\n"
+                + "  order by id desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                 list.add(new Course(rs.getInt(1),
+                         rs.getString(2),
+                         rs.getString(3),
+                         rs.getDouble(4),
+                         rs.getString(5),
+                         rs.getString(6),
+                         rs.getInt(8)));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
 }
