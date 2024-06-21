@@ -69,6 +69,14 @@
             color: #007bff;
         }
     }
+    .search-box button {
+        position: absolute;
+        background: none;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+        font-size: 16px;
+    }
 </style>
 <link rel="stylesheet" href="./css/menu.css"/>
 <!-- begin of Menu--->
@@ -80,6 +88,12 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <form action="searchtext" method="post">
+            <div class="search-box">
+                <input name="txt"  value="${txtS}"type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search..." style=" border-radius: 20px; padding-left: 10px; background-color: #fff; margin: 10px 10px; padding-right: 70px; font-size: 16px;">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass" style="font-size: 16px; padding-top: 18px;"></i></button>
+            </div>
+        </form>
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav">
                 <c:if test="${sessionScope.acc.roleID == 2}">

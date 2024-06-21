@@ -20,168 +20,149 @@
         <title>Course Detail</title>
     </head>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-        }
-
-        .top-area {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .container {
+            max-width: 1200px;
+            margin: auto;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 6px 0 rgba(0,0,0,0.1);
         }
 
-        .top-area div, .top-area form {
-            flex: 1;
-        }
-
-        .search-box {
-            display: flex;
-            position: relative;
-            max-width: 600px; /* Adjust based on your preference */
-            margin-left: auto; /* Aligns the search box to the right */
-            margin-right: 20px;
-        }
-
-        .search-box input[type="text"] {
-            width: 100%;
-            padding: 10px 20px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            font-size: 16px;
-            background-color: #fff;
-            outline: none;
-        }
-
-        .search-box button {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            color: #333;
-            outline: none;
-        }
         .card {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            background-color: #f8f9fa;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
             margin-bottom: 20px;
+        }
+
+        .card-header.bg-primary {
+            background-color: #007bff !important;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
         }
 
         .card-body {
             padding: 20px;
-            background-color: #F2F6FD;
         }
 
         .content-and-image {
-            display: flex;
-            align-items: start; /* Bảo đảm nội dung và hình ảnh cùng căn đầu */
+            justify-content: space-between;
+        }
+
+        .text-section, .image-section {
+            flex: 1;
         }
 
         .text-section {
-            flex: 1; /* Cho phép chiếm đa số không gian khi có thể */
-            padding-right: 20px; /* Tạo khoảng cách giữa văn bản và hình ảnh */
+            padding-right: 20px;
         }
 
         .e-learning-icon {
-            font-size: 20px;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
             color: #007bff;
-            padding-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         .text-content p {
-            text-align: left;
-            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.6;
         }
 
-        .text-content p:first-child {
-            font-size: 40px;
-            font-weight: bold;
-        }
-
-        .text-content p:last-child {
-            font-size: 18px;
-            width: 700px;
+        .text-content a {
+            color: #007bff;
+            text-decoration: none;
         }
 
         .image-section img {
             max-width: 100%;
-            border-radius: 50%; /* Khuyến khích sử dụng khi hình ảnh cần được bo tròn */
-        }
-        /* Cố định phong cách cho toàn bộ section */
-        #reviews {
-            padding: 20px;
-            background-color: #f4f4f4; /* Màu nền nhẹ cho phần reviews */
+            height: auto;
+            border-radius: 8px;
         }
 
-        /* Phong cách cho card */
-        .card.border-light.mb-3 {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ nhẹ */
-            border-radius: 8px; /* Bo tròn góc của card */
-        }
-
-        /* Phong cách cho tiêu đề của card */
-        .card-header.bg-primary.text-white.text-uppercase {
-            display: flex;
-            align-items: center;
+        .card-title.show_txt {
+            padding: 10px 0;
             font-size: 18px;
-            padding-left: 15px; /* Độ lệch sang trái cho biểu tượng và văn bản */
-        }
-        .show_txt.bg-light.text-center {
-            margin-top: 10px;
-            background-color: #ffffff; /* Màu nền cho tiêu đề */
-            padding: 5px 10px; /* Đệm cho tiêu đề */
-            border-radius: 5px;  /* Bo tròn góc cho tiêu đề */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+            font-weight: bold;
         }
 
-        /* Phong cách cho liên kết */
-        .show_txt.bg-light.text-center a {
-            color: #007bff;  /* Màu cho liên kết */
-            text-decoration: none;
+        .btn.btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            color: #ffffff;
         }
+
+        .btn.btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        /* Tổng quan và layout swiper */
+        .swiper {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        /* Tạo hiệu ứng border và box-shadow cho mỗi slide */
         .swiper-slide {
-            height: auto; /* Hoặc có thể thử cố định chiều cao bằng px */
             display: flex;
-            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            overflow: hidden;
         }
+        
 
+        /* Điều chỉnh cho ảnh sản phẩm trong các slide */
         .slide__product-image {
-            width: auto;  /* Đảm bảo chiều ngang tự động điều chỉnh */
-            max-height: 200px; /* Cố định chiều cao tối đa */
-            object-fit: cover; /* Đảm bảo hình ảnh che kín khu vực được chỉ định */
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
         }
 
-        .swiper-slide, .slide__product-detail {
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Căn giữa nội dung cho đồng đều */
-            align-items: center; /* Đảm bảo chiều rộng đồng đều */
+        /* Tạo kiểu cho tiêu đề sản phẩm */
+        .card-title.show_txt {
+            padding: 10px 0;
+            font-size: 18px; /* Tăng kích thước font */
+            font-weight: bold;
+        }
+
+        /* Button điều hướng (nếu bạn có sử dụng) */
+        .swiper-button-next, .swiper-button-prev {
+            color: #007bff; /* Màu sắc của buttons */
+            font-size: 20px; /* Tăng kích thước để dễ nhấn hơn */
+            border: none;
+            background: transparent;
+        }
+
+        /* Pagination bullets */
+        .swiper-pagination-bullet {
+            background: #007bff; /* Màu sắc cho bullets */
+            opacity: 1; /* Làm cho chúng luôn hiển thị */
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #ff6347; /* Màu sắc cho bullet đang active */
+        }
+
+        @media (max-width: 768px) {
+            .content-and-image {
+                flex-direction: column;
+            }
+
+            .text-section {
+                padding-right: 0;
+                padding-bottom: 20px;
+            }
         }
     </style>
-    <section class="top-area">
-        <div>
-            <a href="#"><img src="img/360_F_128939133_0WXTVdZ1bv1NXusQsdYYJLIwTVoXHqQ7.jpg" alt="" width="90px"/></a>
-        </div>
-        <form action="seachtext" method="post">
-            <div class="search-box">
-                <input name="txt"  value="${txtS}"type="text" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search..." style=" border-radius: 20px;padding-left: 10px;background-color: #fff;margin: 10px 10px;padding-right: 70px;font-size: 16px;">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass" style="font-size: 16px;"></i></button>
-            </div>
-        </form>
-    </section>
-    <section class="container">
-        <div>
-            <div class="row">
+    <jsp:include page="menu.jsp"></jsp:include>
+        <section class="container">
+            <div>
+                <div class="row">
                 <c:set var="c" value="${requestScope.detail}"/>
                 <div >
                     <div class="card bg-light mb-3">
