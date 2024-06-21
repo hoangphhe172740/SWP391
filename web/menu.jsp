@@ -107,7 +107,7 @@
                         <b><a class="nav-link" href="statistic">Statistic</a></b>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.acc != null}">
+                <c:if test="${sessionScope.acc != null}">                    
                     <li class="nav-item dropdown pe-3">
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" aria-expanded="true" data-bs-toggle="dropdown">
                             <span class="fa-solid fa-circle-user d-none d-md-block dropdown-toggle ps-2"> ${acc.email}</span>

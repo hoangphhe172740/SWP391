@@ -31,7 +31,7 @@
                                 <div class="main-wrapper">
                                     <h1 class="main-title"><a href="detail?Courseid=${cnew.id}">${cnew.name}</a></h1>
                                     <h3 class="main-header">${cnew.title}</h3>
-                                    <h2 class="main-subtitle">${cnew.price}</h2>
+                                    <button><h2 class="main-subtitle">${cnew.price}</h2></button>
                                 </div>  
                             </div>
                             <div class="right-side">                                       
@@ -44,25 +44,25 @@
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
-
-
-        </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev"
-            }
-        });
-    </script>
-</body>
+        </section>
+            <section>
+                
+            </section>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            var swiper = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                }
+            });
+        </script>
+    </body>
 </html>
