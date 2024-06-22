@@ -387,16 +387,11 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public void InsertCourse(String name, String description, String price, String image, String title, int sid, String category) {
-        String sql = "INSERT [dbo].[Course]\n"
-                + "           ,[name]\n"
-                + "           ,[description]\n"
-                + "           ,[price]\n"
-                + "           ,[image]\n"
-                + "           ,[title]\n"
-                + "           ,[created_by]\n"
-                + "           ,[category_id])"
-                + "VALUES(?,?,?,?,?,?,?)";
+    public void InsertCourse(String name, String description, String price, String image, String title, int createRole, String category) {
+        String sql = "INSERT [dbo].[Course] "
+                + "([name], [description], [price],"
+                + " [image], [title], [created_by], [category_id]) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement st;
         try {
             st = connection.prepareStatement(sql);
@@ -405,8 +400,9 @@ public class DAO extends DBContext {
             st.setString(3, price);
             st.setString(4, image);
             st.setString(5, title);
-            st.setInt(6, sid);
+            st.setInt(6, createRole);
             st.setString(7, category);
+            st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -433,6 +429,6 @@ public class DAO extends DBContext {
 
     public static void main(String[] args) {
         DAO d = new DAO();
-        d.InsertCourse("hhhhhh", "vnvnvnv", "459", " ", "jdjdjda", 2, "5");
+        d.InsertCourse("hehehe", "chiu", "666", "chiu", "chiu", 2, "4");
     }
 }

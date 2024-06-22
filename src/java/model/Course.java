@@ -11,7 +11,9 @@ public class Course {
     private double price;
     private String image,title;
     private int category_id;
-
+    
+    
+    
     public Course() {
     }
 
