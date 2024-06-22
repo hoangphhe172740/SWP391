@@ -15,7 +15,7 @@ import model.Category;
 import model.Course;
 
 public class DAO extends DBContext {
-    
+
     public Account checkLogin(String email, String pass) {
         String sql = "SELECT [uID]\n"
                 + "      ,[user]\n"
@@ -23,7 +23,7 @@ public class DAO extends DBContext {
                 + "      ,[email]\n"
                 + "      ,[roleID]\n"
                 + "  FROM [projectSWP].[dbo].[Account]"
-                + " where [email] = ? and [pass] = ?";
+                + " where [email] = ? and pass = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
@@ -34,35 +34,14 @@ public class DAO extends DBContext {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getString(5));
+                        rs.getInt(5));
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
     }
-    
-    public void SignUp(String user, String email, String pass) {
-        try {
-            String sql = "INSERT INTO [dbo].[Account]\n"
-                    + "           ([user]\n"
-                    + "           ,[email]\n"
-                    + "           ,[pass]\n"
-                    + "           ,[fullname]\n"
-                    + "           ,[roleID]\n"
-                    + "           VALUES(?,?,?,?,?)";
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, user);
-            st.setString(2, email);
-            st.setString(3, pass);
-            st.setString(5, "4");
-            // vcl chiu luon
-            st.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-    }
-    
+
     public boolean checkEmailExist(String email) {
         String sql = "SELECT [uID]\n"
                 + "      ,[user]\n"
@@ -83,7 +62,7 @@ public class DAO extends DBContext {
         }
         return false;
     }
-    
+
     public void getNewPass(String email, String pass) {
         String sql = "UPDATE [dbo].[Account]\n"
                 + "   SET [pass] = ?\n"
@@ -97,7 +76,7 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-    
+
     public List<Course> getAllCourse() {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT * from Course";
@@ -118,7 +97,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Category> getAllCaregories() {
         List<Category> list = new ArrayList<>();
         String sql = "SELECT [cid]\n"
@@ -135,7 +114,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Course> getCourseByCid(int cid) {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT  [id]\n"
@@ -168,7 +147,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Course> searchByCheck(int[] cid) {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT  [id]\n"
@@ -208,7 +187,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Course> getListCourseSearch(String txtSearch) {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT  [id]\n"
@@ -239,7 +218,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public int getNumberPage() {
         String sql = "SELECT COUNT(*)\n"
                 + "  FROM [projectSWP].[dbo].[Course]";
@@ -260,7 +239,7 @@ public class DAO extends DBContext {
         }
         return 0;
     }
-    
+
     public Course getNewCourse() {
         String sql = "Select top 1 * from Course\n"
                 + "order by id desc";
@@ -281,7 +260,7 @@ public class DAO extends DBContext {
         }
         return null;
     }
-    
+
     public List<Course> getPaging(int index) {
         String sql = "SELECT * FROM [dbo].[Course]\n"
                 + "order by id\n"
@@ -346,7 +325,7 @@ public class DAO extends DBContext {
         return cid;
     }
 
-    public List<Course> getCourseByCreatedby(int id) {
+    public List<Course> getCourseByCreatedby(int roleID) {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT  [id]\n"
                 + "      ,[name]\n"
@@ -360,7 +339,7 @@ public class DAO extends DBContext {
                 + " order by id desc";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
+            st.setInt(1, roleID);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 list.add(new Course(rs.getInt(1),
@@ -377,7 +356,8 @@ public class DAO extends DBContext {
         }
         return list;
     }
-     public List<Course> getNewManyCourse() {
+
+    public List<Course> getNewManyCourse() {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT TOP (4) [id]\n"
                 + "      ,[name]\n"
@@ -393,17 +373,66 @@ public class DAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                 list.add(new Course(rs.getInt(1),
-                         rs.getString(2),
-                         rs.getString(3),
-                         rs.getDouble(4),
-                         rs.getString(5),
-                         rs.getString(6),
-                         rs.getInt(8)));
+                list.add(new Course(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(8)));
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
         return list;
+    }
+
+    public void InsertCourse(String name, String description, String price, String image, String title, int sid, String category) {
+        String sql = "INSERT [dbo].[Course]\n"
+                + "           ,[name]\n"
+                + "           ,[description]\n"
+                + "           ,[price]\n"
+                + "           ,[image]\n"
+                + "           ,[title]\n"
+                + "           ,[created_by]\n"
+                + "           ,[category_id])"
+                + "VALUES(?,?,?,?,?,?,?)";
+        PreparedStatement st;
+        try {
+            st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setString(2, description);
+            st.setString(3, price);
+            st.setString(4, image);
+            st.setString(5, title);
+            st.setInt(6, sid);
+            st.setString(7, category);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void SignUp(Account account) {
+        try {
+            String sql = "INSERT INTO [dbo].[Account]\n"
+                    + "           ([user]\n"
+                    + "           ,[pass]\n"
+                    + "           ,[email]\n"
+                    + "           ,[roleID])\n"
+                    + "           VALUES (?,?,?,?)"; // Sửa ở đây
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, account.getUser());
+            st.setString(2, account.getPass());
+            st.setString(3, account.getEmail());
+            st.setInt(4, account.getRoleID());
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        DAO d = new DAO();
+        d.InsertCourse("hhhhhh", "vnvnvnv", "459", " ", "jdjdjda", 2, "5");
     }
 }

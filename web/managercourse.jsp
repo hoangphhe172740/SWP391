@@ -33,10 +33,10 @@
                             </div>
                         </div>
                     </div>
-                <c:if test="${listc.size() == 0}">
-                    <h1>Contains no courses  </h1>
+                <c:if test="${listCourse.size() == 0}">
+                    <h1>Contain no course</h1>
                 </c:if>
-                <c:if test="${listc.size() > 0}">
+                <c:if test="${listCourse.size() > 0}">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -48,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listc}" var="o">
+                            <c:forEach items="${listCourse}" var="o">
                                 <c:set var="Courseid" value="${o.id}"/>
                                 <tr>
                                     <td>${o.id}</td>
@@ -72,7 +72,84 @@
                     </tbody>
                 </table>
             </div>
-                <a href="home"><button type="button" class="btn btn-primary">Back To Home</button></a>
+            <a href="home"><button type="button" class="btn btn-primary">Back To Home</button></a>
         </div>
+        <!---Add-->
+        <div id="addEmployeeModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addEmployeeModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Course</h4>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;</button>
+                    </div>
+                    <form action="add" method="post" id="f1" >
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input name="name" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input name="price" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input name="image" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Title</label>
+                                <textarea name="title" class="form-control" required></textarea>
+                            </div>                           
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select name="category" class="form-select" aria-label="Default select example">
+                                    <c:forEach items="${listC}" var="c">
+                                        <option value="${c.cid}">${c.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <button type="submit" class="btn btn-success" id="btnSubmit">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="js/manager.js" type="text/javascript"></script>
+        <script src="https://cdn.tiny.cloud/1/qe14wbo2e3d1morsjxg5kufktky9kvfntr0082y4w45lj1da/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        <script src="./js/tinymce-config.js"></script>
+        <script type="text/javascript">
+            const f1 = document.getElementById("f1");
+            const f2 = document.getElementById("f2");
+            const btnSubmit = document.getElementById("btnSubmit");
+            const buttonDeletes = document.querySelectorAll("[course-id]");
+            const cofirmDelete = document.getElementById("cofirmDelete");
+            btnSubmit.addEventListener("click", (e) => {
+                f1.submit();
+            });
+
+            buttonDeletes.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    cofirmDelete.addEventListener("click", (ev) => {
+                        ev.preventDefault();
+                        const productId = button.getAttribute("product-id");
+                        document.getElementById("productId").value = productId;
+                        f2.submit();
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

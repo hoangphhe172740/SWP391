@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dao.DAO;
 import java.util.HashSet;
+import model.Account;
 
 /**
  *
@@ -20,7 +21,7 @@ import java.util.HashSet;
  */
 @WebServlet(name = "RegisterControl", urlPatterns = {"/Register"})
 public class RegisterControl extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -29,7 +30,7 @@ public class RegisterControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterControl</title>");            
+            out.println("<title>Servlet RegisterControl</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RegisterControl at " + request.getContextPath() + "</h1>");
@@ -42,31 +43,29 @@ public class RegisterControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("register.jsp").forward(request, response);
-    }    
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullname = request.getParameter("fullname");
         String user = request.getParameter("user");
         String email = request.getParameter("email");
-        
         String pass = request.getParameter("password");
         String repass = request.getParameter("repass");
         String mess;
-        
         DAO d = new DAO();
         if (!pass.equals(repass)) {
             mess = "Password and Confirm password not match";
             request.setAttribute("mess", mess);
             request.getRequestDispatcher("register.jsp").forward(request, response);
         } else if (d.checkEmailExist(email)) {
-            mess ="Email Exsit";
+            mess = "Email Exsit";
             request.setAttribute("mess", mess);
             request.getRequestDispatcher("register.jsp").forward(request, response);
-        } else {
-            d.SignUp(user, email, pass);
-            response.sendRedirect("login");
+        }else{
+            Account newAcc = new Account(email, pass, user, 4);
+            d.SignUp(newAcc);
+            response.sendRedirect("Login");
         }
     }
 }

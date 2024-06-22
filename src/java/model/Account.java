@@ -5,16 +5,24 @@
 package model;
 
 public class Account {
+
     private int id;
     private String email;
     private String pass;
     private String user;
-    private String roleID;
+    private int roleID;
+
+    public Account(String email, String pass, String user, int roleID) {
+        this.email = email;
+        this.pass = pass;
+        this.user = user;
+        this.roleID = roleID;
+    }
 
     public Account() {
     }
 
-    public Account(int id, String email, String pass, String user, String roleID) {
+    public Account(int id, String email, String pass, String user, int roleID) {
         this.id = id;
         this.email = email;
         this.pass = pass;
@@ -54,11 +62,11 @@ public class Account {
         this.user = user;
     }
 
-    public String getRoleID() {
+    public int getRoleID() {
         return roleID;
     }
 
-    public void setRoleID(String roleID) {
+    public void setRoleID(int roleID) {
         this.roleID = roleID;
     }
 
@@ -66,5 +74,5 @@ public class Account {
     public String toString() {
         return "Account{" + "id=" + id + ", email=" + email + ", pass=" + pass + ", user=" + user + ", roleID=" + roleID + '}';
     }
-    
+
 }

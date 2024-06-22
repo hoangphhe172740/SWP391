@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import model.Category;
 import model.Course;
 
 /**
@@ -33,10 +34,12 @@ public class HomeControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO d = new DAO();
+        List<Category> listcate = d.getAllCaregories();
         List<Course> cnew = d.getNewManyCourse();
         if (cnew != null) {
             request.setAttribute("cnew", cnew);
         }
+        request.setAttribute("listcate", listcate);
 //        Course cnew = (Course) d.getNewManyCourse();
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

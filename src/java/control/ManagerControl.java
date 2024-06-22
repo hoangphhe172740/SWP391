@@ -23,8 +23,8 @@ import model.Course;
  *
  * @author Admin
  */
-@WebServlet(name="ManageCourseControl", urlPatterns={"/manageCourse"})
-public class ManageCourseControl extends HttpServlet {
+@WebServlet(name="ManagerControl", urlPatterns={"/manager"})
+public class ManagerControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,14 +39,16 @@ public class ManageCourseControl extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         if(a != null){
-            int id = a.getId();
+            int id = a.getRoleID();
         DAO d = new DAO();
-        List<Course> list = d.getCourseByCreatedby(id);
-        List<Category> listCate = d.getAllCaregories();
-        List<Course> listcourse = d.getAllCourse();
-        request.setAttribute("listC", listCate);
-        request.setAttribute("listc", list);
-        request.getRequestDispatcher("managercourse.jsp").forward(request, response);
+            List<Course> list = d.getCourseByCreatedby(id);
+            List<Category> listCate = d.getAllCaregories();
+            List<Course> listc = d.getAllCourse();
+            
+            System.out.println(list);
+            request.setAttribute("listC", listCate);
+            request.setAttribute("listCourse", list);
+            request.getRequestDispatcher("managercourse.jsp").forward(request, response);
         }else{
             response.sendRedirect("home");
         }
@@ -57,12 +59,16 @@ public class ManageCourseControl extends HttpServlet {
     throws ServletException, IOException {
         processRequest(request, response);
     } 
-  
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
 
 }

@@ -24,7 +24,7 @@
                          class="img-fluid" alt="Sample image">
                     </a></div>
                 <div class="col-md-3 col-lg-3 col-lg-3 offset-xl-1">
-                    <form class="form-signup" action="Register" method="Post">
+                    <form class="form-signup" action="Register" method="post">
                         <h1 class="h3 mb-3 font-weight-normal text-center bold-text">Sign Up</h1>
                         <p class="mess">${mess}</p>
                         
@@ -38,10 +38,7 @@
                             <b class="mb-3">USERNAME</b>
                             <input name="user" type="text" id="inputname" class="form-control form-control-lg mb-3 mt-2" placeholder="Enter Your Full Name" autofocus="" required="">
                         </div>
-                        <div>
-                            <b class="mb-3">FULLNAME</b>
-                            <input name="fullname" type="text" id="inputname" class="form-control form-control-lg mb-3 mt-2" placeholder="Enter Your Full Name" autofocus="" required="">
-                        </div>
+                        
                         <!--Password -->
                         <div>
                             <b class="mb-3">PASSWORD</b>
@@ -60,7 +57,7 @@
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0">Or</p>
                         </div>
-                        <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+                        <a data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href=""
                            role="button">
                             <i class="fab fa-google me-2"></i>Continue with google</a>
                         <div class="d-flex align-items-center justify-content-center pt-3">

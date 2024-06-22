@@ -26,9 +26,7 @@
         .bold-text{
             font-weight: bold;
             padding: 20px 10px;
-
         }
-
     </style>
     <body class="vh-100">
         <div class="container-fluid h-custom">

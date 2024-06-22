@@ -101,7 +101,7 @@
                         <b><a class="nav-link" href="manageMentor">Manage Mentor</a></b>
                     </li>
                     <li class="nav-item">
-                        <b><a class="nav-link" href="manageCourse">Manage Course</a></b>
+                        <b><a class="nav-link" href="manager">Manage Course</a></b>
                     </li>
                     <li class="nav-item">
                         <b><a class="nav-link" href="statistic">Statistic</a></b>

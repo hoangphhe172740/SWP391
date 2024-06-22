@@ -45,9 +45,7 @@
                 <div class="swiper-pagination"></div>
             </div>
         </section>
-            <section>
-                
-            </section>
+        
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script>
             var swiper = new Swiper(".mySwiper", {
