@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="./css/manager.css"/>
         <title>Manager Course</title>
     </head>
+    
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <div class="container">
@@ -31,7 +32,7 @@
                                 <h2>Manage <b>Courses</b></h2>
                             </div>
                             <div class="col-sm-3 pt-3">
-                                <button type="button" data-target="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
+                                <button type="button" data-target="#addEmployeeModal" class="btn btn-success d-flex justify-content-center" data-toggle="modal">
                                     <i class="material-icons">&#xE147;</i> <span>Add New Course</span>
                                 </button>
                             </div>
@@ -62,7 +63,7 @@
                                     </td>
                                     <td>${o.price} $</td>
                                     <td>
-                                        <a href="loadProduct?pid=${o.id}" class="edit btn btn-info mb-3"><i
+                                        <a href="loadCourse?courseid=${o.id}" class="edit btn btn-info mb-3"><i
                                                 class="material-icons"
                                                 title="Edit">&#xE254;</i></a>
                                         <button id="buttonDelete" class="delete btn btn-info" course-id ="${o.id}" data-target="#deleteEmployeeModal" data-toggle="modal">
@@ -80,14 +81,13 @@
         </div>
         <!---Add-->
         <div id="addEmployeeModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addEmployeeModal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Add Course</h4>
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                    <form action="add" method="post" id="f1" >
+                    <form action="add" method="post" id="f1">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name</label>
@@ -95,7 +95,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
+                                <textarea name="description" class="form-control" id="default" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
@@ -107,8 +107,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Title</label>
-                                <textarea name="title" class="form-control" required></textarea>
-                            </div>                           
+                                <textarea name="title" class="form-control" id="default" required></textarea>
+                            </div>
                             <div class="form-group">
                                 <label>Category</label>
                                 <select name="category" class="form-select" aria-label="Default select example">
@@ -149,11 +149,12 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="Footer.jsp"></jsp:include>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="js/manager.js" type="text/javascript"></script>
-        <script src="https://cdn.tiny.cloud/1/qe14wbo2e3d1morsjxg5kufktky9kvfntr0082y4w45lj1da/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://cdn.tiny.cloud/1/tq3vg414qe7kthcn976ppu53gc1d1t29xo9nux1lzy1r5c96/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
         <script src="./js/tinymce-config.js"></script>
@@ -176,6 +177,11 @@
                         f2.submit();
                     });
                 });
+            });
+        </script>
+        <script>
+            tinymce.init({
+                selector: 'textarea#default'
             });
         </script>
     </body>

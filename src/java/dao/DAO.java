@@ -426,19 +426,60 @@ public class DAO extends DBContext {
             System.out.println(ex);
         }
     }
-    public void deleteCourseById(int id){
-        try{
+
+    public void deleteCourseById(int id) {
+        try {
             String sql = "delete from course where id = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
-    public static void main(String[] args) {
-        DAO d = new DAO();
-        d.deleteCourseById(19);
+    public void EditCourse(String name, String description, String price, String image, String title, String category, String courseid) {
+        String sql = "UPDATE [dbo].[Course]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[description] = ?\n"
+                + "      ,[price] = ?\n"
+                + "      ,[image] = ?\n"
+                + "      ,[title] = ?\n"
+                + "      ,[category_id] = ?\n"
+                + " WHERE id = ?";
+        PreparedStatement st;
+        try {
+            st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setString(2, description);
+            st.setString(3, price);
+            st.setString(4, image);
+            st.setString(5, title);
+            st.setString(6, category);
+            st.setString(7, courseid);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
     
+    public  int getCategoryId(int id){
+        String sql = "SELECT \n"
+                + "   [category_id]\n"
+                + "  FROM [projectSWP].[dbo].[Course] where id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("category_id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return -1;
+    }
+    public static void main(String[] args) {
+        DAO d = new DAO();
+        System.out.println(d.getCategoryId(6));
+    }
 }
