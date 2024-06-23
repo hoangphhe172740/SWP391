@@ -65,7 +65,7 @@
                                         <a href="loadProduct?pid=${o.id}" class="edit btn btn-info mb-3"><i
                                                 class="material-icons"
                                                 title="Edit">&#xE254;</i></a>
-                                        <button id="buttonDelete" class="delete btn btn-info" product-id ="${o.id}" data-target="#deleteEmployeeModal" data-toggle="modal">
+                                        <button id="buttonDelete" class="delete btn btn-info" course-id ="${o.id}" data-target="#deleteEmployeeModal" data-toggle="modal">
                                             <i class="material-icons" data-toggle="tooltip" 
                                                title="Delete">&#xE872;</i>
                                         </button>
@@ -126,6 +126,29 @@
                 </div>
             </div>
         </div>
+        <!--delete-->
+        <div id="deleteEmployeeModal" class="modal fade" tabindex="-1" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="delete" id="f2">
+                        <input name="courseId" value="" id="courseId" hidden/>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Course</h4>
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete Course?</p>
+                            <p class="text-warning"><span>This action cannot be undone.</span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <button class="btn btn-danger" id="cofirmDelete">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -148,8 +171,8 @@
                 button.addEventListener("click", (e) => {
                     cofirmDelete.addEventListener("click", (ev) => {
                         ev.preventDefault();
-                        const productId = button.getAttribute("course-id");
-                        document.getElementById("courseId").value = productId;
+                        const courseId = button.getAttribute("course-id");
+                        document.getElementById("courseId").value = courseId;
                         f2.submit();
                     });
                 });

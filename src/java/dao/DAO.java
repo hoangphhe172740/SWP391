@@ -426,9 +426,19 @@ public class DAO extends DBContext {
             System.out.println(ex);
         }
     }
-
+    public void deleteCourseById(int id){
+        try{
+            String sql = "delete from course where id = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+    }
     public static void main(String[] args) {
         DAO d = new DAO();
-        d.InsertCourse("hehehe", "chiu", "666", "chiu", "chiu", 2, "4");
+        d.deleteCourseById(19);
     }
+    
 }
