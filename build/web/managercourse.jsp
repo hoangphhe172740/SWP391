@@ -26,11 +26,11 @@
             <div class="container">
                 <div class="table-wrapper">
                     <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <div class="d-flex justify-content-between">
+                            <div class="col-sm-6 pt-3">
                                 <h2>Manage <b>Courses</b></h2>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3 pt-3">
                                 <button type="button" data-target="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
                                     <i class="material-icons">&#xE147;</i> <span>Add New Course</span>
                                 </button>
@@ -148,8 +148,8 @@
                 button.addEventListener("click", (e) => {
                     cofirmDelete.addEventListener("click", (ev) => {
                         ev.preventDefault();
-                        const productId = button.getAttribute("product-id");
-                        document.getElementById("productId").value = productId;
+                        const productId = button.getAttribute("course-id");
+                        document.getElementById("courseId").value = productId;
                         f2.submit();
                     });
                 });

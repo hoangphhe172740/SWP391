@@ -1,0 +1,113 @@
+/* Reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+}
+
+.table-wrapper {
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.table-title {
+    padding-bottom: 15px;
+    background: #435d7d;
+    color: #fff;
+    padding: 16px 30px;
+    border-radius: 3px 3px 0 0;
+}
+
+.table-title h2 {
+    margin: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f3f3f3;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #ddd;
+}
+
+.table img {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+a.edit, button.delete {
+    font-size: 18px;
+}
+
+a.edit {
+    color: #ffc107;
+    padding-right: 15px;
+}
+
+button.delete {
+    color: #f44336;
+    background: none;
+    border: none;
+    padding-left: 15px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    margin-top: 20px;
+}
+
+.modal .modal-dialog {
+    max-width: 400px;
+}
+
+.modal .modal-header, .modal .modal-body, .modal .modal-footer {
+    padding: 20px 30px;
+}
+
+.modal .modal-content {
+    border-radius: 5px;
+}
+
+.modal .modal-footer {
+    text-align: right;
+}
+
+.modal .form-control {
+    border-radius: 2px;
+    box-shadow: none;
+    border-color: #dddddd;
+}
+
+.modal textarea {
+    resize: vertical;
+}
+
+.modal .btn {
+    border-radius: 2px;
+    min-width: 100px;
+}
+
+.modal form label {
+    font-weight: normal;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .table-responsive {
+        margin-top: 15px;
+    }
+}

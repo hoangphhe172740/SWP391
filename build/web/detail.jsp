@@ -213,7 +213,7 @@
                                     <div class="slide__product" style="padding-bottom: 20px;">
                                         <img class="slide__product-image" src="${cc.image}" alt="Card image cap">
                                         <div class="slide__product-detail">
-                                            <h6 class="card-title show_txt bg-light text-center"><a href="detail?pid=${cc.id}" title="View Product">${cc.name}</a></h6>
+                                            <h6 class="card-title show_txt bg-light text-center"><a href="detail?Courseid=${cc.id}" title="View Product">${cc.name}</a></h6>
                                             <div class="row">
                                                 <div class="col">
                                                     <p class="btn btn-danger btn-block">${cc.price}$</p>
