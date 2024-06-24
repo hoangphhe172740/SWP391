@@ -13,30 +13,39 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="DeleteControl", urlPatterns={"/delete"})
-public class DeleteControl extends HttpServlet {
-
+@WebServlet(name="addMentorControl", urlPatterns={"/addmentor"})
+public class addMentorControl extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String courseid_raw = request.getParameter("courseId");
-         
-        int courseid;
-        System.out.println(courseid_raw);
-        DAO d = new DAO();
+        request.setCharacterEncoding("UTF-8");
         try{
-            courseid = Integer.parseInt(courseid_raw);
-            d.deleteCourseById(courseid);
-        }catch(NumberFormatException e){
+           String name = request.getParameter("name");
+           String image = request.getParameter("image");
+            HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            DAO d = new DAO();
+            d.InsertMentor(name, image, 2);
+            response.sendRedirect("manageMentor");
+        }catch(Exception e){
             System.out.println(e);
+            response.sendRedirect("Login");
         }
-        response.sendRedirect("manager");
-        
     } 
 
     @Override

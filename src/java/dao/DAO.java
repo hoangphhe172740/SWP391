@@ -356,6 +356,24 @@ public class DAO extends DBContext {
         }
     }
 
+    public void InsertMentor(String name, String image, int createRole) {
+        String sql = "INSERT INTO [dbo].[Mentor]\n"
+                + "           ([Mentor_name]\n"
+                + "           ,[image]\n"
+                + "           ,[create_by])"
+                + "VALUES (?,?,?)";
+        PreparedStatement st;
+        try{
+           st = connection.prepareStatement(sql);
+           st.setString(1, name);
+           st.setString(2, image);
+           st.setInt(3, createRole);
+           st.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+    }
+
     public void SignUp(Account account) {
         try {
             String sql = "INSERT INTO [dbo].[Account]\n"
@@ -385,7 +403,16 @@ public class DAO extends DBContext {
             System.out.println(ex);
         }
     }
-
+    public void deleteMentorById(int id){
+        try{
+            String sql = "delete from [Mentor] where Mentor_id = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+    }
     public void EditCourse(String name, String description, String price, String image, String title, String category, String courseid) {
         String sql = "UPDATE [dbo].[Course]\n"
                 + "   SET [name] = ?\n"
@@ -523,6 +550,6 @@ public class DAO extends DBContext {
 
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getMentorByCreatedby(2));
+        d.deleteMentorById(6);
     }
 }
