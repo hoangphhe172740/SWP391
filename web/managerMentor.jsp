@@ -83,11 +83,16 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <form action="addmentor" method="post" id="f1">
+                        <b class="mess text-warning" style="padding: 30px;">${mess}</b>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name</label>
                                 <input name="name" type="text" class="form-control" required>
-                            </div>                            
+                            </div>
+                            <div class="form-group">
+                                <label>email</label>
+                                <input name="email" type="text" class="form-control" required>
+                            </div>
                             <div class="form-group">
                                 <label>Image</label>
                                 <input name="image" type="text" class="form-control" required>

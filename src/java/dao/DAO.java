@@ -43,27 +43,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public boolean checkEmailExist(String email) {
-        String sql = "SELECT [uID]\n"
-                + "      ,[user]\n"
-                + "      ,[pass]\n"
-                + "      ,[email]\n"
-                + "      ,[roleID]\n"
-                + "  FROM [projectSWP].[dbo].[Account]"
-                + " where [email] = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, email);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return false;
-    }
-
     public void getNewPass(String email, String pass) {
         String sql = "UPDATE [dbo].[Account]\n"
                 + "   SET [pass] = ?\n"
@@ -356,20 +335,22 @@ public class DAO extends DBContext {
         }
     }
 
-    public void InsertMentor(String name, String image, int createRole) {
+    public void InsertMentor(String name, String email, String image, int createRole) {
         String sql = "INSERT INTO [dbo].[Mentor]\n"
                 + "           ([Mentor_name]\n"
+                + "           ,[email]\n"
                 + "           ,[image]\n"
                 + "           ,[create_by])"
-                + "VALUES (?,?,?)";
+                + "VALUES (?,?,?,?)";
         PreparedStatement st;
-        try{
-           st = connection.prepareStatement(sql);
-           st.setString(1, name);
-           st.setString(2, image);
-           st.setInt(3, createRole);
-           st.executeUpdate();
-        }catch(SQLException ex){
+        try {
+            st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setString(2, email);
+            st.setString(3, image);
+            st.setInt(4, createRole);
+            st.executeUpdate();
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
@@ -403,16 +384,18 @@ public class DAO extends DBContext {
             System.out.println(ex);
         }
     }
-    public void deleteMentorById(int id){
-        try{
+
+    public void deleteMentorById(int id) {
+        try {
             String sql = "delete from [Mentor] where Mentor_id = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
+
     public void EditCourse(String name, String description, String price, String image, String title, String category, String courseid) {
         String sql = "UPDATE [dbo].[Course]\n"
                 + "   SET [name] = ?\n"
@@ -464,7 +447,8 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 list.add(new Mentor(rs.getInt(1),
                         rs.getString(2),
-                        rs.getString(3)));
+                        rs.getString(3),
+                        rs.getString(4)));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -476,6 +460,7 @@ public class DAO extends DBContext {
         List<Mentor> list = new ArrayList<>();
         String sql = "SELECT [Mentor_id]\n"
                 + "         ,[Mentor_name]\n"
+                + "         ,[email]\n"
                 + "         ,[image]\n"
                 + "FROM [projectSWP].[dbo].[Mentor]"
                 + "where create_by = ?"
@@ -487,7 +472,8 @@ public class DAO extends DBContext {
             while (rs.next()) {
                 list.add(new Mentor(rs.getInt(1),
                         rs.getString(2),
-                        rs.getString(3)));
+                        rs.getString(3),
+                        rs.getString(4)));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -548,8 +534,50 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public boolean checkEmailExist(String email) {
+        String sql = "SELECT [uID]\n"
+                + "      ,[user]\n"
+                + "      ,[pass]\n"
+                + "      ,[email]\n"
+                + "      ,[roleID]\n"
+                + "  FROM [projectSWP].[dbo].[Account]"
+                + " where [email] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public boolean checkEmailMentorExist(String email) {
+        String sql = "SELECT [Mentor_id]\n"
+                + "      ,[Mentor_name]\n"
+                + "      ,[email]\n"
+                + "      ,[image]\n"
+                + "      ,[create_by]\n"
+                + "  FROM [projectSWP].[dbo].[Mentor]"
+                + " where [email] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         DAO d = new DAO();
-        d.deleteMentorById(6);
+        d.InsertMentor("hahaha", "haha@gmail.com", "https://vcdn1-giaitri.vnecdn.net/2020/02/25/a478702cb59c752eb242966da4e800-2518-7607-1582638039.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=YmuaEcKh2ujkQbDshvp-Yw", 2);
     }
 }

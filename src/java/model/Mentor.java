@@ -11,14 +11,16 @@ package model;
 public class Mentor {
     private int mentorId;
     private String mentorName;
+    private String email;
     private String image;
 
     public Mentor() {
     }
 
-    public Mentor(int mentorId, String mentorName, String image) {
+    public Mentor(int mentorId, String mentorName, String email, String image) {
         this.mentorId = mentorId;
         this.mentorName = mentorName;
+        this.email = email;
         this.image = image;
     }
 
@@ -38,6 +40,14 @@ public class Mentor {
         this.mentorName = mentorName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getImage() {
         return image;
     }
@@ -45,5 +55,4 @@ public class Mentor {
     public void setImage(String image) {
         this.image = image;
     }
-    
 }
