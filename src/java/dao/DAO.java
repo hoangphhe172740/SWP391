@@ -13,6 +13,7 @@ import java.util.List;
 import model.Account;
 import model.Category;
 import model.Course;
+import model.Mentor;
 
 public class DAO extends DBContext {
 
@@ -75,27 +76,6 @@ public class DAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-    }
-
-    public List<Course> getAllCourse() {
-        List<Course> list = new ArrayList<>();
-        String sql = "SELECT * from Course";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(new Course(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(8)));
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        return list;
     }
 
     public List<Category> getAllCaregories() {
@@ -325,38 +305,6 @@ public class DAO extends DBContext {
         return cid;
     }
 
-    public List<Course> getCourseByCreatedby(int roleID) {
-        List<Course> list = new ArrayList<>();
-        String sql = "SELECT  [id]\n"
-                + "      ,[name]\n"
-                + "      ,[description]\n"
-                + "      ,[price]\n"
-                + "      ,[image]\n"
-                + "      ,[title]\n"
-                + "      ,[category_id]\n"
-                + "FROM [projectSWP].[dbo].[Course]"
-                + "where created_by = ?"
-                + " order by id desc";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, roleID);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(new Course(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7)
-                ));
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        return list;
-    }
-
     public List<Course> getNewManyCourse() {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT TOP (4) [id]\n"
@@ -437,6 +385,7 @@ public class DAO extends DBContext {
             System.out.println(ex);
         }
     }
+
     public void EditCourse(String name, String description, String price, String image, String title, String category, String courseid) {
         String sql = "UPDATE [dbo].[Course]\n"
                 + "   SET [name] = ?\n"
@@ -461,8 +410,8 @@ public class DAO extends DBContext {
             System.out.println(ex);
         }
     }
-    
-    public  int getCategoryId(int id){
+
+    public int getCategoryId(int id) {
         String sql = "SELECT \n"
                 + "   [category_id]\n"
                 + "  FROM [projectSWP].[dbo].[Course] where id = ?";
@@ -478,9 +427,102 @@ public class DAO extends DBContext {
         }
         return -1;
     }
-    public 
+
+    public List<Mentor> getAllMentor() {
+        List<Mentor> list = new ArrayList<>();
+        String sql = "SELECT * from Mentor";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Mentor(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Mentor> getMentorByCreatedby(int roleID) {
+        List<Mentor> list = new ArrayList<>();
+        String sql = "SELECT [Mentor_id]\n"
+                + "         ,[Mentor_name]\n"
+                + "         ,[image]\n"
+                + "FROM [projectSWP].[dbo].[Mentor]"
+                + "where create_by = ?"
+                + " order by Mentor_id desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, roleID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Mentor(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Course> getCourseByCreatedby(int roleID) {
+        List<Course> list = new ArrayList<>();
+        String sql = "SELECT  [id]\n"
+                + "      ,[name]\n"
+                + "      ,[description]\n"
+                + "      ,[price]\n"
+                + "      ,[image]\n"
+                + "      ,[title]\n"
+                + "      ,[category_id]\n"
+                + "FROM [projectSWP].[dbo].[Course]"
+                + "where created_by = ?"
+                + " order by id desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, roleID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Course(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7)
+                ));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+
+    public List<Course> getAllCourse() {
+        List<Course> list = new ArrayList<>();
+        String sql = "SELECT * from Course";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Course(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(8)));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getCategoryId(6));
+        System.out.println(d.getMentorByCreatedby(2));
     }
 }

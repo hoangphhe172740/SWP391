@@ -64,7 +64,7 @@ public class Email {
             msg.setContent("<html>"
                     + "<body>"
                     + "<h1>"
-                    + "Coursera"
+                    + "E-learning"
                     + "</h1>"
                     + "Mã OTP lấy lại mật khẩu của bạn là: "
                     + "<b>" + otp + "</b>"
