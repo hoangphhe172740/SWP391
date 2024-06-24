@@ -478,6 +478,7 @@ public class DAO extends DBContext {
         }
         return -1;
     }
+    public 
     public static void main(String[] args) {
         DAO d = new DAO();
         System.out.println(d.getCategoryId(6));

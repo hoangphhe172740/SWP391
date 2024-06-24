@@ -35,30 +35,34 @@ public class LoginControl extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         String rem = request.getParameter("remember");
-            
-            Cookie ce = new Cookie("cemail", email);
-            Cookie cp = new Cookie("cpass", pass);
-            Cookie cr = new Cookie("crem", rem);
-            if(rem != null){
-                ce.setMaxAge(7 * 60 * 60 * 24);
-                cp.setMaxAge(7 * 60 * 60 * 24);
-                cr.setMaxAge(7 * 60 * 60 * 24);
-            }else{
-                
-                ce.setMaxAge(0);
-                cp.setMaxAge(0);
-                cr.setMaxAge(0);
-            }
-            response.addCookie(ce);
-            response.addCookie(cp);
-            response.addCookie(cr);
+
+        Cookie ce = new Cookie("cemail", email);
+        Cookie cp = new Cookie("cpass", pass);
+        Cookie cr = new Cookie("crem", rem);
+        if (rem != null) {
+            ce.setMaxAge(7 * 60 * 60 * 24);
+            cp.setMaxAge(7 * 60 * 60 * 24);
+            cr.setMaxAge(7 * 60 * 60 * 24);
+        } else {
+
+            ce.setMaxAge(0);
+            cp.setMaxAge(0);
+            cr.setMaxAge(0);
+        }
+        response.addCookie(ce);
+        response.addCookie(cp);
+        response.addCookie(cr);
         DAO dao = new DAO();
         Account a = dao.checkLogin(email, pass);
         if (a == null) {
             request.setAttribute("mess", "Wrong email or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else if (a.getRoleID() == 1) {
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", a);
+            response.sendRedirect("homeAdmin.jsp");
         } else {
-            HttpSession session =request.getSession();
+            HttpSession session = request.getSession();
             session.setAttribute("acc", a);
             response.sendRedirect("home");
         }
