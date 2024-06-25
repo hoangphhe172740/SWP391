@@ -481,38 +481,6 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<Course> getCourseByCreatedby(int roleID) {
-        List<Course> list = new ArrayList<>();
-        String sql = "SELECT  [id]\n"
-                + "      ,[name]\n"
-                + "      ,[description]\n"
-                + "      ,[price]\n"
-                + "      ,[image]\n"
-                + "      ,[title]\n"
-                + "      ,[category_id]\n"
-                + "FROM [projectSWP].[dbo].[Course]"
-                + "where created_by = ?"
-                + " order by id desc";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, roleID);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(new Course(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(7)
-                ));
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        return list;
-    }
-
     public List<Course> getAllCourse() {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT * from Course";
@@ -576,8 +544,82 @@ public class DAO extends DBContext {
         return false;
     }
 
+    public void AddAccount(String user, String pass, String email, int roleID) {
+        String sql = "INSERT INTO [dbo].[Account]\n"
+                + "           ([user]\n"
+                + "           ,[pass]\n"
+                + "           ,[email]\n"
+                + "           ,[roleID])"
+                + " VALUES(?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, user);
+            st.setString(2, pass);
+            st.setString(3, email);
+            st.setInt(4, roleID);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Account> getAccountByRoleId(int roleID) {
+        List<Account> list = new ArrayList<>();
+        String sql = "SELECT [uID], [user], [pass], [email], [roleID] "
+                + "FROM [dbo].[Account] "
+                + "WHERE roleID = ? ";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, roleID);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Account(rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getInt(5)));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Exception while fetching accounts: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public List<Course> getCourseByCreatedby(int roleID) {
+        List<Course> list = new ArrayList<>();
+        String sql = "SELECT  [id]\n"
+                + "      ,[name]\n"
+                + "      ,[description]\n"
+                + "      ,[price]\n"
+                + "      ,[image]\n"
+                + "      ,[title]\n"
+                + "      ,[category_id]\n"
+                + "FROM [projectSWP].[dbo].[Course]"
+                + "where created_by = ?"
+                + " order by id desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, roleID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Course(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7)
+                ));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         DAO d = new DAO();
-        d.InsertMentor("hahaha", "haha@gmail.com", "https://vcdn1-giaitri.vnecdn.net/2020/02/25/a478702cb59c752eb242966da4e800-2518-7607-1582638039.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=YmuaEcKh2ujkQbDshvp-Yw", 2);
+        System.out.println(d.getAccountByRoleId(3));
     }
 }

@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/footer.css"/>
         <link rel="stylesheet" href="./css/manager.css"/>
@@ -61,7 +63,7 @@
                                         <img src="${o.image}" style="width: 150px; border-radius: 5px;">
                                     </td>
                                     <td>
-                                        <a href="#=${o.mentorId}" class="edit btn btn-info mb-3"><i class="material-symbols-outlined" title="Create Account">&#xE254;</i></a>
+                                        <a href="create-account?roleID=${o.mentorId}" class="edit btn btn-info mb-3"><i class="material-symbols-outlined" title="Create Account">&#xE254;</i></a>
                                         <button id="buttonDelete" class="delete btn btn-info" mentor-id ="${o.mentorId}" data-target="#deleteEmployeeModal" data-toggle="modal">
                                             <i class="material-icons" data-toggle="tooltip" 
                                                title="Delete">&#xE872;</i>
@@ -87,15 +89,15 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input name="name" type="text" class="form-control" required>
+                                <input name="name" type="text" placeholder="Enter name..." id="inputname" class="form-control" required="" autofocus="">
                             </div>
                             <div class="form-group">
                                 <label>email</label>
-                                <input name="email" type="text" class="form-control" required>
+                                <input name="email" type="text" placeholder="name@email.com" id="inputemail" class="form-control" required="" autofocus="">
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input name="image" type="text" class="form-control" required>
+                                <input name="image" type="text" class="form-control" required="" autofocus="">
                             </div>
                         </div>
                         <div class="modal-footer">

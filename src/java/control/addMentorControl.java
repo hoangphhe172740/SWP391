@@ -45,6 +45,10 @@ public class addMentorControl extends HttpServlet {
                 mess = "Email Exist";
                 request.setAttribute("mess", mess);
                 request.getRequestDispatcher("manageMentor").forward(request, response);              
+            }else if(name.isEmpty() &&  name == null || image.isEmpty() && image == null || email.isEmpty() && email == null){
+                mess = "Lack of information";
+                request.setAttribute("mess", mess);
+                request.getRequestDispatcher("manageMentor").forward(request, response);
             }else{
                 HttpSession session = request.getSession();
                 Account a = (Account) session.getAttribute("acc");
