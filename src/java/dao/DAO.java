@@ -246,27 +246,7 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public Course getCourseById(int id) {
-        List<Course> list = new ArrayList<>();
-        String sql = "select * from course where id = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return new Course(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt(8));
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        return null;
-    }
+    
 
     public int getCidById(int id) {
         int cid = 0;
@@ -617,9 +597,64 @@ public class DAO extends DBContext {
         }
         return list;
     }
-
+    public Course getCourseById(int id) {
+        List<Course> list = new ArrayList<>();
+        String sql = "select * from course where id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Course(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(8));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    public Mentor getMentorByID(int mentorid){
+        List<Mentor> list = new ArrayList<>();
+        String sql = "select * from mentor where Mentor_id = ?";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, mentorid);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return new Mentor(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4));
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+    public void EditMentor(String name,String email,String image,String mentorId){
+        String sql = "UPDATE [dbo].[Mentor]\n"
+                + "     SET [Mentor_name] = ?\n"
+                + "         ,[email] = ?\n"
+                + "         ,[image] = ?\n"
+                + "WHERE Mentor_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setString(2, email);
+            st.setString(3, image);
+            st.setString(4, mentorId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getAccountByRoleId(3));
+        System.out.println(d.getMentorByID(2));
     }
 }

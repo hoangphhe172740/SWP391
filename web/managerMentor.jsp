@@ -63,7 +63,7 @@
                                         <img src="${o.image}" style="width: 150px; border-radius: 5px;">
                                     </td>
                                     <td>
-                                        <a href="create-account?roleID=${o.mentorId}" class="edit btn btn-info mb-3"><i class="material-symbols-outlined" title="Create Account">&#xE254;</i></a>
+                                        <a href="load-account?mentorID=${o.mentorId}" class="edit btn btn-info mb-3"><i class="material-symbols-outlined" title="Create Account">&#xE254;</i></a>
                                         <button id="buttonDelete" class="delete btn btn-info" mentor-id ="${o.mentorId}" data-target="#deleteEmployeeModal" data-toggle="modal">
                                             <i class="material-icons" data-toggle="tooltip" 
                                                title="Delete">&#xE872;</i>

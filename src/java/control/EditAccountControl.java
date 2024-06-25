@@ -13,17 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
-
 import model.Mentor;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="EditAccount", urlPatterns={"/edit-account"})
-public class EditAccount extends HttpServlet {
+@WebServlet(name="EditAccountControl", urlPatterns={"/edit-account"})
+public class EditAccountControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,16 +33,14 @@ public class EditAccount extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Mentor m = (Mentor) session.getAttribute("mentor");
-        if(m != null){
-            int id = m.getMentorId();
-            DAO d = new DAO();
-            List<Mentor> list = d.getAllMentor();
-            request.setAttribute("listMentor", list);
-            request.getRequestDispatcher("m")
-        }
-        
+        request.setCharacterEncoding("UTF-8");
+        String mentorid =request.getParameter("id");
+        String name = request.getParameter("name");
+        String image = request.getParameter("image");
+        String email = request.getParameter("email");       
+        DAO d = new DAO();
+        d.EditMentor(name, email, image, mentorid);
+        response.sendRedirect("manageMentor");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

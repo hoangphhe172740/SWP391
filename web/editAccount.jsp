@@ -9,6 +9,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Accounts</title>
         <style>
@@ -136,13 +140,12 @@
 
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
-
             <div class="container">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6 d-flex justify-content-">
-                                <h2>ManageAccount</h2>
+                                <h2>Manage Account</h2>
                             </div>
                         </div>
                     </div>
@@ -151,7 +154,6 @@
             <!-- Edit Modal HTML -->
             <div id="editEmployeeModal">
                 <div class="modal-dialog" style="max-width: 1000px;">
-                <c:forEach items="${listMentor}" var="o">
                     <div class="modal-content">
                         <form action="edit-account" method="post">
                             <div class="modal-header">						
@@ -161,36 +163,28 @@
                             <div class="modal-body">					
                                 <div class="form-group">
                                     <label>ID Mentor</label>
-                                    <input type="text" name="id" value="${o.mentorId}"readonly class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="name" value="${o.mentorName}" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Image</label>
-                                    <input type="text" name="image" value="${o.image}" class="form-control" required>
-                                    <img src="${o.image}" alt="${o.name}" class="img-preview" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input value="${o.email}" name="price" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Pass</label>
-                                    <input name="pass" type="text" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>RoleID</label>
-                                    <input name="role" type="text" class="form-control" required>
-                                </div>
+                                    <input type="text" name="id" value="${listM.mentorId}"readonly class="form-control" required>
                             </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-secondary" href="manager">Cancel</a>
-                                <input type="submit" class="btn btn-success" value="Edit">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" value="${listM.mentorName}" class="form-control" required>
                             </div>
-                        </form>
-                    </c:forEach>     
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input type="text" name="image" value="${listM.image}" class="form-control" required>
+                                <img src="${listM.image}" class="img-preview" style="width: 300px;"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input value="${listM.email}" name="email" type="text" class="form-control" required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" href="manager">Cancel</a>
+                            <input type="submit" class="btn btn-success" value="Edit">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
