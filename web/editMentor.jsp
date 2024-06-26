@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edit Accounts</title>
+        <title>Edit Mentor</title>
         <style>
             /* Reset CSS */
             * {
@@ -144,8 +144,8 @@
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
-                            <div class="col-sm-6 d-flex justify-content-">
-                                <h2>Manage Account</h2>
+                            <div>
+                                <h3><b>Manage Account</b></h3>
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                     <div class="modal-content">
                         <form action="edit-mentor" method="post">
                             <div class="modal-header">						
-                                <h4> Create Account </h4>
+                                <h4> Edit Mentor </h4>
                                 <a href="manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                             </div>
                             <div class="modal-body">					
@@ -181,7 +181,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-secondary" href="manager">Cancel</a>
+                            <a class="btn btn-secondary" href="manageMentor">Cancel</a>
                             <input type="submit" class="btn btn-success" value="Edit">
                         </div>
                     </form>

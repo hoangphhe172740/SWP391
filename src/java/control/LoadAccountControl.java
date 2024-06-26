@@ -5,6 +5,7 @@
 
 package control;
 
+import dao.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,36 +13,32 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Mentor;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="EditAccountServlet", urlPatterns={"/EditAccountServlet"})
-public class EditAccountServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name="LoadAccountControl", urlPatterns={"/load-account"})
+public class LoadAccountControl extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditAccountServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditAccountServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String mentor_raw = request.getParameter("MentorID");
+        int mentorId;
+        DAO d = new DAO();
+        try {
+            mentorId = Integer.parseInt(mentor_raw);
+            Mentor m = d.getMentorByID(mentorId);
+            System.out.println(m);
+            request.setAttribute("listM", m);
+            request.getRequestDispatcher("createAccount.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }catch(Exception e){
+            System.out.println(e);
+        }      
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

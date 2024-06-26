@@ -3,11 +3,15 @@
     Created on : Jun 26, 2024, 2:35:00 PM
     Author     : Admin
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Account</title>
         <style>
@@ -150,16 +154,12 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog" style="max-width: 1000px;">
                     <div class="modal-content">
-                        <form action="edit-account" method="post">
+                        <form action="create-account" method="post">
                             <div class="modal-header">						
                                 <h4> Create Account </h4>
                                 <a href="manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                             </div>
-                            <div class="modal-body">					
-                                <div class="form-group">
-                                    <label>ID Mentor</label>
-                                    <input type="text" name="id" value="${listM.mentorId}"readonly class="form-control" required>
-                            </div>
+                            <div class="modal-body">					                               
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" name="name" value="${listM.mentorName}" class="form-control" required>
@@ -173,7 +173,10 @@
                                 <label>Email</label>
                                 <input value="${listM.email}" name="email" type="text" class="form-control" required>
                             </div>
-
+                            <div class="form-group">
+                                <label>Pass</label>
+                                <input  name="pass" type="text" class="form-control" required>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <a class="btn btn-secondary" href="manager">Cancel</a>

@@ -673,8 +673,29 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
+    public Account checkAccount(String email,String user){
+        String sql = "SELECT * FROM Account\n"
+                + "where [email] = ? and user = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            st.setString(2, user);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                Account u = new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.checkNameMentorExist("Vu Ba Lam Nhu".toLowerCase()));
+        System.out.println(d.getMentorByID(31));
     }
 }
