@@ -20,8 +20,8 @@ import model.Mentor;
  *
  * @author Admin
  */
-@WebServlet(name="EditAccountControl", urlPatterns={"/edit-account"})
-public class EditAccountControl extends HttpServlet {
+@WebServlet(name="EditMentorControl", urlPatterns={"/edit-mentor"})
+public class EditMentorControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

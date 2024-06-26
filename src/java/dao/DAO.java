@@ -523,6 +523,26 @@ public class DAO extends DBContext {
         }
         return false;
     }
+    public boolean checkNameMentorExist(String name){
+        String sql = "SELECT [Mentor_id]\n"
+                + "      ,[Mentor_name]\n"
+                + "      ,[email]\n"
+                + "      ,[image]\n"
+                + "      ,[create_by]\n"
+                + "  FROM [projectSWP].[dbo].[Mentor]"
+                + " where [Mentor_name] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 
     public void AddAccount(String user, String pass, String email, int roleID) {
         String sql = "INSERT INTO [dbo].[Account]\n"
@@ -655,6 +675,6 @@ public class DAO extends DBContext {
     }
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getMentorByID(2));
+        System.out.println(d.checkNameMentorExist("Vu Ba Lam Nhu".toLowerCase()));
     }
 }
