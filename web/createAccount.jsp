@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-secondary" href="manager">Cancel</a>
+                            <a class="btn btn-secondary" href="manageMentor">Cancel</a>
                             <input type="submit" class="btn btn-success" value="Edit">
                         </div>
                     </form>

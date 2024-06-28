@@ -246,8 +246,6 @@ public class DAO extends DBContext {
         return null;
     }
 
-    
-
     public int getCidById(int id) {
         int cid = 0;
         String sql = "select category_id from course where id = ?";
@@ -523,7 +521,8 @@ public class DAO extends DBContext {
         }
         return false;
     }
-    public boolean checkNameMentorExist(String name){
+
+    public boolean checkNameMentorExist(String name) {
         String sql = "SELECT [Mentor_id]\n"
                 + "      ,[Mentor_name]\n"
                 + "      ,[email]\n"
@@ -535,7 +534,7 @@ public class DAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, name);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
             }
         } catch (SQLException e) {
@@ -562,30 +561,6 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-
-    public List<Account> getAccountByRoleId(int roleID) {
-        List<Account> list = new ArrayList<>();
-        String sql = "SELECT [uID], [user], [pass], [email], [roleID] "
-                + "FROM [dbo].[Account] "
-                + "WHERE roleID = ? ";
-
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            st.setInt(1, roleID);
-            try (ResultSet rs = st.executeQuery()) {
-                while (rs.next()) {
-                    list.add(new Account(rs.getInt(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            rs.getInt(5)));
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("SQL Exception while fetching accounts: " + e.getMessage());
-        }
-        return list;
-    }
-
     public List<Course> getCourseByCreatedby(int roleID) {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT  [id]\n"
@@ -617,6 +592,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public Course getCourseById(int id) {
         List<Course> list = new ArrayList<>();
         String sql = "select * from course where id = ?";
@@ -638,25 +614,27 @@ public class DAO extends DBContext {
         }
         return null;
     }
-    public Mentor getMentorByID(int mentorid){
+
+    public Mentor getMentorByID(int mentorid) {
         List<Mentor> list = new ArrayList<>();
         String sql = "select * from mentor where Mentor_id = ?";
-        try{
+        try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, mentorid);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return new Mentor(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4));
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
         return null;
     }
-    public void EditMentor(String name,String email,String image,String mentorId){
+
+    public void EditMentor(String name, String email, String image, String mentorId) {
         String sql = "UPDATE [dbo].[Mentor]\n"
                 + "     SET [Mentor_name] = ?\n"
                 + "         ,[email] = ?\n"
@@ -673,7 +651,8 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-    public Account checkAccount(String email,String user){
+
+    public Account checkAccount(String email, String user) {
         String sql = "SELECT * FROM Account\n"
                 + "where [email] = ? and user = ?";
         try {
@@ -681,7 +660,7 @@ public class DAO extends DBContext {
             st.setString(1, email);
             st.setString(2, user);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Account u = new Account(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -694,8 +673,66 @@ public class DAO extends DBContext {
         }
         return null;
     }
+
+    public List<Course> getTopCoursesByCategory() {
+        String sql = "SELECT id, name, description, price, image, title, category_id " +
+                     "FROM (" +
+                     "    SELECT id, name, description, price, image, title, category_id, " +
+                     "           ROW_NUMBER() OVER (PARTITION BY category_id ORDER BY id) AS row_num " +
+                     "    FROM Course" +
+                     ") AS numbered_courses " +
+                     "WHERE row_num <= 2"; // Thay đổi điều kiện row_num nếu cần thiết
+
+        List<Course> courses = new ArrayList<>();
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                int price = rs.getInt("price");
+                String image = rs.getString("image");
+                String title = rs.getString("title");                
+                int categoryId = rs.getInt("category_id");
+
+                Course course = new Course(id, name, description, price, image, title, categoryId);
+                courses.add(course);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return courses;
+    }
+    
+    public List<Account> getAccountByRoleId(int roleID) {
+        List<Account> list = new ArrayList<>();
+        String sql = "SELECT [uID], [user], [pass], [email], [roleID] "
+                + "FROM [dbo].[Account] "
+                + "WHERE roleID = ? ";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, roleID);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Account(rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getInt(5)));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Exception while fetching accounts: " + e.getMessage());
+        }
+        return list;
+    }
+    
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getMentorByID(31));
+        System.out.println(d.getTopCoursesByCategory());
     }
 }

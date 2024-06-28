@@ -45,7 +45,7 @@
             }
 
             .table-title {
-                background-color: #0056D2;
+                background-color: #c6c6c6;
                 color: #fff;
                 padding: 16px 30px;
                 border-radius: 8px 8px 0 0;
@@ -145,7 +145,7 @@
                     <div class="table-title">
                         <div class="row">
                             <div>
-                                <h3><b>Manage Account</b></h3>
+                                <h3><b><a href="home" style="color: #333;">Manage Account</a></b></h3>
                             </div>
                         </div>
                     </div>

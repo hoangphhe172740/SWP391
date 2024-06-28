@@ -34,12 +34,14 @@ public class HomeControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO d = new DAO();
-        List<Category> listcate = d.getAllCaregories();
         List<Course> cnew = d.getNewManyCourse();
         if (cnew != null) {
             request.setAttribute("cnew", cnew);
         }
-        request.setAttribute("listcate", listcate);
+        List<Course> list = d.getTopCoursesByCategory();
+        if(list != null){
+            request.setAttribute("listc", list);
+        }
 //        Course cnew = (Course) d.getNewManyCourse();
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
