@@ -32,10 +32,10 @@
             <div class="card-header bg-success text-white text-uppercase">New Course</div>
             <div class="card-body card-product text-left">
                 <img class="img-fluid" src="${pnew.image}" />
-                <h5 class="card-title"><a href="detail?pid=${pnew.id}">${pnew.name}</a></h5>
+                <h5 class="card-title"><a href="detail?Courseid=${pnew.id}">${pnew.name}</a></h5>
                 <p class="card-text"><b>Skills you'll gain:</b> ${pnew.title}</p>
                 <i class="fa-solid fa-star" style="color: yellowgreen;"></i><b> 4</b>
-                <p class="btn btn-danger btn-block">${pnew.price} $</p>
+                
             </div>
         </div>
     </div>

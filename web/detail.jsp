@@ -114,7 +114,7 @@
             background-color: #fff;
             overflow: hidden;
         }
-        
+
 
         /* Điều chỉnh cho ảnh sản phẩm trong các slide */
         .slide__product-image {
@@ -181,6 +181,9 @@
                                     <img class="img-fluid" src="${c.image}" alt="error"/>
                                 </a>  
                             </div>
+                            <div class="col">
+                                <p class="btn btn-danger btn-block"><a href="join-course?Courseid=${c.id}" style="color: #333;">Join now</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -215,9 +218,6 @@
                                         <div class="slide__product-detail">
                                             <h6 class="card-title show_txt bg-light text-center"><a href="detail?Courseid=${cc.id}" title="View Product">${cc.name}</a></h6>
                                             <div class="row">
-                                                <div class="col">
-                                                    <p class="btn btn-danger btn-block">${cc.price}$</p>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

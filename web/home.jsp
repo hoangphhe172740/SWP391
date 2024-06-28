@@ -40,7 +40,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
             width: 310px;
-            height: 560px;
+            height: 520px;
 
         }
         .card-top:hover {
@@ -114,7 +114,7 @@
                                 <div class="main-wrapper">
                                     <h1 class="main-title"><a href="detail?Courseid=${cnew.id}">${cnew.name}</a></h1>
                                     <h3 class="main-header">${cnew.title}</h3>
-                                    <button><h2 class="main-subtitle">${cnew.price}</h2></button>
+                                    <button><h2 class="main-subtitle"><a href="join-course?Courseid=${cnew                                                                                                                               .id}" style="color: #333;">Join now</a></h2></button>
                                 </div>  
                             </div>
                             <div class="right-side">                                       
@@ -130,7 +130,7 @@
         </section>
         <section>
             <div style="padding-left: 80px;">
-                <b style="padding-left: 5px; font-size: 20px;"><i class="fa-solid fa-graduation-cap"></i> SOME OUTSTANDING COURSES IN VARIOUS CATEGORIES</b>
+                <b style="padding-left: 5px; font-size: 20px;"><i class="fa-solid fa-graduation-cap"></i> SOME OUTSTANDING COURSES IN VARIOUS CATEGORIES:</b>
                 <div class="col-sm-11 pt-4">
                     <div class="row">
                         <c:forEach items="${requestScope.listc}" var="c" varStatus="status">
@@ -146,9 +146,7 @@
                                         <p class="card-text"><b>Skills you'll gain:</b> ${c.title}</p>
                                         <i class="fa-solid fa-star" style="color: yellowgreen;"></i><b> 4.8</b>
                                         <div class="row">
-                                            <div class="col">
-                                                <p class="btn btn-danger btn-block">Join now</p>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -161,8 +159,8 @@
                     </div>
                 </div>             
             </div>
-
         </section>
+        <jsp:include page="Footer.jsp"></jsp:include>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>

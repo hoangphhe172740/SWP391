@@ -274,9 +274,7 @@
                                         <p class="card-text"><b>Skills you'll gain:</b> ${c.title}</p>
                                         <i class="fa-solid fa-star" style="color: yellowgreen;"></i><b> 4.8</b>
                                         <div class="row">
-                                            <div class="col">
-                                                <p class="btn btn-danger btn-block">${c.price}</p>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
