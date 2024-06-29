@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Account;
 import model.Course;
+import model.Lesson;
 import model.Modules;
 
 /**
@@ -35,8 +36,9 @@ public class JoinServlet extends HttpServlet {
         if (a != null) {
             DAO d = new DAO();
             LessonDAO dao = new LessonDAO();
-            courseid = Integer.parseInt(course_raw);           
-            Course listc = d.getCourseById(courseid); 
+            courseid = Integer.parseInt(course_raw);
+            Course listc = d.getCourseById(courseid);
+            System.out.println(listc);
             List<Modules> listModule = dao.getAllModuleByCid(courseid);
             System.out.println(listModule);
             request.setAttribute("listModule", listModule);
@@ -45,7 +47,7 @@ public class JoinServlet extends HttpServlet {
         } else {
             response.sendRedirect("Login");
         }
-        
+
     }
 
     @Override

@@ -85,8 +85,8 @@ public class SearchControl extends HttpServlet {
         List<Course> courses = new ArrayList<>();
         List<Course> listcourse = d.getAllCourse();
         List<Category> listCate = d.getAllCaregories();
+        System.out.println(listCate);
         
-        System.out.println(listcourse);
         if (cid_raw != null) {
             System.out.println(cid_raw);
             cid = Integer.parseInt(cid_raw);

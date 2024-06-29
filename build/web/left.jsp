@@ -14,6 +14,7 @@
                            value="${0}" onclick="setCheck(this)"/>
                     <label for="c0">ALL</label>
                 </li>
+
                 <c:forEach begin="0" end="${listC.size()-1}" var="i">
                     <li class="list-group-item text-left ${chid[i+1]? "active" : ""}">
                         <input type="checkbox" id="c${i+1}" name="cidd" 
@@ -23,6 +24,7 @@
                         <label for="c${i+1}">${listC.get(i).getName()}</label>
                     </li>
                 </c:forEach>
+
                 <input name = "page" id="paging" value="1" hidden />
                 <input name = "sort" id="sortForm" value="default" hidden />
             </form>                    
@@ -35,7 +37,7 @@
                 <h5 class="card-title"><a href="detail?Courseid=${pnew.id}">${pnew.name}</a></h5>
                 <p class="card-text"><b>Skills you'll gain:</b> ${pnew.title}</p>
                 <i class="fa-solid fa-star" style="color: yellowgreen;"></i><b> 4</b>
-                
+
             </div>
         </div>
     </div>

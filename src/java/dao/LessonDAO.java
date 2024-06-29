@@ -32,27 +32,6 @@ public class LessonDAO extends DBContext {
         }
         return list;
     }
-
-    public List<Lesson> getAllLesson() {
-        List<Lesson> list = new ArrayList<>();
-        String sql = "SELECT [module_id]\n"
-                + "      ,[lesson_Id]\n"
-                + "      ,[lesson_name]\n"
-                + "      ,[lesson_video]\n"
-                + "      ,[create_by]\n"
-                + "  FROM [dbo].[Lesson]";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(new Lesson(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
     public List<Modules> getAllModuleByCid(int course_id) {
         List<Modules> list = new ArrayList<>();
         String sql = "SELECT [course_id], [module_id], [module_name] "
@@ -77,15 +56,16 @@ public class LessonDAO extends DBContext {
                 + "      ,[lesson_Id]\n"
                 + "      ,[lesson_name]\n"
                 + "      ,[lesson_video]\n"
+                + "      ,[duration]\n"
                 + "      ,[create_by]\n"
                 + "  FROM [dbo].[Lesson]"
-                + "Where [module_id] = ?";
+                + "where [module_id] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, module_id);
             ResultSet rs = st.executeQuery();
-            while(rs.next()){
-                list.add(new Lesson(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+            while (rs.next()) {
+                list.add(new Lesson(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6)));
             }
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -95,6 +75,6 @@ public class LessonDAO extends DBContext {
 
     public static void main(String[] args) {
         LessonDAO d = new LessonDAO();
-        System.out.println(d.getLessonByModuleid(1));
+        System.out.println(d.getLessonByModuleid(2));
     }
 }

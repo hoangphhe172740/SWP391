@@ -13,16 +13,18 @@ public class Lesson {
     private int lesson_id;
     private String lesson_name;
     private String lesson_video;
+    private int duration;
     private int create_by;
 
     public Lesson() {
     }
 
-    public Lesson(int module_id, int lesson_id, String lesson_name, String lesson_video, int create_by) {
+    public Lesson(int module_id, int lesson_id, String lesson_name, String lesson_video, int duration, int create_by) {
         this.module_id = module_id;
         this.lesson_id = lesson_id;
         this.lesson_name = lesson_name;
         this.lesson_video = lesson_video;
+        this.duration = duration;
         this.create_by = create_by;
     }
 
@@ -58,11 +60,21 @@ public class Lesson {
         this.lesson_video = lesson_video;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public int getCreate_by() {
         return create_by;
     }
 
     public void setCreate_by(int create_by) {
         this.create_by = create_by;
-    }        
+    }
+
+    
 }
