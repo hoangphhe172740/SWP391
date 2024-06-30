@@ -113,8 +113,7 @@
                             <div class="left-side">
                                 <div class="main-wrapper">
                                     <h1 class="main-title"><a href="detail?Courseid=${cnew.id}">${cnew.name}</a></h1>
-                                    <h3 class="main-header">${cnew.title}</h3>
-                                    <button><h2 class="main-subtitle"><a href="join-course?Courseid=${cnew                                                                                                                               .id}" style="color: #333;">Join now</a></h2></button>
+                                    <h3 class="main-header">${cnew.title}</h3>                                  
                                 </div>  
                             </div>
                             <div class="right-side">                                       

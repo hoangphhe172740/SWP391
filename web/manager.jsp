@@ -27,7 +27,7 @@
                     <div class="table-title">
                         <div class="d-flex justify-content-between">
                             <div class="col-sm-6 pt-3">
-                                <h2>Mentor <b>Manage</b></h2>
+                                <a href="home" style="text-decoration: none; color: #fff;"><h2>Mentor <b>Manage</b></h2></a>
                             </div>                       
                         </div>
                     </div>
@@ -42,7 +42,6 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Image</th>
-                            <th>Price</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -55,21 +54,21 @@
                                 <td>
                                     <img src="${o.image}" style="width: 300px; border-radius: 5px;">
                                 </td>
-                                <td>${o.price} $</td>
                                 <td>
                                     <a href="load-lesson?courseid=${o.id}" class="edit btn btn-info mb-3"><i
                                             class="material-icons"
                                             title="Edit">&#xE254;</i></a>
-                                    <button id="buttonDelete" class="delete btn btn-info" course-id ="${o.id}" data-target="#deleteEmployeeModal" data-toggle="modal">
-                                        <i class="material-icons" data-toggle="tooltip" 
-                                           title="Delete">&#xE872;</i>
-                                    </button>
+                                    
                                 </td>
                             </tr>
                         </c:forEach>
                     </c:if>
                 </tbody>
             </table>
+        </div>
+        <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+            <a href="home" class="btn btn-success">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Home</a>
         </div>
     </body>
 </html>

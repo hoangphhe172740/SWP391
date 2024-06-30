@@ -157,7 +157,7 @@
                         <form action="create-account" method="post">
                             <div class="modal-header">						
                                 <h4> Create Account </h4>
-                                <a href="manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                                <a href="manageMentor" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                             </div>
                             <div class="modal-body">					                               
                             <div class="form-group">

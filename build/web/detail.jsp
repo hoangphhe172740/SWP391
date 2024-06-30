@@ -20,25 +20,29 @@
         <title>Course Detail</title>
     </head>
     <style>
-        .container {
-            max-width: 1200px;
-            margin: auto;
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
             padding: 20px;
+            margin: 0;
+        }
+
+        /* Container Styles */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .card {
-            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden;
             margin-bottom: 20px;
-        }
-
-        .card-header.bg-primary {
-            background-color: #007bff !important;
-            color: #ffffff;
-            font-size: 20px;
-            font-weight: bold;
         }
 
         .card-body {
@@ -46,116 +50,131 @@
         }
 
         .content-and-image {
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-        }
-
-        .text-section, .image-section {
-            flex: 1;
+            gap: 20px;
         }
 
         .text-section {
-            padding-right: 20px;
+            flex: 1;
         }
 
-        .e-learning-icon {
-            display: flex;
-            align-items: center;
-            font-size: 18px;
-            color: #007bff;
-            margin-bottom: 15px;
+        .text-content {
+            margin-top: 10px;
         }
 
         .text-content p {
-            color: #333;
-            line-height: 1.6;
+            font-size: 16px;
         }
 
-        .text-content a {
-            color: #007bff;
-            text-decoration: none;
+        .image-section {
+            flex: 1;
         }
 
-        .image-section img {
+        .course-image {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
+            
         }
 
-        .card-title.show_txt {
-            padding: 10px 0;
-            font-size: 18px;
-            font-weight: bold;
+        .join-now-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            width: 150px;
+            height: 50px;
+            
         }
 
-        .btn.btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-            color: #ffffff;
+        .join-now-btn:hover {
+            background-color: #0056b3;
         }
 
-        .btn.btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+        .card-header {
+            border-radius: 8px 8px 0 0;
         }
 
-        /* Tổng quan và layout swiper */
+        .card-text {
+            font-size: 16px;
+        }
+
         .swiper {
-            overflow: hidden;
             width: 100%;
+            height: 100%;
         }
 
-        /* Tạo hiệu ứng border và box-shadow cho mỗi slide */
         .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
             display: flex;
-            align-items: flex-end;
             justify-content: center;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            overflow: hidden;
+            align-items: center;
         }
 
+        .slide__product {
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
 
-        /* Điều chỉnh cho ảnh sản phẩm trong các slide */
+        .slide__product:hover {
+            transform: scale(1.05);
+        }
+
         .slide__product-image {
             width: 100%;
             height: auto;
-            object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
         }
 
-        /* Tạo kiểu cho tiêu đề sản phẩm */
-        .card-title.show_txt {
-            padding: 10px 0;
-            font-size: 18px; /* Tăng kích thước font */
-            font-weight: bold;
+        .slide__product-detail {
+            padding: 10px;
         }
 
-        /* Button điều hướng (nếu bạn có sử dụng) */
-        .swiper-button-next, .swiper-button-prev {
-            color: #007bff; /* Màu sắc của buttons */
-            font-size: 20px; /* Tăng kích thước để dễ nhấn hơn */
-            border: none;
-            background: transparent;
+        .slide__product-detail h6 {
+            margin: 0;
         }
 
-        /* Pagination bullets */
-        .swiper-pagination-bullet {
-            background: #007bff; /* Màu sắc cho bullets */
-            opacity: 1; /* Làm cho chúng luôn hiển thị */
+        .text-center {
+            font-size: 16px;
+            padding: 10px;
         }
 
-        .swiper-pagination-bullet-active {
-            background: #ff6347; /* Màu sắc cho bullet đang active */
-        }
-
-        @media (max-width: 768px) {
-            .content-and-image {
-                flex-direction: column;
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
             }
 
-            .text-section {
-                padding-right: 0;
-                padding-bottom: 20px;
+            .content-and-image {
+                flex-direction: column;
+                text-align: center;
+                    
+            }
+
+            .text-content p {
+                font-size: 14px;
+            }
+
+            .card-text {
+                font-size: 14px;
+            }
+
+            .swiper-slide {
+                font-size: 16px;
+            }
+
+            .text-center {
+                font-size: 14px;
             }
         }
     </style>
@@ -164,26 +183,29 @@
             <div>
                 <div class="row">
                 <c:set var="c" value="${requestScope.detail}"/>
-                <div >
+                <div>
                     <div class="card bg-light mb-3">
                         <div class="card-body">
-                            <div class="content-and-image d-flex flex-row align-items-start">
+                            <div class="content-and-image d-flex">
                                 <div class="text-section">
                                     <div class="e-learning-icon">
                                         <i class="fa-solid fa-graduation-cap"> E-Learning</i>
                                     </div>
                                     <div class="text-content">
-                                        <p class="text-left font-weight-bold">${c.name}</p>
-                                        <p class="text-left">If you want to learn more about the course you are watching, you can buy it. We have many interesting courses. If you want to learn more, you can click<a href="search"> here.</a></p>
+                                        <p class="text-left font-weight-bold" style="font-size: 30px;">${c.name}</p>
+                                        <p class="text-left">
+                                            If you want to learn more about the course you are watching, you can buy it. We have many interesting courses. If you want to learn more, you can click
+                                            <a href="search"> here.</a>
+                                        </p>
                                     </div>
                                 </div>
                                 <a href="" class="image-section" data-toggle="modal" data-target="#courseModal">
-                                    <img class="img-fluid" src="${c.image}" alt="error"/>
-                                </a>  
+                                    <img class="img-fluid course-image" src="${c.image}" alt="error"/>
+                                </a>
                             </div>
-                            <div class="col">
-                                <p class="btn btn-danger btn-block"><a href="join-course?Courseid=${c.id}" style="color: #333;">Join now</a></p>
-                            </div>
+                            <button class="join-now-btn col">
+                                <b><a href="join-course?Courseid=${c.id}" style="color: #fff; text-decoration: none;">Join now</a></b>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -195,7 +217,9 @@
             <!-- Description -->
             <div class="col-12">
                 <div class="card border-light mb-3">
-                    <div class="card-header bg-primary text-white text-uppercase"><i class="fa-brands fa-discourse"></i> Description</div>
+                    <div class="card-header bg-primary text-white text-uppercase">
+                        <i class="fa-brands fa-discourse"></i> Description
+                    </div>
                     <div class="card-body">
                         <p class="card-text">
                             ${c.description}
@@ -203,22 +227,25 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <section>
         <div class="col-12" id="reviews">
             <div class="card border-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa-brands fa-codepen"></i> Courses Similarly</div>
+                <div class="card-header bg-primary text-white text-uppercase">
+                    <i class="fa-brands fa-codepen"></i> Courses Similarly
+                </div>
                 <div>
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             <c:forEach var="cc" items="${requestScope.cCate}">
                                 <div class="swiper-slide">
-                                    <div class="slide__product" style="padding-bottom: 20px;">
+                                    <div class="slide__product" style="padding-bottom: 20px; width: 400px;">
                                         <img class="slide__product-image" src="${cc.image}" alt="Card image cap">
                                         <div class="slide__product-detail">
-                                            <h6 class="card-title show_txt bg-light text-center"><a href="detail?Courseid=${cc.id}" title="View Product">${cc.name}</a></h6>
-                                            <div class="row">
-                                            </div>
+                                            <h6 class="card-title show_txt bg-light text-center">
+                                                <a href="detail?Courseid=${cc.id}" title="View Product">${cc.name}</a>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>

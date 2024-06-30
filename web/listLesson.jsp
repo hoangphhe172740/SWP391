@@ -7,11 +7,11 @@
         <title>Lessons</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <style>
-            .container {
-                max-width: 800px;
+            .container-home{
+                width: 100%;
                 margin: auto;
                 padding: 20px;
-                color: #333; /* Trung tính h?n so v?i màu tr?ng ho?c ?en c?ng */
+                color: #333; 
             }
 
             h2 {
@@ -21,8 +21,8 @@
             }
 
             .lesson-item {
-                background-color: #5a6268; /* Màu xám trung tính */
-                color: white;
+                background-color: #f8f9fa; /* Màu xám trung tính */
+                color: #333;
                 padding: 10px 20px;
                 margin-bottom: 5px;
                 cursor: pointer;
@@ -39,7 +39,7 @@
             }
 
             .lesson-item:hover {
-                background-color: #495057; /* Sáng h?n m?t chút khi di */
+                background-color: #adb5bd; /* Sáng h?n m?t chút khi di */
                 transform: translateY(-2px); /* Nh? nhàng nâng lên */
                 box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Bóng ??m h?n */
             }
@@ -93,7 +93,7 @@
                     <span><i class="fas fa-chevron-down"></i> ${o.lesson_name}</span>                   
                 </div>
                 <div class="lesson-content">
-                    <b>.</b><button onclick="toggleVideo(this)"> Xem Video</button>
+                    <button onclick="toggleVideo(this)"> <i class="fa-regular fa-circle-play"></i> Video</button>
                     <div class="video-content" style="display:none;">
                         <p>${o.lesson_video}</p>
                     </div>

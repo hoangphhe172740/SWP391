@@ -29,7 +29,7 @@
                     <div class="table-title">
                         <div class="d-flex justify-content-between">
                             <div class="col-sm-6 pt-3">
-                                <h2>Manage <b>Courses</b></h2>
+                                <a href="home" style="text-decoration: none; color: #fff;"><h2>Manage <b>Courses</b></h2></a>
                             </div>
                             <div class="col-sm-3 pt-3">
                                 <button type="button" data-target="#addEmployeeModal" class="btn btn-success d-flex justify-content-center" data-toggle="modal">

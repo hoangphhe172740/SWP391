@@ -82,7 +82,7 @@
 <!-- begin of Menu--->
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="home">
             <img src="img/360_F_128939133_0WXTVdZ1bv1NXusQsdYYJLIwTVoXHqQ7.jpg" class="img-fluid" alt="Sample image">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,7 +127,16 @@
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="profile?id=${acc.id}">
                                     <i class="bi bi-person-fill "></i>
-                                    <span> My Profile</span>
+                                    <span style="padding-left: 10px;"> My Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <i class="fa-solid fa-list"></i>
+                                    <span style="padding-left: 10px;"> Wish List</span>
                                 </a>
                             </li>
                             <li>
@@ -136,7 +145,7 @@
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="logout">
                                     <i class="bi bi-box-arrow-right"></i>
-                                    <span>Log Out</span>
+                                    <span style="padding-left: 10px;">Log Out</span>
                                 </a>
                             </li>
                         </ul>

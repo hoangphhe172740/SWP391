@@ -32,6 +32,7 @@ public class LessonDAO extends DBContext {
         }
         return list;
     }
+
     public List<Modules> getAllModuleByCid(int course_id) {
         List<Modules> list = new ArrayList<>();
         String sql = "SELECT [course_id], [module_id], [module_name] "
@@ -73,8 +74,28 @@ public class LessonDAO extends DBContext {
         return list;
     }
 
+    public void AddLesson(String module,String lesson_name, String lesson_video, int createRole) {
+        String sql = "INSERT INTO [dbo].[Lesson]\n"
+                + "           ([module_id]\n"
+                + "           ,[lesson_name]\n"
+                + "           ,[lesson_video]\n"
+                + "           ,[create_by])"
+                + "VALUES (?,?,?,?)";
+        PreparedStatement st;
+        try {
+            st = connection.prepareStatement(sql);
+            st.setString(1, module);
+            st.setString(2, lesson_name);
+            st.setString(3, lesson_video);
+            st.setInt(4, createRole);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) {
         LessonDAO d = new LessonDAO();
-        System.out.println(d.getLessonByModuleid(2));
+        System.out.println(d.getAllModuleByCid(1));
     }
 }

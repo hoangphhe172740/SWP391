@@ -733,6 +733,6 @@ public class DAO extends DBContext {
     
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getCourseById(2));
+        System.out.println(d.getCourseById(1));
     }
 }
