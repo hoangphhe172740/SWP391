@@ -14,41 +14,32 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 import model.Account;
-import model.Category;
 import model.Course;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="ManagerControl", urlPatterns={"/manager"})
-public class ManagerControl extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name="LoadHistoryJoin", urlPatterns={"/load-historyjoin"})
+public class LoadHistoryJoin extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
+        String course_raw = request.getParameter("Courseid");
+        int courseid;
+        
+        HttpSession session =request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if(a != null){
-            int id = a.getRoleID();
-        DAO d = new DAO();
-            List<Course> list = d.getCourseByCreatedby(id);
-            List<Category> listCate = d.getAllCaregories();
-            List<Course> listc = d.getAllCourse();           
-            request.setAttribute("listC", listCate);
-            request.setAttribute("listCourse", list);
-            request.getRequestDispatcher("managercourse.jsp").forward(request, response);
+        if(a != null ){
+            DAO d = new DAO();
+            courseid = Integer.parseInt(course_raw);
+            Course co = d.getCourseById(courseid);            
+            request.setAttribute("listCourse", co);
+            request.getRequestDispatcher("confirm.jsp").forward(request, response);
         }else{
-            response.sendRedirect("home");
+            response.sendRedirect("Login");
         }
     } 
 
@@ -67,6 +58,6 @@ public class ManagerControl extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

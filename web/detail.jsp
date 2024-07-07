@@ -76,7 +76,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-            
+
         }
 
         .join-now-btn {
@@ -90,7 +90,7 @@
             text-align: center;
             width: 150px;
             height: 50px;
-            
+
         }
 
         .join-now-btn:hover {
@@ -158,7 +158,7 @@
             .content-and-image {
                 flex-direction: column;
                 text-align: center;
-                    
+
             }
 
             .text-content p {
@@ -203,9 +203,16 @@
                                     <img class="img-fluid course-image" src="${c.image}" alt="error"/>
                                 </a>
                             </div>
-                            <button class="join-now-btn col">
-                                <b><a href="join-course?Courseid=${c.id}" style="color: #fff; text-decoration: none;">Join now</a></b>
-                            </button>
+                            <c:if test="${Enrolled == null}">
+                                <button class="join-now-btn col">
+                                    <b><a href="load-historyjoin?Courseid=${c.id}" style="color: #fff; text-decoration: none;">Join now</a></b>
+                                </button>
+                            </c:if>
+                            <c:if test="${Enrolled != null}">
+                                <button class="join-now-btn col">
+                                    <b><a href="join-course?Courseid=${c.id}" style="color: #fff; text-decoration: none;">Enrolled</a></b>
+                                </button>
+                            </c:if>
                         </div>
                     </div>
                 </div>

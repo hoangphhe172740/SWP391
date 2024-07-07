@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package control;
 
-import dao.DAO;
 import dao.LessonDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,52 +16,41 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Account;
-import model.Course;
-import model.Modules;
+import model.CourseEnrollment;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "JoinServlet", urlPatterns = {"/join-course"})
-public class JoinServlet extends HttpServlet {
-    
+@WebServlet(name="MylearningControl", urlPatterns={"/my-learning"})
+public class MylearningControl extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String course_raw = request.getParameter("Courseid");
-        int courseid;
-        HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("acc");
-        try {
-            if (a != null) {
-                DAO d = new DAO();
-                LessonDAO dao = new LessonDAO();
-                courseid = Integer.parseInt(course_raw);
-                Course listc = d.getCourseById(courseid);
-                System.out.println(listc);
-                List<Modules> listModule = dao.getAllModuleByCid(courseid);
-                System.out.println(listModule);
-                request.setAttribute("listModule", listModule);
-                request.setAttribute("listc", listc);
-                request.getRequestDispatcher("joinCourse.jsp").forward(request, response);
-            } else {
-                response.sendRedirect("Login");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println(e);
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        LessonDAO dao = new LessonDAO();
+        List<CourseEnrollment> list = dao.getMycoursebyAccID();
+        request.setAttribute("listcourse", list);
+        request.getRequestDispatcher("myLearning.jsp").forward(request, response);
         }
-        
-    }
-    
+     
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /** 
+     * Handles the HTTP <code>GET</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -69,10 +58,14 @@ public class JoinServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
+    /** 
+     * Returns a short description of the servlet.
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

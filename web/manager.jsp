@@ -57,8 +57,7 @@
                                 <td>
                                     <a href="load-lesson?courseid=${o.id}" class="edit btn btn-info mb-3"><i
                                             class="material-icons"
-                                            title="Edit">&#xE254;</i></a>
-                                    
+                                            title="Edit">&#xE254;</i></a>                                   
                                 </td>
                             </tr>
                         </c:forEach>

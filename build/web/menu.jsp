@@ -112,6 +112,9 @@
                         <b><a class="nav-link" href="mentor-manager">Manager</a></b>
                     </li>
                 </c:if>
+                <c:if test="${sessionScope.acc.roleID == 4}">
+                    <b><a class="nav-link" href="my-learning">My Learning</a></b>
+                </c:if>
                 <c:if test="${sessionScope.acc != null}">                    
                     <li class="nav-item dropdown pe-3">
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" aria-expanded="true" data-bs-toggle="dropdown">

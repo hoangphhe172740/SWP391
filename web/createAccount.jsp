@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Account</title>
         <style>
-            /* Reset CSS */
+            
             * {
                 margin: 0;
                 padding: 0;

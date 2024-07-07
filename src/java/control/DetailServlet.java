@@ -6,6 +6,7 @@
 package control;
 
 import dao.DAO;
+import dao.LessonDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
 import model.Category;
 import model.Course;
 
@@ -36,7 +38,13 @@ public class DetailServlet extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id_raw = request.getParameter("Courseid");
+        
         HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        LessonDAO dao = new LessonDAO();
+        if(dao.checkEnrollExist(a.getId(), id_raw)){
+            request.setAttribute("Enrolled", a);
+        }
         String url = request.getRequestURI() + "?Courseid=" + id_raw;
         session.setAttribute("prevPage", url);
         Course c = null;
@@ -48,7 +56,7 @@ public class DetailServlet extends HttpServlet {
         }catch(NumberFormatException e){
             System.out.println(e);
         }
-        System.out.println(c);
+        
         List<Course> listcourse = d.getAllCourse();
         List<Category> listCate = d.getAllCaregories();
         Course pnew = d.getNewCourse();

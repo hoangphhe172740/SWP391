@@ -730,9 +730,30 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+    public List<Account> getAccountById(int id) {
+        List<Account> list = new ArrayList<>();
+        String sql = "SELECT [uID], [user], [pass], [email], [roleID] "
+                + "FROM [dbo].[Account] "
+                + "WHERE uID = ? ";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, id);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Account(rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getInt(5)));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Exception while fetching accounts: " + e.getMessage());
+        }
+        return list;
+    }
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getCourseById(1));
+        System.out.println(d.getCourseById(9));
     }
 }
