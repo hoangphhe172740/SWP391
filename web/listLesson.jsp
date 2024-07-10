@@ -85,10 +85,12 @@
                 }
             }
         </style>
+        
     </head>
     <body>
         <div class="container">
             <c:forEach var="o" items="${Listlesson}">
+                
                 <div class="lesson-item" onclick="toggleSection(this)">
                     <span><i class="fas fa-chevron-down"></i> ${o.lesson_name}</span>                   
                 </div>
@@ -96,7 +98,7 @@
                     <button onclick="toggleVideo(this)"> <i class="fa-regular fa-circle-play"></i> Video</button>
                     <div class="video-content" style="display:none;">
                         <p>${o.lesson_video}</p>
-                    </div>
+                    </div>                    
                 </div>
             </c:forEach>
         </div>

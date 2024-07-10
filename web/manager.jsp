@@ -43,6 +43,7 @@
                             <th>Name</th>
                             <th>Image</th>
                             <th>Actions</th>
+                            <th>Add Quiz</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +58,10 @@
                                 <td>
                                     <a href="load-lesson?courseid=${o.id}" class="edit btn btn-info mb-3"><i
                                             class="material-icons"
-                                            title="Edit">&#xE254;</i></a>                                   
+                                            title="Add Lesson">&#xE254;</i></a>                                   
+                                </td>
+                                <td>
+                                    <a href="#"><i class="fa-solid fa-plus"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

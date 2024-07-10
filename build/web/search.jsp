@@ -234,7 +234,7 @@
     <body>
         <section class="top-area">
             <div>
-                <a href="#"><img src="img/360_F_128939133_0WXTVdZ1bv1NXusQsdYYJLIwTVoXHqQ7.jpg" alt="" width="90px"/></a>
+                <a href="home"><img src="img/360_F_128939133_0WXTVdZ1bv1NXusQsdYYJLIwTVoXHqQ7.jpg" alt="" width="90px"/></a>
             </div>
             <form action="searchtext" method="post">
                 <div class="search-box">

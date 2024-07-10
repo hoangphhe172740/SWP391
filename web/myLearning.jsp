@@ -19,6 +19,83 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>My Learning</title>
     </head>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Header Styles */
+        .table-wrapper {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-title h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        .table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Image Styles */
+        .table td img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Button Styles */
+        .join-now-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-now-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-primary {
+            margin-top: 20px;
+        }
+    </style>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <div class="container">
@@ -30,8 +107,8 @@
                             </div>                           
                         </div>
                     </div>
-                <c:if test="${listcourse.size() == null}">
-                    <h1>You have not participated in any courses yet</h1>
+                <c:if test="${listcourse.size() == 0}">
+                    <h1 class="btn btn-danger" style=" padding: 10px 10px;"><i class="fa-solid fa-circle-exclamation"></i> You have not participated in any courses yet</h1>
                 </c:if>
                 <c:if test="${listcourse.size() > 0}">
                     <table class="table table-striped table-hover">
@@ -44,15 +121,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listcourse}" var="o">
+                            <c:forEach items="${listcourse}" var="o">                              
                                 <tr>
                                     <td>${o.courseID}</td>
                                     <td>${o.courseName}</td>
                                     <td>
                                         <img src="${o.courseImage}" style="width: 300px; border-radius: 5px;">
-                                    </td>                                    
-                                </tr>
-                            </c:forEach>                               
+                                    </td>
+                                    <td>
+                                        <button class="join-now-btn col">
+                                            <b><a href="join-course?Courseid=${o.courseID}" style=" text-decoration: none; color: #fff;">Enrolled</a></b>
+                                        </button>
+                                    </td>
+                                </tr>                                   
+                            </c:forEach>
                         </c:if>
                     </tbody>
                 </table>

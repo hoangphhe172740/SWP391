@@ -41,7 +41,8 @@ public class DetailServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        LessonDAO dao = new LessonDAO();
+        if(a != null){
+            LessonDAO dao = new LessonDAO();
         if(dao.checkEnrollExist(a.getId(), id_raw)){
             request.setAttribute("Enrolled", a);
         }
@@ -59,6 +60,7 @@ public class DetailServlet extends HttpServlet {
         
         List<Course> listcourse = d.getAllCourse();
         List<Category> listCate = d.getAllCaregories();
+            System.out.println(listCate);
         Course pnew = d.getNewCourse();
         int cid = d.getCidById(id);
         List<Course> listProductByCide = d.getCourseByCid(cid);
@@ -68,6 +70,9 @@ public class DetailServlet extends HttpServlet {
         request.setAttribute("listC", listCate);
         request.setAttribute("detail", c);
         request.getRequestDispatcher("detail.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("Login");
+        }
     } 
 
     @Override

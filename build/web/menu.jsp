@@ -111,6 +111,9 @@
                     <li class="nav-item">
                         <b><a class="nav-link" href="mentor-manager">Manager</a></b>
                     </li>
+                    <li>
+                        <b><a class="nav-link" href="my-learning">My Learning</a></b>
+                    </li>
                 </c:if>
                 <c:if test="${sessionScope.acc.roleID == 4}">
                     <b><a class="nav-link" href="my-learning">My Learning</a></b>

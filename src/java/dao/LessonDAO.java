@@ -169,22 +169,26 @@ public class LessonDAO extends DBContext {
         return list;
     }
 
-    public List<CourseEnrollment> getMycoursebyAccID() {
+    public List<CourseEnrollment> getMycoursebyAccID(int id) {
         List<CourseEnrollment> list = new ArrayList<>();
         String sql = "SELECT * \n"
                 + "  FROM [dbo].[CourseEnrollment] ce\n"
-                + "  join Course c on c.id = ce.CourseID";
+                + "  join Course c on c.id = ce.CourseID\n"
+                + "  where AccountID = ?\n"
+                + "  order by ce.CourseID desc";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 CourseEnrollment courseEn = new CourseEnrollment();
+                courseEn.setAccountID(rs.getInt(2));
                 courseEn.setCourseID(rs.getInt(4));
                 courseEn.setCourseName(rs.getString(7));
                 courseEn.setCourseImage(rs.getString(10));
                 courseEn.setJoindate(rs.getString(5));
                 list.add(courseEn);
-            }               
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -193,6 +197,6 @@ public class LessonDAO extends DBContext {
 
     public static void main(String[] args) {
         LessonDAO d = new LessonDAO();
-        System.out.println(d.getMycoursebyAccID());
+        System.out.println(d.getMycoursebyAccID(2));
     }
 }

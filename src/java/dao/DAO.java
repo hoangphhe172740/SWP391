@@ -264,7 +264,7 @@ public class DAO extends DBContext {
 
     public List<Course> getNewManyCourse() {
         List<Course> list = new ArrayList<>();
-        String sql = "SELECT TOP (4) [id]\n"
+        String sql = "SELECT TOP (6) [id]\n"
                 + "      ,[name]\n"
                 + "      ,[description]\n"
                 + "      ,[price]\n"

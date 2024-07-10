@@ -29,7 +29,9 @@ public class MylearningControl extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         LessonDAO dao = new LessonDAO();
-        List<CourseEnrollment> list = dao.getMycoursebyAccID();
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("acc");
+        List<CourseEnrollment> list = dao.getMycoursebyAccID(a.getId());
         request.setAttribute("listcourse", list);
         request.getRequestDispatcher("myLearning.jsp").forward(request, response);
         }
