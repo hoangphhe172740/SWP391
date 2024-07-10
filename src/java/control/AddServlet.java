@@ -39,8 +39,7 @@ public class AddServlet extends HttpServlet {
             DAO d = new DAO();
             d.InsertCourse(name, description, price, image, title, 2, pcategory);
             response.sendRedirect("manager");
-
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             System.out.println(e);
             response.sendRedirect("Login");
         }
