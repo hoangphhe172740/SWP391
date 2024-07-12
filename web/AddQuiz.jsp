@@ -142,8 +142,8 @@
                         <div class="modal-content">
                             <form action="add-quiz" method="post">
                                 <div class="modal-header">						
-                                    <h4> Create Account </h4>
-                                    <a href="manageMentor" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                                    <h4> Create Quiz </h4>
+                                    <a href="mentor-manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                                 </div>
                                 <div class="modal-body">					                               
                                     <div class="form-group">

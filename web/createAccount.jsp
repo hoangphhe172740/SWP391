@@ -162,16 +162,16 @@
                             <div class="modal-body">					                               
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" value="${listM.mentorName}" class="form-control" required>
+                                <input type="text" name="name" value="${listM.mentorName}" class="form-control" required readonly>
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input type="text" name="image" value="${listM.image}" class="form-control" required>
+                                <input type="text" name="image" value="${listM.image}" class="form-control" required readonly>
                                 <img src="${listM.image}" class="img-preview" style="width: 300px;"/>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input value="${listM.email}" name="email" type="text" class="form-control" required>
+                                <input value="${listM.email}" name="email" type="text" class="form-control" required readonly>
                             </div>
                             <div class="form-group">
                                 <label>Pass</label>
