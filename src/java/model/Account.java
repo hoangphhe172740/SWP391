@@ -11,6 +11,7 @@ public class Account {
     private String pass;
     private String user;
     private int roleID;
+    private String image;
 
     public Account(String email, String pass, String user, int roleID) {
         this.email = email;
@@ -19,7 +20,24 @@ public class Account {
         this.roleID = roleID;
     }
 
+    public Account(int id, String email, String pass, String user, int roleID, String image) {
+        this.id = id;
+        this.email = email;
+        this.pass = pass;
+        this.user = user;
+        this.roleID = roleID;
+        this.image = image;
+    }
+
     public Account() {
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Account(int id, String email, String pass, String user, int roleID) {

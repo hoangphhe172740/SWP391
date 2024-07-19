@@ -4,17 +4,68 @@
  */
 package model;
 
+import java.util.List;
+
 public class Course {
     private int id;
     private String name;
     private String description;
     private double price;
-    private String image,title;
-    private int category_id;
-    
+    private String image,title,mentorName;
+    private int category_id,createdBy,mentorId;
+    private List<Comment> list;
+
+    public int getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(int createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public int getMentorId() {
+        return mentorId;
+    }
+
+    public void setMentorId(int mentorId) {
+        this.mentorId = mentorId;
+    }
+
+    public List<Comment> getList() {
+        return list;
+    }
+
+    public void setList(List<Comment> list) {
+        this.list = list;
+    }
+
+    public String getMentorName() {
+        return mentorName;
+    }
+
+    public void setMentorName(String mentorName) {
+        this.mentorName = mentorName;
+    }
     
     
     public Course() {
+    }
+
+    public Course(int id, String name, double price, String image, String title, int mentorId) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.title = title;
+        this.mentorId = mentorId;
+    }
+    public Course(int id, String name, double price, String image, String title, String  mentorName) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.title = title;
+        this.mentorName = mentorName;
     }
 
     public Course(int id, String name, String description, double price, String image, String title, int category_id) {
@@ -25,6 +76,16 @@ public class Course {
         this.image = image;
         this.title = title;
         this.category_id = category_id;
+    }
+    public Course(int id, String name, String description, double price, String image, String title, int category_id, int mentorId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.image = image;
+        this.title = title;
+        this.category_id = category_id;
+        this.mentorId = mentorId;
     }
 
     public int getId() {

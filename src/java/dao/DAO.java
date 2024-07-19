@@ -9,11 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Account;
 import model.Category;
+import model.Comment;
 import model.Course;
+import model.Lesson;
 import model.Mentor;
+import model.Modules;
+import model.Profile;
 
 public class DAO extends DBContext {
 
@@ -29,6 +35,31 @@ public class DAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
             st.setString(2, pass);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Account getUserByID(int id) {
+        String sql = "SELECT [uID]\n"
+                + "      ,[user]\n"
+                + "      ,[pass]\n"
+                + "      ,[email]\n"
+                + "      ,[roleID]\n"
+                + "  FROM [projectSWP].[dbo].[Account]"
+                + " where [uID] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return new Account(rs.getInt(1),
@@ -292,11 +323,10 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public void InsertCourse(String name, String description, String price, String image, String title, int createRole, String category) {
-        String sql = "INSERT [dbo].[Course] "
-                + "([name], [description], [price],"
-                + " [image], [title], [created_by], [category_id]) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void InsertCourse(String name, String description, String price, String image, String title, int createRole, String category, String mentorId) {
+        String sql = "INSERT INTO [dbo].[Course] "
+                + "([name], [description], [price], [image], [title], [created_by], [category_id], [mentor_id]) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement st;
         try {
             st = connection.prepareStatement(sql);
@@ -307,6 +337,7 @@ public class DAO extends DBContext {
             st.setString(5, title);
             st.setInt(6, createRole);
             st.setString(7, category);
+            st.setString(8, mentorId); // Thêm giá trị mentorId vào câu lệnh SQL
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -332,21 +363,69 @@ public class DAO extends DBContext {
             System.out.println(ex);
         }
     }
+// //lay id cua order vua add
+//            String sql1 = "select top 1 OrderID from [order] order by OrderID desc";
+//            PreparedStatement st1 = connection.prepareStatement(sql1);
+//            ResultSet rs = st1.executeQuery();
+//            //add bang orderdetail
+//            if (rs.next()) {
+//                int orderID = rs.getInt("orderID");
+//                for (Item i : cart.getItems()) {
+//                    String sql2 = "INSERT INTO [dbo].[OrderDetail]\n"
+//                            + "           ([OrderID]\n"
+//                            + "           ,[ProductID]\n"
+//                            + "           ,[Quantity]\n"
+//                            + "           ,[Price]\n"
+//                            + "           ,[Discount])\n"
+//                            + "     VALUES (?,?,?,?,?)";
+//                    PreparedStatement st2 = connection.prepareStatement(sql2);
+//                    st2.setInt(1, orderID);
+//                    st2.setInt(2, i.getProduct().getProductID());
+//                    st2.setInt(3, i.getQuantity());
+//                    st2.setDouble(4, i.getPrice());
+//                    st2.setDouble(5, i.getProduct().getDiscount());
+//                    st2.executeUpdate();
+//                }
+//            }
+//            connection.commit(); // Xác nhận giao dịch
+//        } catch (SQLException e) {
+//            connection.rollback(); // Hủy bỏ giao dịch nếu có lỗi
+//        }
+//    }
 
     public void SignUp(Account account) {
+
         try {
-            String sql = "INSERT INTO [dbo].[Account]\n"
-                    + "           ([user]\n"
-                    + "           ,[pass]\n"
-                    + "           ,[email]\n"
-                    + "           ,[roleID])\n"
-                    + "           VALUES (?,?,?,?)"; // Sửa ở đây
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, account.getUser());
-            st.setString(2, account.getPass());
-            st.setString(3, account.getEmail());
-            st.setInt(4, account.getRoleID());
-            st.executeUpdate();
+            connection.setAutoCommit(false);
+            try {
+                String sql = "INSERT INTO [dbo].[Account]\n"
+                        + "           ([user]\n"
+                        + "           ,[pass]\n"
+                        + "           ,[email]\n"
+                        + "           ,[roleID])\n"
+                        + "           VALUES (?,?,?,?)"; // Sửa ở đây
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, account.getUser());
+                st.setString(2, account.getPass());
+                st.setString(3, account.getEmail());
+                st.setInt(4, account.getRoleID());
+                st.executeUpdate();
+                String sql1 = "SELECT TOP (1) [uID] FROM [Account] order by [uID] desc";
+                PreparedStatement st1 = connection.prepareStatement(sql1);
+                ResultSet rs = st1.executeQuery();
+                if (rs.next()) {
+                    int uid = rs.getInt(1);
+
+                    // Insert into Profile table
+                    String sqlProfile = "INSERT INTO [dbo].[Profile] (uid) VALUES (?)";
+                    PreparedStatement stProfile = connection.prepareStatement(sqlProfile);
+                    stProfile.setInt(1, uid);
+                    stProfile.executeUpdate();
+                }
+                connection.commit(); // Xác nhận giao dịch
+            } catch (SQLException e) {
+                connection.rollback(); // Hủy bỏ giao dịch nếu có lỗi
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -374,28 +453,22 @@ public class DAO extends DBContext {
         }
     }
 
-    public void EditCourse(String name, String description, String price, String image, String title, String category, String courseid) {
-        String sql = "UPDATE [dbo].[Course]\n"
-                + "   SET [name] = ?\n"
-                + "      ,[description] = ?\n"
-                + "      ,[price] = ?\n"
-                + "      ,[image] = ?\n"
-                + "      ,[title] = ?\n"
-                + "      ,[category_id] = ?\n"
-                + " WHERE id = ?";
-        PreparedStatement st;
-        try {
-            st = connection.prepareStatement(sql);
+    public void EditCourse(String name, String description, String price, String image, String title, String category, String courseid, String mentorId) {
+        String sql = "UPDATE [dbo].[Course] "
+                + "SET [name] = ?, [description] = ?, [price] = ?, [image] = ?, [title] = ?, [category_id] = ?, [mentor_id] = ? "
+                + "WHERE id = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, name);
             st.setString(2, description);
             st.setString(3, price);
             st.setString(4, image);
             st.setString(5, title);
             st.setString(6, category);
-            st.setString(7, courseid);
+            st.setString(7, mentorId);
+            st.setString(8, courseid);
             st.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -544,23 +617,46 @@ public class DAO extends DBContext {
     }
 
     public void AddAccount(String user, String pass, String email, int roleID) {
-        String sql = "INSERT INTO [dbo].[Account]\n"
-                + "           ([user]\n"
-                + "           ,[pass]\n"
-                + "           ,[email]\n"
-                + "           ,[roleID])"
-                + " VALUES(?,?,?,?)";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, user);
-            st.setString(2, pass);
-            st.setString(3, email);
-            st.setInt(4, roleID);
-            st.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
+            connection.setAutoCommit(false);
+            try {
+                // Insert into Account table
+                String sqlAccount = "INSERT INTO [dbo].[Account]\n"
+                        + "           ([user]\n"
+                        + "           ,[pass]\n"
+                        + "           ,[email]\n"
+                        + "           ,[roleID])\n"
+                        + "           VALUES (?,?,?,?)";
+                PreparedStatement stAccount = connection.prepareStatement(sqlAccount);
+                stAccount.setString(1, user);
+                stAccount.setString(2, pass);
+                stAccount.setString(3, email);
+                stAccount.setInt(4, roleID);
+                stAccount.executeUpdate();
+
+                // Retrieve the generated uid
+                String sqlRetrieveUID = "SELECT TOP (1) [uID] FROM [Account] ORDER BY [uID] DESC";
+                PreparedStatement stRetrieveUID = connection.prepareStatement(sqlRetrieveUID);
+                ResultSet rs = stRetrieveUID.executeQuery();
+                if (rs.next()) {
+                    int uid = rs.getInt(1);
+
+                    // Insert into Profile table
+                    String sqlProfile = "INSERT INTO [dbo].[Profile] (uid) VALUES (?)";
+                    PreparedStatement stProfile = connection.prepareStatement(sqlProfile);
+                    stProfile.setInt(1, uid);
+                    stProfile.executeUpdate();
+                }
+
+                connection.commit(); // Commit transaction
+            } catch (SQLException e) {
+                connection.rollback(); // Rollback transaction if there's an error
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
     }
+
     public List<Course> getCourseByCreatedby(int roleID) {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT  [id]\n"
@@ -601,18 +697,104 @@ public class DAO extends DBContext {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new Course(rs.getInt(1),
+                Course course = new Course(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getDouble(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getInt(8));
+                        rs.getInt(8),
+                        rs.getInt("mentor_id"));
+                return course;
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
         return null;
+    }
+
+    public List<Course> getCourseByMentor(int id) {
+        List<Course> list = new ArrayList<>();
+        String sql = "SELECT  [id]\n"
+                + "      ,[name]\n"
+                + "      ,[description]\n"
+                + "      ,[price]\n"
+                + "      ,[image]\n"
+                + "      ,[title]\n"
+                + "      ,[created_by]\n"
+                + "      ,[category_id]\n"
+                + "      ,[mentor_id]\n"
+                + "  FROM [projectSWP].[dbo].[Course] where mentor_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new Course(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7)
+                ));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+
+    public Course getCourseWishListById(int courseId) {
+        String query = "SELECT * FROM Course WHERE id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(query);
+            st.setInt(1, courseId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                int mentorId = rs.getInt("mentor_id");
+                Profile mentorProfile = getProfileByuId(mentorId);
+                String mentorFullName = (mentorProfile != null) ? mentorProfile.getFullName() : "Unknown Mentor";
+
+                return new Course(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("price"),
+                        rs.getString("image"),
+                        rs.getString("title"),
+                        mentorFullName
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Comment> getCommentsByCourseID(int courseID) {
+        List<Comment> list = new ArrayList<>();
+        String sql = "SELECT [id]\n"
+                + "      ,[courseID]\n"
+                + "      ,[content]\n"
+                + "      ,[userID]\n"
+                + "      ,[createdDate]\n"
+                + "  FROM [projectSWP].[dbo].[Comment] where courseID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, courseID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Comment c = new Comment();
+                c.setId(rs.getInt(1));
+                c.setContent(rs.getString(3));
+                c.setUser(getUserByID(rs.getInt(4)));
+                c.setCreatedDate(rs.getTimestamp(5).toLocalDateTime());
+                list.add(c);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
     }
 
     public Mentor getMentorByID(int mentorid) {
@@ -675,13 +857,13 @@ public class DAO extends DBContext {
     }
 
     public List<Course> getTopCoursesByCategory() {
-        String sql = "SELECT id, name, description, price, image, title, category_id " +
-                     "FROM (" +
-                     "    SELECT id, name, description, price, image, title, category_id, " +
-                     "           ROW_NUMBER() OVER (PARTITION BY category_id ORDER BY id) AS row_num " +
-                     "    FROM Course" +
-                     ") AS numbered_courses " +
-                     "WHERE row_num <= 2"; // Thay đổi điều kiện row_num nếu cần thiết
+        String sql = "SELECT id, name, description, price, image, title, category_id "
+                + "FROM ("
+                + "    SELECT id, name, description, price, image, title, category_id, "
+                + "           ROW_NUMBER() OVER (PARTITION BY category_id ORDER BY id) AS row_num "
+                + "    FROM Course"
+                + ") AS numbered_courses "
+                + "WHERE row_num <= 2"; // Thay đổi điều kiện row_num nếu cần thiết
 
         List<Course> courses = new ArrayList<>();
 
@@ -695,7 +877,7 @@ public class DAO extends DBContext {
                 String description = rs.getString("description");
                 int price = rs.getInt("price");
                 String image = rs.getString("image");
-                String title = rs.getString("title");                
+                String title = rs.getString("title");
                 int categoryId = rs.getInt("category_id");
 
                 Course course = new Course(id, name, description, price, image, title, categoryId);
@@ -707,7 +889,7 @@ public class DAO extends DBContext {
 
         return courses;
     }
-    
+
     public List<Account> getAccountByRoleId(int roleID) {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [uID], [user], [pass], [email], [roleID] "
@@ -730,6 +912,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public List<Account> getAccountById(int id) {
         List<Account> list = new ArrayList<>();
         String sql = "SELECT [uID], [user], [pass], [email], [roleID] "
@@ -752,8 +935,204 @@ public class DAO extends DBContext {
         }
         return list;
     }
+
     public static void main(String[] args) {
         DAO d = new DAO();
-        System.out.println(d.getCourseById(9));
+        d.getMentorsDetails();
     }
+
+    public void insertModule(String name, String courseID) {
+        String sql = """
+                     INSERT INTO [dbo].[Module]
+                                ([course_id]
+                                ,[module_name])
+                          VALUES
+                                (?,?)""";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, Integer.parseInt(courseID));
+            st.setString(2, name);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    // Method to fetch modules by course ID
+
+    public List<Modules> getModulesByCourseId(int courseId) {
+        List<Modules> modules = new ArrayList<>();
+        String sql = "SELECT * FROM Module WHERE course_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, courseId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Modules module = new Modules();
+                module.setModule_id(rs.getInt("module_id"));
+                module.setModule_name(rs.getString("module_name"));
+                module.setCourse_id(rs.getInt("course_id"));
+                // Set other properties if needed
+                modules.add(module);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return modules;
+    }
+
+// Method to fetch lessons by module ID
+    public List<Lesson> getLessonsByModuleId(int moduleId) {
+        List<Lesson> lessons = new ArrayList<>();
+        String sql = "SELECT * FROM Lesson WHERE module_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, moduleId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Lesson lesson = new Lesson();
+                lesson.setLesson_id(rs.getInt("lesson_id"));
+                lesson.setLesson_name(rs.getString("lesson_name"));
+                lesson.setModule_id(rs.getInt("module_id"));
+                lesson.setCreate_by(rs.getInt("create_by"));
+                // Set other properties if needed
+                lessons.add(lesson);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return lessons;
+    }
+
+    public Profile getUserProfile(int userId) {
+        Profile profile = null;
+        String sql = "SELECT profile_id, fullname, gender, email, nation, uid, avatar FROM Profile WHERE uid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, userId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                profile = new Profile(rs.getInt("profile_id"), rs.getString("fullname"), rs.getBoolean("gender"),
+                        rs.getString("email"), rs.getString("nation"), rs.getInt("uid"), rs.getString("avatar"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profile;
+    }
+
+    public void updateUserProfile(Profile profile) throws SQLException {
+        String sql = "UPDATE Profile SET fullName=?, email=?, gender=?, nation=?, avatar=? WHERE profile_Id=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, profile.getFullName());
+            statement.setString(2, profile.getEmail());
+            statement.setBoolean(3, profile.isGender());
+            statement.setString(4, profile.getNation());
+            statement.setString(5, profile.getAvatar());
+            statement.setInt(6, profile.getProfileId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new SQLException("Error updating user profile: " + ex.getMessage());
+        }
+    }
+
+    public Profile getProfileByuId(int mentorid) {
+        String sql = "select * from profile where uId = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, mentorid);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Profile(
+                        rs.getInt("profile_id"),
+                        rs.getString("fullname"),
+                        rs.getBoolean("gender"),
+                        rs.getString("email"),
+                        rs.getString("nation"),
+                        rs.getInt("uid"),
+                        rs.getString("avatar")
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    public Lesson getLessonById(int lessonId) {
+        String sql = "SELECT * FROM lesson WHERE lesson_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, lessonId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Lesson(
+                        rs.getInt("module_id"),
+                        rs.getInt("lesson_id"),
+                        rs.getString("lesson_name"),
+                        rs.getString("lesson_video"),
+                        rs.getInt("duration"),
+                        rs.getInt("create_by")
+                );
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateLesson(Lesson lesson) {
+        String sql = "UPDATE lesson SET  lesson_name = ?, lesson_video = ?, duration = ?, create_by = ?, module_id = ? WHERE  lesson_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, lesson.getLesson_name());
+            statement.setString(2, lesson.getLesson_video());
+            statement.setInt(3, lesson.getDuration());
+            statement.setInt(4, lesson.getCreate_by());
+            statement.setInt(5, lesson.getModule_id());
+            statement.setInt(6, lesson.getLesson_id());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteLesson(int lessonId) {
+        String sql = "DELETE FROM lesson WHERE lesson_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, lessonId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Account> getMentorsDetails() {
+        List<Account> mentors = new ArrayList<>();
+        String sql = "SELECT A.uid, p.fullname, A.roleID, P.avatar AS image "
+                + "FROM Account A "
+                + "INNER JOIN Profile P ON A.uid = P.uid "
+                + "WHERE A.roleID = 3"; // Điều kiện roleID = 3 tương ứng với mentor
+
+        try (
+                PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("uid");
+                String fullName = rs.getString("fullname");
+                int roleID = rs.getInt("roleID");
+                String image = rs.getString("image");
+
+                Account mentor = new Account(id, null, null, fullName, roleID, image); // Tạo đối tượng Mentor từ ResultSet
+                mentors.add(mentor); // Thêm Mentor vào danh sách
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mentors;
+    }
+
+  
+
 }

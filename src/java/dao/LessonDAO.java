@@ -77,8 +77,30 @@ public class LessonDAO extends DBContext {
         }
         return list;
     }
+    
+    public Lesson getLessonByID(int id) {
+        String sql = "SELECT [module_id]\n"
+                + "      ,[lesson_Id]\n"
+                + "      ,[lesson_name]\n"
+                + "      ,[lesson_video]\n"
+                + "      ,[duration]\n"
+                + "      ,[create_by]\n"
+                + "  FROM [dbo].[Lesson]"
+                + "where [lesson_Id] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Lesson(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
 
-    public void AddLesson(String module, String lesson_name, String lesson_video, int createRole) {
+    public void AddLesson(String module, String lesson_name, String lesson_video, int id) {
         String sql = "INSERT INTO [dbo].[Lesson]\n"
                 + "           ([module_id]\n"
                 + "           ,[lesson_name]\n"
@@ -91,7 +113,7 @@ public class LessonDAO extends DBContext {
             st.setString(1, module);
             st.setString(2, lesson_name);
             st.setString(3, lesson_video);
-            st.setInt(4, createRole);
+            st.setInt(4, id);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
