@@ -21,6 +21,7 @@
                             <div class="col-sm-6 d-flex justify-content-">
                                 <h2>Mentor Manager</h2>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -34,16 +35,19 @@
                                 <h4> Create Lesson </h4>
                                 <a href="mentor-manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>ID Course</label>
-                                    <input type="text" name="id" value="${listCourse.id}" readonly class="form-control" required>
+                        <c:if test="${requestScope.report != nulls}">
+                            <p style="color: #00c61c">${requestScope.report}</p>
+                        </c:if>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>ID Course</label>
+                                <input type="text" name="id" value="${listCourse.id}" readonly class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" name="name" value="${listCourse.name}" readonly class="form-control" required>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label>Image</label>
                                 <input type="text" name="image" value="${listCourse.getImage()}" readonly class="form-control" required>
@@ -57,20 +61,20 @@
                             <div class="form-group">
                                 <label>Lesson video</label>
                                 <input class="form-control" name="lessonvideo" required>
-                                
+
                             </div>
                             <div class="form-group">
                                 <label>Module</label>
-                                <select name="module" class="form-select" aria-label="Default select example">
+                                <select name="module" class="form-select" aria-label="Default select example" >
                                     <c:forEach items="${module_id}" var="m">                                       
-                                        <option value="${m.getModule_id()}">${m.getModule_name()}</option>
+                                        <option value="${m.getModule_id()}" >${m.getModule_name()}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-secondary" href="mentor-manager">Cancel</a>
-                            <input type="submit" class="btn btn-success" value="Edit">
+                            <a class="btn btn-secondary" href="display-modules?courseid=${listCourse.id}">Back</a>
+                            <input type="submit" class="btn btn-success" value="Save">
                         </div>
                     </form>                          
                 </div>
