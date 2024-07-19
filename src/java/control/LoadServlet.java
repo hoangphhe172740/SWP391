@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package control;
 
 import dao.DAO;
@@ -14,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Account;
 import model.Category;
 import model.Course;
 
@@ -21,18 +21,20 @@ import model.Course;
  *
  * @author Admin
  */
-@WebServlet(name="LoadServlet", urlPatterns={"/loadCourse"})
+@WebServlet(name = "LoadServlet", urlPatterns = {"/loadCourse"})
 public class LoadServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String course_raw = request.getParameter("courseid");
         int courseid;
@@ -43,6 +45,8 @@ public class LoadServlet extends HttpServlet {
             List<Category> listCate = d.getAllCaregories();
             int category_id = d.getCategoryId(courseid);
             List<Course> listc = d.getAllCourse();
+            List<Account> listMentorDetails = d.getMentorsDetails(); // Lấy danh sách mentor details từ DAO
+            request.setAttribute("listMentorDetails", listMentorDetails); // Đặt danh sách mentor details vào request
             request.setAttribute("category_id", category_id);
             request.setAttribute("listC", listCate);
             request.setAttribute("detail", c);
@@ -50,11 +54,12 @@ public class LoadServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -62,12 +67,13 @@ public class LoadServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -75,12 +81,13 @@ public class LoadServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

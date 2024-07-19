@@ -33,7 +33,7 @@ public class MentorManagerControl extends HttpServlet {
         if(a != null){
             int id = a.getRoleID();
             DAO d = new DAO();
-            List<Course> list = d.getAllCourse();
+            List<Course> list = d.getCourseByMentor( a.getId());
             System.out.println(list);
             request.setAttribute("listCourse", list);
             request.getRequestDispatcher("manager.jsp").forward(request, response);

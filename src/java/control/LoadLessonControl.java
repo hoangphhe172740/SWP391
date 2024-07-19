@@ -41,7 +41,7 @@ public class LoadLessonControl extends HttpServlet {
             request.setAttribute("module_id", module_id);
             request.setAttribute("listmodule", listModule);
             request.setAttribute("listCourse", list);
-            request.getRequestDispatcher("createLesson.jsp").forward(request, response);
+            request.getRequestDispatcher("CreateLesson.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
