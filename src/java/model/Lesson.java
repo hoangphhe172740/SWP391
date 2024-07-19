@@ -76,5 +76,4 @@ public class Lesson {
         this.create_by = create_by;
     }
 
-    
 }

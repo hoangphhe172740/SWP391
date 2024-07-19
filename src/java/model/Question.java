@@ -1,49 +1,67 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author Admin
- */
+import java.util.ArrayList;
+import java.util.List;
+import model.AnswerChoice;
+
 public class Question {
-    private int question_number;
-    private int quiz_id;
-    private String question_name;
+    private int questionId;
+    private int quizId;
+    private String questionText;
+    private String questionType;
+    private List<AnswerChoice> answers;
 
-    public Question() {
+    // Constructor
+    public Question(int questionId, int quizId, String questionText, String questionType) {
+        this.questionId = questionId;
+        this.quizId = quizId;
+        this.questionText = questionText;
+        this.questionType = questionType;
+        this.answers = new ArrayList<>(); // Khởi tạo danh sách answers
     }
 
-    public Question(int question_number, int quiz_id, String question_name) {
-        this.question_number = question_number;
-        this.quiz_id = quiz_id;
-        this.question_name = question_name;
+    // Getters and setters
+    public int getQuestionId() {
+        return questionId;
     }
 
-    public int getQuestion_number() {
-        return question_number;
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 
-    public void setQuestion_number(int question_number) {
-        this.question_number = question_number;
+    public int getQuizId() {
+        return quizId;
     }
 
-    public int getQuiz_id() {
-        return quiz_id;
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
     }
 
-    public void setQuiz_id(int quiz_id) {
-        this.quiz_id = quiz_id;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public String getQuestion_name() {
-        return question_name;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
-    public void setQuestion_name(String question_name) {
-        this.question_name = question_name;
+    public String getQuestionType() {
+        return questionType;
     }
-    
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
+
+    public List<AnswerChoice> getAnswers() {
+        return answers;
+    }
+
+    // Method to add an answer choice
+    public void addAnswer(AnswerChoice answer) {
+        if (this.answers == null) {
+            this.answers = new ArrayList<>(); // Khởi tạo nếu danh sách answers là null
+        }
+        this.answers.add(answer);
+    }
 }

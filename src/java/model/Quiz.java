@@ -1,56 +1,117 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-import java.sql.Time;
-
 public class Quiz {
-    private int module_id;
-    private String quiz_name;
-    private Time quiz_time;
-    private double passScore;
+
+    private int quizId;
+    private int lessonId;
+    private String quizName;
+    private String quizDescription;
+    private int quizTime; // Time in minutes
+    private int passScore;
+    private boolean is_active;
+    private boolean hasJoined;
+    private int score;
+    private boolean passed;
 
     public Quiz() {
     }
 
-    public Quiz(int module_id, String quiz_name, Time quiz_time, double passScore) {
-        this.module_id = module_id;
-        this.quiz_name = quiz_name;
-        this.quiz_time = quiz_time;
+    public Quiz(int quizId, int lessonId, String quizName, String quizDescription, int quizTime, int passScore, boolean is_active) {
+        this.quizId = quizId;
+        this.lessonId = lessonId;
+        this.quizName = quizName;
+        this.quizDescription = quizDescription;
+        this.quizTime = quizTime;
+        this.passScore = passScore;
+        this.is_active = is_active;
+    }
+
+    public Quiz(int quizId, int lessonId, String quizName, String quizDescription, int quizTime, int passScore) {
+        this.quizId = quizId;
+        this.lessonId = lessonId;
+        this.quizName = quizName;
+        this.quizDescription = quizDescription;
+        this.quizTime = quizTime;
         this.passScore = passScore;
     }
 
-    public int getModule_id() {
-        return module_id;
+    public boolean isHasJoined() {
+        return hasJoined;
     }
 
-    public void setModule_id(int module_id) {
-        this.module_id = module_id;
+    public void setHasJoined(boolean hasJoined) {
+        this.hasJoined = hasJoined;
     }
 
-    public String getQuiz_name() {
-        return quiz_name;
+    public int getScore() {
+        return score;
     }
 
-    public void setQuiz_name(String quiz_name) {
-        this.quiz_name = quiz_name;
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    public Time getQuiz_time() {
-        return quiz_time;
+    public boolean isPassed() {
+        return passed;
     }
 
-    public void setQuiz_time(Time quiz_time) {
-        this.quiz_time = quiz_time;
+    public void setPassed(boolean passed) {
+        this.passed = passed;
     }
 
-    public double getPassScore() {
+    public boolean isIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(boolean is_active) {
+        this.is_active = is_active;
+    }
+
+    public int getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
+    }
+
+    public int getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(int lessonId) {
+        this.lessonId = lessonId;
+    }
+
+    public String getQuizName() {
+        return quizName;
+    }
+
+    public void setQuizName(String quizName) {
+        this.quizName = quizName;
+    }
+
+    public String getQuizDescription() {
+        return quizDescription;
+    }
+
+    public void setQuizDescription(String quizDescription) {
+        this.quizDescription = quizDescription;
+    }
+
+    public int getQuizTime() {
+        return quizTime;
+    }
+
+    public void setQuizTime(int quizTime) {
+        this.quizTime = quizTime;
+    }
+
+    public int getPassScore() {
         return passScore;
     }
 
-    public void setPassScore(double passScore) {
+    public void setPassScore(int passScore) {
         this.passScore = passScore;
     }
 }
