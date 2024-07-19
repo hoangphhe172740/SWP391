@@ -131,8 +131,8 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Image</th>
-                            <th>Actions</th>
-                            <th>Add Quiz</th>
+                            <th>View Module</th>
+                            <th>Add Module</th>
                             <th>Question</th>
                         </tr>
                     </thead>
@@ -146,12 +146,12 @@
                                     <img src="${o.image}" style="width: 300px; border-radius: 5px;">
                                 </td>
                                 <td>
-                                    <a href="load-lesson?courseid=${o.id}" class="edit btn btn-info mb-3"><i
-                                            class="material-icons"
-                                            title="Add Lesson">&#xE254;</i></a>                                   
+                                    <a href="display-modules?courseid=${o.id}"" class="edit btn btn-info mb-3"><i
+                                            class="fa-solid fa-eye"
+                                            title="View Module"></i></a>                                   
                                 </td>
                                 <td>
-                                    <a href="load-quiz?courseid=${o.id}"><i class="fa-solid fa-plus"></i></a>
+                                    <a href="create-module?courseid=${o.id}"><i class="fa-solid fa-plus"></i></a>
                                 </td>
                                 <td>
                                     <a href="#"><i class="fa-solid fa-circle-question"></i></a>

@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="./css/manager.css"/>
         <title>Manager Course</title>
     </head>
-    
+
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
             <div class="container">
@@ -48,7 +48,6 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Image</th>
-                                <th>Price</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -61,7 +60,6 @@
                                     <td>
                                         <img src="${o.image}" style="width: 300px; border-radius: 5px;">
                                     </td>
-                                    <td>${o.price} $</td>
                                     <td>
                                         <a href="loadCourse?courseid=${o.id}" class="edit btn btn-info mb-3"><i
                                                 class="material-icons"
@@ -97,9 +95,9 @@
                                 <label>Description</label>
                                 <textarea name="description" class="form-control" id="default" required></textarea>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" hidden="">
                                 <label>Price</label>
-                                <input name="price" type="text" class="form-control" required>
+                                <input name="price" type="text" class="form-control" value="0">
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
@@ -114,6 +112,15 @@
                                 <select name="category" class="form-select" aria-label="Default select example">
                                     <c:forEach items="${listC}" var="c">
                                         <option value="${c.cid}">${c.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Mentor</label>
+                                
+                                <select name="mentor" class="form-select" aria-label="Default select example">
+                                    <c:forEach items="${listMentorDetails}" var="mentor">
+                                        <option value="${mentor.id}">${mentor.user}</option> 
                                     </c:forEach>
                                 </select>
                             </div>
