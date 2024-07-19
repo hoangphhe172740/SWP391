@@ -188,6 +188,13 @@
                         <div class="card-body">
                             <div class="content-and-image d-flex">
                                 <div class="text-section">
+                                    <%
+                                    String message = request.getParameter("mess");
+
+                                    if (message != null && !message.isEmpty()) {
+                                    out.println("<div class='alert alert-warning'>" + message + "</div>");
+                                    }
+                                    %>
                                     <div class="e-learning-icon">
                                         <i class="fa-solid fa-graduation-cap"> E-Learning</i>
                                     </div>
@@ -206,6 +213,9 @@
                             <c:if test="${Enrolled == null}">
                                 <button class="join-now-btn col">
                                     <b><a href="load-historyjoin?Courseid=${c.id}" style="color: #fff; text-decoration: none;">Join now</a></b>
+                                </button>
+                                <button class="join-now-btn btn-info col">
+                                    <b><a href="addToWishlist?courseId=${c.id}" style="color: #fff; text-decoration: none;">Add to wish list</a></b>
                                 </button>
                             </c:if>
                             <c:if test="${Enrolled != null}">

@@ -11,7 +11,7 @@
                 width: 100%;
                 margin: auto;
                 padding: 20px;
-                color: #333; 
+                color: #333;
             }
 
             h2 {
@@ -85,19 +85,21 @@
                 }
             }
         </style>
-        
+
     </head>
     <body>
         <div class="container">
             <c:forEach var="o" items="${Listlesson}">
-                
+
                 <div class="lesson-item" onclick="toggleSection(this)">
                     <span><i class="fas fa-chevron-down"></i> ${o.lesson_name}</span>                   
                 </div>
                 <div class="lesson-content">
                     <button onclick="toggleVideo(this)"> <i class="fa-regular fa-circle-play"></i> Video</button>
+                    <p>${o.lesson_video}</p>
+                    <button class="btn-success"><a href="list-quizzes-client?lessonId=${o.lesson_id}"> <i class="fa-regular fa-pencil-square">Do Quizzes</i> </a></button>
                     <div class="video-content" style="display:none;">
-                        <p>${o.lesson_video}</p>
+                        
                     </div>                    
                 </div>
             </c:forEach>

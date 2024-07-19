@@ -155,7 +155,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog" style="max-width: 1000px;">
                     <div class="modal-content">
-                        <form action="edit" method="post">
+                        <form action="edit" method="post" >
                             <div class="modal-header">						
                                 <h4> Edit Course </h4>
                                 <a href="manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
@@ -163,7 +163,7 @@
                             <div class="modal-body">					
                                 <div class="form-group">
                                     <label>ID Course</label>
-                                    <input type="text" name="id" value="${detail.id}" readonly class="form-control" required>
+                                    <input type="text" name="id" value="${detail.id}" readonly class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Name</label>
@@ -176,11 +176,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
-                                <input value="${detail.price}" name="price" type="text" class="form-control" required>
+                                <input value="${detail.price}" name="price" type="text" class="form-control" hidden="">
                             </div>
                             <div class="form-group">
                                 <label>Title</label>
-                                <textarea  class="form-control" name="title" id="default" required>${detail.title}</textarea>
+                                <textarea  class="form-control" name="title" id="default" required rows="10">${detail.title}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
@@ -194,7 +194,16 @@
                                         <option ${(id==c.cid)?"selected":""} value="${c.cid}">${c.name}</option>
                                     </c:forEach>
                                 </select>
-                            </div>				
+                            </div>
+                            <div class="form-group">
+                                <label>Mentor</label>
+                                <!-- Phần hiển thị danh sách mentor -->
+                                <select name="mentor" class="form-select" aria-label="Default select example">
+                                    <c:forEach items="${listMentorDetails}" var="mentor">
+                                        <option value="${mentor.id}" ${mentor.id == detail.mentorId ? 'selected' : ''}>${mentor.user}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <a class="btn btn-secondary" href="manager">Cancel</a>
