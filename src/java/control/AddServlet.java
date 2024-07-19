@@ -33,16 +33,20 @@ public class AddServlet extends HttpServlet {
             String image = request.getParameter("image");
             String title = request.getParameter("title");
             String pcategory = request.getParameter("category");
+            String mentorId = request.getParameter("mentor"); // Lấy giá trị mentor
             HttpSession session = request.getSession();
             Account a = (Account) session.getAttribute("acc");
-            
-            DAO d = new DAO();
-            d.InsertCourse(name, description, price, image, title, 2, pcategory);
-            response.sendRedirect("manager");
+            if (a != null) {
+                DAO d = new DAO();
+                d.InsertCourse(name, description, price, image, title, 2, pcategory, mentorId); // Truyền giá trị mentor
+                response.sendRedirect("manager");
+
+            }
         } catch (NumberFormatException e) {
             System.out.println(e);
             response.sendRedirect("Login");
         }
+
     }
 
     @Override

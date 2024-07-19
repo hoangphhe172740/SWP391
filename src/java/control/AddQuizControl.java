@@ -22,7 +22,7 @@ import java.util.Timer;
  *
  * @author Admin
  */
-@WebServlet(name="AddQuizControl", urlPatterns={"/add-quiz"})
+@WebServlet(name="AddQuizControl", urlPatterns={"/a"})
 public class AddQuizControl extends HttpServlet {
    
 
