@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="6.0" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+<servlet>
+<servlet-name>CreateModuleServlet</servlet-name>
+<servlet-class>control.CreateModuleServlet</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>ListQuestionServlet</servlet-name>
+<servlet-class>control.ListQuestionServlet</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>doQuizServlet</servlet-name>
+<servlet-class>control.doQuizServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>CreateModuleServlet</servlet-name>
+<url-pattern>/create-module</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>ListQuestionServlet</servlet-name>
+<url-pattern>/questions</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>doQuizServlet</servlet-name>
+<url-pattern>/doQuiz</url-pattern>
+</servlet-mapping>
+</web-app>
