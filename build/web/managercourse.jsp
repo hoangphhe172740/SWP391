@@ -76,7 +76,7 @@
                     </tbody>
                 </table>
             </div>
-            <a href="home"><button type="button" class="btn btn-primary">Back To Home</button></a>
+            
         </div>
         <!---Add-->
         <div id="addEmployeeModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addEmployeeModal" aria-hidden="true">
@@ -153,6 +153,7 @@
                 </div>
             </div>
         </div>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

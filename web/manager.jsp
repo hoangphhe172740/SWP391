@@ -125,8 +125,7 @@
                             <th>Name</th>
                             <th>Image</th>
                             <th>View Module</th>
-                            <th>Add Module</th>
-                            <th>Question</th>
+                            <th>Add Module</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -146,9 +145,7 @@
                                 <td>
                                     <a href="create-module?courseid=${o.id}"><i class="fa-solid fa-plus"></i></a>
                                 </td>
-                                <td>
-                                    <a href="#"><i class="fa-solid fa-circle-question"></i></a>
-                                </td>
+                                
                             </tr>
                         </c:forEach>
                     </c:if>

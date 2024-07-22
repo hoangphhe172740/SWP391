@@ -54,10 +54,10 @@ public class CertificateGenerator {
         g.setStroke(new BasicStroke(5));
         g.draw(new RoundRectangle2D.Double(5, 5, WIDTH - 10, HEIGHT - 10, 30, 30));
         // Seal
-        BufferedImage seal = ImageIO.read(new File("D:\\Semester_5\\SWP391\\SWP391\\web\\img\\seal.png")); // Add your seal image path
+        BufferedImage seal = ImageIO.read(new File("E:\\dao load\\SWP391 (3)\\SWP391\\web\\img\\seal.png")); // Add your seal image path
         g.drawImage(seal, 100, 600, 200, 200, null);
         // Logo
-        BufferedImage logo = ImageIO.read(new File("D:\\Semester_5\\SWP391\\SWP391\\web\\img\\logo.png")); // Replace with your badge image path
+        BufferedImage logo = ImageIO.read(new File("E:\\dao load\\SWP391 (3)\\SWP391\\web\\img\\logo.png")); // Replace with your badge image path
         g.drawImage(logo, 50, 50, 150, 150, null);
 
         // Title
@@ -85,9 +85,9 @@ public class CertificateGenerator {
         g.setFont(FONT_SIGNATURE);
         g.setColor(TEXT_COLOR);
         // Cài đặt font hỗ trợ UTF-8
-        g.drawString("NGUYỄN LAN ANH", 150, 550);
+        g.drawString("Phạm Hải Hoàng", 150, 550);
         g.drawString("Giám đốc khóa học", 150, 580);
-        g.drawString("PHÚC YÊN", WIDTH - 300, 550);
+        g.drawString("Hoangchatboy", WIDTH - 300, 550);
         g.drawString("CEO & Nhà sáng lập", WIDTH - 300, 580);
 
         g.setFont(FONT_SIGNATURE);
