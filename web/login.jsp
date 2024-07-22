@@ -45,13 +45,13 @@
                         <div>
                             <i class="bold-text mb-3">EMAIL</i>
                             <input name="email" type="email" id="inputemail" class="form-control form-control-lg mb-3 mt-2" placeholder="name@email" required="" autofocus=""
-                                   value="${cookie.cuser.value}" >
+                                   value="${cookie.cemail.value}" >
                         </div>
                         <!--Password -->
                         <div>
                             <i class="bold-text mb-3">PASSWORD</i>
                             <input name="password" type="password" id="inputpass" class="form-control form-control-lg mb-3 mt-2" placeholder="Enter The Password" required="" autofocus=""
-                                   value="${cookie.cuser.value}">
+                                   value="${cookie.cpass.value}">
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <!-- Checkbox -->

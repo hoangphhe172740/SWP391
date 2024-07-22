@@ -10,7 +10,6 @@ public class Course {
     private int id;
     private String name;
     private String description;
-    private double price;
     private String image,title,mentorName;
     private int category_id,createdBy,mentorId;
     private List<Comment> list;
@@ -51,37 +50,33 @@ public class Course {
     public Course() {
     }
 
-    public Course(int id, String name, double price, String image, String title, int mentorId) {
+    public Course(int id, String name, String image, String title, int mentorId) {
         this.id = id;
         this.name = name;
-        this.price = price;
         this.image = image;
         this.title = title;
         this.mentorId = mentorId;
     }
-    public Course(int id, String name, double price, String image, String title, String  mentorName) {
+    public Course(int id, String name, String image, String title, String  mentorName) {
         this.id = id;
         this.name = name;
-        this.price = price;
         this.image = image;
         this.title = title;
         this.mentorName = mentorName;
     }
 
-    public Course(int id, String name, String description, double price, String image, String title, int category_id) {
+    public Course(int id, String name, String description,  String image, String title, int category_id) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
         this.image = image;
         this.title = title;
         this.category_id = category_id;
     }
-    public Course(int id, String name, String description, double price, String image, String title, int category_id, int mentorId) {
+    public Course(int id, String name, String description,  String image, String title, int category_id, int mentorId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
         this.image = image;
         this.title = title;
         this.category_id = category_id;
@@ -112,13 +107,6 @@ public class Course {
         this.description = description;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public String getImage() {
         return image;
@@ -142,9 +130,5 @@ public class Course {
 
     public void setCategory_id(int category_id) {
         this.category_id = category_id;
-    }
-    @Override
-    public String toString(){
-        return "Course{"+ "id=" + id + ", name=" + name + ", image=" + image + ", price=" + price + ", title=" + title + ", description=" + description + '}';
     }
 }

@@ -123,20 +123,19 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="eMail">Email</label>
-                                            <input type="email" class="form-control" id="eMail" name="eMail" value="${user.email}" required>
+                                            <input type="email" class="form-control" id="eMail" name="eMail" value="${sessionScope.acc.user}" required>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="gender">Gender</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gender" name="gender" value="true" ${user.gender ? 'checked' : ''}>
-                                                <label class="form-check-label" for="gender">
-                                                    Male
-                                                </label>
-                                            </div>
+                                            <select class="form-select" id="gender" name="gender">
+                                                <option value="male" ${user.gender == 'male' ? 'selected' : ''}>Male</option>
+                                                <option value="female" ${user.gender == 'female' ? 'selected' : ''}>Female</option>
+                                            </select>
                                         </div>
                                     </div>
+
 
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
@@ -147,7 +146,7 @@
 
                                 </div>
                                 <!-- Submit Button -->
-                                <div class="row gutters">
+                                <div class="row gutters" style="margin: 10px;">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-primary">Update</button>

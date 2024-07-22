@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Mentor</title>
+        <link href="admin/css/sidebar-admin.css" rel="stylesheet" type="text/css"/>
         <style>
             /* Reset CSS */
             * {
@@ -65,7 +66,7 @@
             }
 
             .modal-header {
-                background-color: #0056D2;
+                background-color: #435d7d;
                 color: #fff;
                 border-bottom: 1px solid #eee;
             }
@@ -139,26 +140,15 @@
     </head>
 
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
-            <div class="container">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div>
-                                <h3><b><a href="home" style="color: #333;">Manage Account</a></b></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Edit Modal HTML -->
+        <jsp:include page="admin/SideBarAdmin.jsp"></jsp:include>
+            
             <div id="editEmployeeModal">
                 <div class="modal-dialog" style="max-width: 1000px;">
                     <div class="modal-content">
                         <form action="edit-mentor" method="post">
                             <div class="modal-header">						
                                 <h4> Edit Mentor </h4>
-                                <a href="manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                                <a href="manageMentor" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
@@ -172,7 +162,7 @@
                             <div class="form-group">
                                 <label>Image</label>
                                 <input type="text" name="image" value="${listM.image}" class="form-control" required>
-                                <img src="${listM.image}" class="img-preview" style="width: 300px;"/>
+                                <img src="${listM.image}" class="img-preview" style="width: 200px; height: 200px;"/>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -203,3 +193,4 @@
         </script>
     </body>
 </html>
+<script src="admin/js/SideBar.js" type="text/javascript"></script>

@@ -79,13 +79,19 @@
                                 <label for="duration">Duration (minutes)</label>
                                 <input name="duration" id="duration" type="number" class="form-control" value="${lesson.duration}" required>
                             </div>
+
                             <div class="form-group">
-                                <label for="create_by">Created By</label>
-                                <input name="create_by" id="create_by" type="text" class="form-control" value="${lesson.create_by}" readonly="">
+                                <label for="status">Status</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="true" ${lesson.isActive ? 'selected' : ''}>Active</option>
+                                    <option value="false" ${!lesson.isActive ? 'selected' : ''}>Inactive</option>
+                                </select>
                             </div>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+                            <a href="display-modules?courseid=${modules[0].course_id}" ><button type="button" class="btn btn-default" data-dismiss="modal">Back</button></a>
                             <button type="submit" class="btn btn-success" id="btnSubmit">Save Changes</button>
                         </div>
                     </form>

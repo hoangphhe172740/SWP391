@@ -152,10 +152,13 @@
                             </div>
                         </c:forEach>
                     </div>
-                    <div class="container" >
-                        <button id="show-more">Show More</button>
-                        <button id="show-less" style="display: none;">Show Less</button>
-                    </div>
+                    <!--                    <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                                            <a href="home" class="btn btn-info">
+                                                <i class="fas fa-arrow-left mr-2"></i> Back to Home
+                                            </a>
+                                        </div>-->
+                    <button id="show-more" class="btn btn-info">Show More</button>
+                    <button id="show-less" class="btn btn-info" style="display: none;">Show Less</button>
                 </div>             
             </div>
         </section>

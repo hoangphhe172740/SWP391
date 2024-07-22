@@ -64,7 +64,7 @@ public class LessonDAO extends DBContext {
                 + "      ,[duration]\n"
                 + "      ,[create_by]\n"
                 + "  FROM [dbo].[Lesson]"
-                + "where [module_id] = ?";
+                + "where [module_id] = ? and isActive = 1";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, module_id);
@@ -77,7 +77,7 @@ public class LessonDAO extends DBContext {
         }
         return list;
     }
-    
+
     public Lesson getLessonByID(int id) {
         String sql = "SELECT [module_id]\n"
                 + "      ,[lesson_Id]\n"
@@ -191,25 +191,44 @@ public class LessonDAO extends DBContext {
         return list;
     }
 
-    public List<CourseEnrollment> getMycoursebyAccID(int id) {
+    public List<CourseEnrollment> getMycoursebyAccID(int id, boolean operator) {
+        QuizDAO d = new QuizDAO();
         List<CourseEnrollment> list = new ArrayList<>();
-        String sql = "SELECT * \n"
-                + "  FROM [dbo].[CourseEnrollment] ce\n"
-                + "  join Course c on c.id = ce.CourseID\n"
-                + "  where AccountID = ?\n"
-                + "  order by ce.CourseID desc";
+        String sql = "SELECT ce.[EnrollmentID], ce.[AccountID], ce.[Email], ce.[CourseID], ce.[JoinDate], "
+                + "c.[id], c.[name], c.[description], c.[image], c.[title], c.[created_by], c.[category_id], c.[mentor_id] "
+                + "FROM [dbo].[CourseEnrollment] ce "
+                + "JOIN [dbo].[Course] c ON c.id = ce.CourseID "
+                + "WHERE ce.AccountID = ? "
+                + "ORDER BY ce.CourseID DESC";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
+                int totalQuizzes = d.getTotalQuizzesInCourse(rs.getInt("CourseID"));
+                int passedQuizzes = d.getPassedQuizzesByUserInCourse(id, rs.getInt("CourseID"));
+
+                // Tạo đối tượng CourseEnrollment
                 CourseEnrollment courseEn = new CourseEnrollment();
-                courseEn.setAccountID(rs.getInt(2));
-                courseEn.setCourseID(rs.getInt(4));
-                courseEn.setCourseName(rs.getString(7));
-                courseEn.setCourseImage(rs.getString(10));
-                courseEn.setJoindate(rs.getString(5));
-                list.add(courseEn);
+                courseEn.setAccountID(rs.getInt("AccountID"));
+                courseEn.setCourseID(rs.getInt("CourseID"));
+                courseEn.setCourseName(rs.getString("name"));
+                courseEn.setCourseImage(rs.getString("image"));
+                courseEn.setJoindate(rs.getString("JoinDate"));
+
+                // Tính toán tiến độ khóa học
+                int courseProgress = 0;
+                if (totalQuizzes != 0) {
+                    courseProgress = (passedQuizzes * 100) / totalQuizzes;
+                }
+                courseEn.setCourseProgress(courseProgress);
+
+                // Thêm điều kiện lọc theo operator
+                if (operator && courseProgress <= 98) {
+                    list.add(courseEn);
+                } else if (!operator && courseProgress >= 98) {
+                    list.add(courseEn);
+                }
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -219,6 +238,8 @@ public class LessonDAO extends DBContext {
 
     public static void main(String[] args) {
         LessonDAO d = new LessonDAO();
-        System.out.println(d.getMycoursebyAccID(2));
+        for (CourseEnrollment arg : d.getMycoursebyAccID(15, true)) {
+            System.out.println(arg.getCourseImage());
+        }
     }
 }

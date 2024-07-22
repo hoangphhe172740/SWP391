@@ -115,8 +115,8 @@
         <script>
             // Function to initialize the countdown timer
             function startTimer(duration, display) {
-                var timer = duration, minutes, seconds;
-                setInterval(function () {
+                let timer = duration, minutes, seconds;
+                const interval = setInterval(function () {
                     minutes = parseInt(timer / 60, 10);
                     seconds = parseInt(timer % 60, 10);
 
@@ -125,20 +125,44 @@
 
                     display.textContent = minutes + ":" + seconds;
 
+                    // Save the remaining time in localStorage
+                    localStorage.setItem('remainingTime', timer);
+
                     if (--timer < 0) {
+                        clearInterval(interval);
                         alert("Time is up! Submitting your quiz.");
                         document.querySelector('form').submit(); // Automatically submit the form
                     }
                 }, 1000);
             }
 
-            // Call the startTimer function when the page loads
             window.onload = function () {
-                var timeLimit = ${timeLimit}; // Time limit in seconds passed from the server
-                var display = document.querySelector('#time');
-                startTimer(timeLimit, display);
+                const timeDisplay = document.getElementById('time');
+                let timeLimit = parseInt(document.querySelector('input[name="timeLimit"]').value, 10); // Get time limit from server-side
+                let remainingTime = parseInt(localStorage.getItem('remainingTime'), 10);
+
+                // If there's no valid remaining time, start from time limit
+                if (isNaN(remainingTime) || remainingTime <= 0) {
+                    remainingTime = timeLimit;
+                }
+
+                startTimer(remainingTime, timeDisplay);
+
+                // Block specific keys and key combinations
+                document.addEventListener('keydown', function (event) {
+                    const blockedKeys = [112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123]; // F1 to F12
+                    if (blockedKeys.includes(event.keyCode) || event.ctrlKey || event.shiftKey || event.metaKey) {
+                        event.preventDefault();
+                    }
+                });
+
+                // Clear remaining time on form submission
+                document.querySelector('form').addEventListener('submit', function () {
+                    localStorage.removeItem('remainingTime');
+                });
             };
         </script>
+        
 
     </head>
     <body>
@@ -146,6 +170,7 @@
             <h1>Take Quiz</h1>
             <div id="timer">
                 Time Remaining: <span id="time">00:00</span>
+                <input type="hidden" name="timeLimit" value="${timeLimit}"> <!-- Example: 10 minutes (600 seconds) -->
             </div>
             <form action="submitquiz" method="post" onsubmit="return validateQuiz()">
                 <input type="hidden" name="quizId" value="${quizId}" />

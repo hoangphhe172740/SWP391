@@ -16,7 +16,7 @@ public class CourseEnrollment {
     private String joindate;
     private String courseName;
     private String courseImage;
-    
+    private int courseProgress;
     public CourseEnrollment() {
     }
 
@@ -25,6 +25,24 @@ public class CourseEnrollment {
         this.email = email;
         this.courseID = courseID;
         this.joindate = joindate;
+    }
+
+    public CourseEnrollment(int accountID, String email, int courseID, String joindate, String courseName, String courseImage, int courseProgress) {
+        this.accountID = accountID;
+        this.email = email;
+        this.courseID = courseID;
+        this.joindate = joindate;
+        this.courseName = courseName;
+        this.courseImage = courseImage;
+        this.courseProgress = courseProgress;
+    }
+
+    public int getCourseProgress() {
+        return courseProgress;
+    }
+
+    public void setCourseProgress(int courseProgress) {
+        this.courseProgress = courseProgress;
     }
 
     public int getAccountID() {

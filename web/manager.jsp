@@ -21,93 +21,86 @@
         <title>Add lesson</title>
     </head>
     <style>
-        /* Reset some default styles */
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
         }
 
-        /* Container styles */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Table styles */
+        /* Header Styles */
         .table-wrapper {
             background-color: #fff;
+            padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
         }
 
         .table-title {
-            background-color: #4CAF50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #435d7d;
             color: #fff;
-            padding: 15px 30px;
+            padding: 16px 30px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .table-title h2 {
             font-size: 24px;
             font-weight: bold;
         }
 
+        /* Table Styles */
         .table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 16px;
+            font-size: 14px;
         }
 
-        .table th, .table td {
-            padding: 12px 15px;
+        .table th,
+        .table td {
+            padding: 10px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
 
         .table th {
-            background-color: #f2f2f2;
-        }
-
-        .table tbody tr:nth-of-type(even) {
-            background-color: #f2f2f2;
-        }
-
-        .table tbody tr:hover {
-            background-color: #e6e6e6;
-        }
-
-        /* Button styles */
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            font-size: 14px;
+            background-color: #f5f5f5;
             font-weight: bold;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
         }
 
-        .btn-info {
-            background-color: #17a2b8;
-            color: #fff;
+        .table tr:hover {
+            background-color: #f5f5f5;
         }
 
-        .btn-info:hover {
-            background-color: #138496;
-        }
-
-        .btn-success {
-            background-color: #4CAF50;
-            color: #fff;
-        }
-
-        .btn-success:hover {
-            background-color: #398439;
-        }
-
-        /* Image styles */
-        .table img {
-            max-width: 300px;
+        /* Image Styles */
+        .table td img {
+            max-width: 100%;
+            height: auto;
             border-radius: 5px;
         }
+
+        /* Button Styles */
+        .join-now-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-now-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-primary {
+            margin-top: 20px;
+        }
+
     </style>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
@@ -116,7 +109,7 @@
                     <div class="table-title">
                         <div class="d-flex justify-content-between">
                             <div class="col-sm-6 pt-3">
-                                <a href="home" style="text-decoration: none; color: #fff;"><h2>Mentor <b>Manage</b></h2></a>
+                                <a href="home" style="text-decoration: none; color: #fff;"><b><h2>Mentor Manage</h2></b></a>
                             </div>                       
                         </div>
                     </div>
@@ -162,10 +155,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
-            <a href="home" class="btn btn-success">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Home
-            </a>
-        </div>
+        
     </body>
 </html>

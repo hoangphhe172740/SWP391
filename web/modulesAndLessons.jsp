@@ -47,6 +47,18 @@
             th {
                 background-color: #f4f4f4;
             }
+            .status-active {
+                color: white;
+                background-color: #27ae60;
+                padding: 5px;
+                border-radius: 5px;
+            }
+            .status-disabled {
+                color: white;
+                background-color: red;
+                padding: 5px;
+                border-radius: 5px;
+            }
         </style>
     </head>
     <body>
@@ -70,7 +82,7 @@
                             <th>Lesson Name</th>
                             <th>Video</th>
                             <th>Duration</th>
-                            <th>Created By</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -88,11 +100,11 @@
                                 </td>
 
                                 <td>${lesson.duration}</td>
-                                <td>${lesson.create_by}</td>
+                                 <td><span class="status-${lesson.isActive ? 'active' : 'disabled'}">${lesson.isActive ? 'active' : 'disabled'}</span></td>
                                 <td><button type="button" data-target="#addEmployeeModal" class="btn btn-primary" data-toggle="modal">
-                                       <a href="quizbylesson?lessonId=${lesson.lesson_id}&courseid=${firstCourseId}" style="color: black; text-decoration: none">View</a>
+                                        <a href="quizbylesson?lessonId=${lesson.lesson_id}&courseid=${firstCourseId}" style="color: black; text-decoration: none">View</a>
                                     </button> | <button type="button" data-target="#addEmployeeModal" class="btn btn-Warning" data-toggle="modal">
-                                       <a href="edit-lesson?lessonid=${lesson.lesson_id}&courseid=${firstCourseId}" style="color: black; text-decoration: none">Edit</a>
+                                        <a href="edit-lesson?lessonid=${lesson.lesson_id}&courseid=${firstCourseId}" style="color: black; text-decoration: none">Edit</a>
                                     </button>|  <button id="buttonDelete" class="delete btn btn-danger" lesson-id ="${lesson.lesson_id}" data-target="#deleteEmployeeModal" data-toggle="modal">
                                         <i class="material-icons" data-toggle="tooltip" 
                                            >Delete</i>

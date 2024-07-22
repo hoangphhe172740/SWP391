@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <title>Edit Course</title>
+        <link href="admin/css/sidebar-admin.css" rel="stylesheet" type="text/css"/>
         <style>
             /* Reset CSS */
             * {
@@ -64,7 +65,7 @@
             }
 
             .modal-header {
-                background-color: #0056D2;
+                background-color: #435d7d;
                 color: #fff;
                 border-bottom: 1px solid #eee;
             }
@@ -138,19 +139,7 @@
     </head>
 
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
-
-            <div class="container">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6 d-flex justify-content-">
-                                <h2>ManageCourse</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <jsp:include page="admin/SideBarAdmin.jsp"></jsp:include>
             <!-- Edit Modal HTML -->
             <div id="editEmployeeModal">
                 <div class="modal-dialog" style="max-width: 1000px;">
@@ -173,10 +162,6 @@
                                 <label>Image</label>
                                 <input type="text" name="image" value="${detail.image}" class="form-control" required>
                                 <img src="${detail.image}" alt="${detail.name}" class="img-preview" />
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input value="${detail.price}" name="price" type="text" class="form-control" hidden="">
                             </div>
                             <div class="form-group">
                                 <label>Title</label>
@@ -228,3 +213,4 @@
         </script>
     </body>
 </html>
+<script src="admin/js/SideBar.js" type="text/javascript"></script>

@@ -191,7 +191,6 @@
                             <select name="questionType1">
                                 <option value="MC">Multiple Choice</option>
                                 <option value="SA">Single Choice</option>
-                                <option value="TF">True/False</option>
                             </select><br/>
                             <div id="answers1">
                                 <h4>Answers</h4>
@@ -215,7 +214,7 @@
                         <label for="quizDescription">Quiz Description:</label>
                         <textarea name="quizDescription" required></textarea><br/>
 
-                        <label for="quizTime">Quiz Time (minutes):</label>
+                        <label for="quizTime">Quiz Time (Seconds):</label>
                         <input type="number" name="quizTime" required /><br/>
 
                         <label for="passScore">Pass Score:</label>
@@ -226,6 +225,7 @@
                     </div>
                 </form>
             </div>
+            <a href="quizbylesson?lessonId=${lessonId}"><button type="button" style="background: #6c757d">Back</button></a>
         </div>
     </body>
 </html>

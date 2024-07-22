@@ -41,18 +41,31 @@
                 margin-right: 10px;
                 text-decoration: none;
                 padding: 6px 12px;
-                background-color: #4CAF50;
+                background-color: #435d7d;
                 color: white;
                 border-radius: 4px;
             }
             .quiz-actions a:hover {
-                background-color: #45a049;
+                background-color: #007bff;
+                color: white;
             }
             .quiz-actions a.delete {
                 background-color: #f44336;
             }
             .quiz-actions a.delete:hover {
                 background-color: #da190b;
+            }
+            .status-active {
+                color: white;
+                background-color: #27ae60;
+                padding: 5px;
+                border-radius: 5px;
+            }
+            .status-disabled {
+                color: white;
+                background-color: red;
+                padding: 5px;
+                border-radius: 5px;
             }
         </style>
     </head>
@@ -72,13 +85,15 @@
                         <div class="quiz-info">
                             <strong>Quiz Name:</strong> ${quiz.quizName}<br/>
                             <strong>Description:</strong> ${quiz.quizDescription}<br/>
-                            <strong>Time:</strong> ${quiz.quizTime} minutes<br/>
+                            <strong>Time:</strong> ${quiz.quizTime} Seconds<br/>
+                            <strong>Status:</strong> <span class="status-${quiz.is_active ? 'active' : 'disabled'}">${quiz.is_active ? 'active' : 'disabled'}</span><br/>
                             <strong>Pass Score:</strong> ${quiz.passScore}<br/>
                         </div>
                         <div class="quiz-actions">
-                            <a href="viewQuiz?id=${quiz.quizId}">View Quiz</a>
-                            <a href="editQuiz?id=${quiz.quizId}">Edit Quiz</a>
-                            <a href="deleteQuiz?id=${quiz.quizId}" class="delete">Delete Quiz</a>
+                            <a href="editquiz?quizId=${quiz.quizId}">Edit Quiz</a>
+                            <a href="addquestion?quizId=${quiz.quizId}&lessonId=${quiz.lessonId}">Add Question</a>
+                            <a href="editQuestion?quizId=${quiz.quizId}&lessonId=${quiz.lessonId}">Edit Question</a>
+                            <a href="viewquizdetail?quizId=${quiz.quizId}&lessonId=${quiz.lessonId}">View Quiz Detail</a>
                         </div>
                     </div>
                 </c:forEach>
@@ -86,7 +101,6 @@
             <c:if test="${empty quizzes}">
                 <p>No quizzes available.</p>
             </c:if>
-            <a href="home">Back to Home</a>
         </div>
     </body>
 </html>

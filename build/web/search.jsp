@@ -249,8 +249,6 @@
                     <form action="search" id="f1">
                         <select name="sort" id="sort">
                             <option value="default" ${sort=='default'?"selected":""}>Default</option>
-                            <option value="sortByCreasePrice" ${sort=='sortByCreasePrice'?"selected":""}>Sort by increasing Price</option>
-                            <option value="sortByDecresePrice" ${sort=='sortByDecresePrice'?"selected":""}>Sort by descending Price </option>
                             <option value="sortByName" ${sort=='sortByName'?"selected":""}>Sort by name </option>
                         </select>
                     </form>
@@ -274,7 +272,7 @@
                                         <p class="card-text"><b>Skills you'll gain:</b> ${c.title}</p>
                                         <i class="fa-solid fa-star" style="color: yellowgreen;"></i><b> 4.8</b>
                                         <div class="row">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -310,10 +308,7 @@
                 if (path.includes("?cidd")) {
                     document.getElementById('formCategory').querySelector("#sortForm").value = sortType;
                     document.getElementById('formCategory').submit();
-                } else {
-                    document.getElementById('formPrice').querySelector("#sortForm").value = sortType;
-                    document.getElementById('formPrice').submit();
-                }
+                } 
             });
             const pages = document.querySelectorAll("[paging-current]");
             const path = document.querySelector("[data-path]");
@@ -327,11 +322,7 @@
                         document.getElementById('formCategory').querySelector("#paging").value = currentPage;
                         document.getElementById('formCategory').querySelector("#sortForm").value = sortType;
                         document.getElementById('formCategory').submit();
-                    } else {
-                        document.getElementById('formPrice').querySelector("#paging").value = currentPage;
-                        document.getElementById('formPrice').querySelector("#sortForm").value = sortType;
-                        document.getElementById('formPrice').submit();
-                    }
+                    } 
                 });
             });
 
@@ -351,22 +342,7 @@
                 }
                 document.getElementById('formCategory').submit();
             }
-            function setCheck1(obj) {
-                var fries = document.getElementsByName('price');
-                if ((obj.id === 'g0') && (fries[0].checked === true))
-                {
-                    for (var i = 1; i < fries.length; i++)
-                        fries[i].checked = false;
-                } else {
-                    for (var i = 1; i < fries.length; i++) {
-                        if (fries[i].checked === true) {
-                            fries[0].checked = false;
-                            break;
-                        }
-                    }
-                }
-                document.getElementById('formPrice').submit();
-            }
+           
         </script>
     </body>
 </html>

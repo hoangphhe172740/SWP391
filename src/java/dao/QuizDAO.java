@@ -59,34 +59,6 @@ public class QuizDAO extends DBContext {
         }
     }
 
-//    public List<Question> getQuestionsByQuizID(int id) {
-//        List<Question> questions = new ArrayList<>();
-//        String sql = """
-//                     SELECT [QuestionID]
-//                           ,[Question_Number]
-//                           ,[Quiz_id]
-//                           ,[QuestionName]
-//                       FROM [dbo].[Question] where Quiz_id = ?
-//                     """;
-//        PreparedStatement st;
-//        try {
-//            st = connection.prepareStatement(sql);
-//            st.setInt(1, id);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                Question question = new Question();
-//                question.setQuestion_number(rs.getInt(2));
-//                question.setQuestionID(rs.getInt(1));
-//                question.setQuestion_name(rs.getString(4));
-//                question.setQuiz_id(rs.getInt(3));
-//                question.setChoices(getQuestionChoiceByQuestionID(rs.getInt(1)));
-//                questions.add(question);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return questions;
-//    }
     private void startCountdown(Time quizTime) {
         long quizStartTime = System.currentTimeMillis();
         long endTime = quizStartTime + duration;
@@ -141,36 +113,29 @@ public class QuizDAO extends DBContext {
         }
     }
 
-//    public List<QuestionChoice> getQuestionChoiceByQuestionID(int questionID){
-//        List<QuestionChoice> list = new ArrayList<>();
-//        String sql = """
-//                     SELECT [QuestionID]
-//                           ,[Choices]
-//                           ,[inCorrect]
-//                           ,[id]
-//                       FROM [dbo].[QuestionChoice] where QuestionID = ?
-//                     """;
-//        PreparedStatement st;
-//        try {
-//            st = connection.prepareStatement(sql);
-//            st.setInt(1, questionID);
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                QuestionChoice questionChoice = new QuestionChoice();
-//                questionChoice.setId(rs.getInt(4));
-//                questionChoice.setChoice(rs.getString(2));
-//                questionChoice.setInCorrect(rs.getBoolean(3));
-//                list.add(questionChoice);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return list;
-//    }
     public static void main(String[] args) {
-        QuizDAO d = new QuizDAO();
         try {
-            System.out.println(d.isBooleanAnswerCorrect(20, "true"));
+            QuizDAO d = new QuizDAO();
+            Quiz quiz = d.getQuizDetails(5); // Replace with the desired quiz ID
+
+            // Print the quiz details to verify the result
+            if (quiz != null) {
+                System.out.println("Quiz Name: " + quiz.getQuizName());
+                System.out.println("Description: " + quiz.getQuizDescription());
+                System.out.println("Time Limit: " + quiz.getQuizTime() + " minutes");
+                System.out.println("Pass Score: " + quiz.getPassScore());
+
+                List<Question> questions = quiz.getQuestions();
+                for (Question question : questions) {
+                    System.out.println("\nQuestion: " + question.getQuestionText());
+                    System.out.println("Type: " + question.getQuestionType());
+
+                    List<AnswerChoice> answers = question.getAnswers();
+                    for (AnswerChoice answer : answers) {
+                        System.out.println(" - Answer: " + answer.getAnswerChoiceText() + " (Correct: " + answer.isCorrect() + ")");
+                    }
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(QuizDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -232,12 +197,94 @@ public class QuizDAO extends DBContext {
         }
     }
 
+    public void updateQuiz(int quizId, String quizName, String quizDescription, int quizTime, int passScore, boolean isActive) throws SQLException {
+        String sql = "UPDATE Quiz SET quiz_name = ?, quiz_description = ?, quiz_time = ?, pass_score = ?, is_active = ? WHERE quiz_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, quizName);
+            ps.setString(2, quizDescription);
+            ps.setInt(3, quizTime);
+            ps.setInt(4, passScore);
+            ps.setBoolean(5, isActive);
+            ps.setInt(6, quizId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error updating quiz: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Method to update a question
+    public boolean updateQuestion(int questionId, String questionText, String questionType) {
+        String sql = "UPDATE Question SET question_text = ?, question_type = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, questionText);
+            ps.setString(2, questionType);
+            ps.setInt(3, questionId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error updating question: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Method to update an answer choice
+    public boolean updateAnswerChoice(int answerChoiceId, String answerChoiceText, boolean isCorrect) {
+        String sql = "UPDATE AnswerChoice SET answer_choice_text = ?, is_correct = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, answerChoiceText);
+            ps.setBoolean(2, isCorrect);
+            ps.setInt(3, answerChoiceId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error updating answer choice: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public List<Quiz> getQuizzesByLessonClientId(int lessonId, int userId) {
+        List<Quiz> quizzes = new ArrayList<>();
+        String sql = "SELECT q.quiz_id, q.quiz_name, q.quiz_description, q.quiz_time, q.pass_score, "
+                + "       CASE WHEN qu.user_id IS NOT NULL THEN 1 ELSE 0 END AS has_joined, "
+                + "       ISNULL(qu.score, 0) AS score, "
+                + "       ISNULL(qu.is_passed, 0) AS is_passed, "
+                + "       q.is_active "
+                + "FROM Quiz q "
+                + "LEFT JOIN quiz_user qu ON q.quiz_id = qu.quiz_id AND qu.user_id = ? "
+                + "WHERE q.lesson_id = ? And q.is_active = 1";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, lessonId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Quiz quiz = new Quiz();
+                    quiz.setQuizId(rs.getInt("quiz_id"));
+                    quiz.setLessonId(lessonId); // Ensure lessonId is set
+                    quiz.setQuizName(rs.getString("quiz_name"));
+                    quiz.setQuizDescription(rs.getString("quiz_description"));
+                    quiz.setQuizTime(rs.getInt("quiz_time"));
+                    quiz.setPassScore(rs.getInt("pass_score"));
+                    quiz.setHasJoined(rs.getBoolean("has_joined"));
+                    quiz.setScore(rs.getInt("score"));
+                    quiz.setPassed(rs.getBoolean("is_passed"));
+                    quiz.setIs_active(rs.getBoolean("is_active")); // Set the new field
+                    quizzes.add(quiz);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return quizzes;
+    }
     public List<Quiz> getQuizzesByLessonId(int lessonId, int userId) {
         List<Quiz> quizzes = new ArrayList<>();
         String sql = "SELECT q.quiz_id, q.quiz_name, q.quiz_description, q.quiz_time, q.pass_score, "
                 + "       CASE WHEN qu.user_id IS NOT NULL THEN 1 ELSE 0 END AS has_joined, "
                 + "       ISNULL(qu.score, 0) AS score, "
-                + "       ISNULL(qu.is_passed, 0) AS is_passed "
+                + "       ISNULL(qu.is_passed, 0) AS is_passed, "
+                + "       q.is_active "
                 + "FROM Quiz q "
                 + "LEFT JOIN quiz_user qu ON q.quiz_id = qu.quiz_id AND qu.user_id = ? "
                 + "WHERE q.lesson_id = ?";
@@ -257,6 +304,7 @@ public class QuizDAO extends DBContext {
                     quiz.setHasJoined(rs.getBoolean("has_joined"));
                     quiz.setScore(rs.getInt("score"));
                     quiz.setPassed(rs.getBoolean("is_passed"));
+                    quiz.setIs_active(rs.getBoolean("is_active")); // Set the new field
                     quizzes.add(quiz);
                 }
             }
@@ -315,8 +363,14 @@ public class QuizDAO extends DBContext {
 
     public Quiz getQuizById(int quizId) {
         Quiz quiz = null;
-        String query = "SELECT quiz_id, lesson_id, quiz_name, quiz_description, quiz_time, pass_score "
-                + "FROM Quiz "
+        String query = "SELECT [quiz_id]\n"
+                + "      ,[lesson_id]\n"
+                + "      ,[quiz_name]\n"
+                + "      ,[quiz_description]\n"
+                + "      ,[quiz_time]\n"
+                + "      ,[pass_score]\n"
+                + "      ,[is_active]\n"
+                + "  FROM [dbo].[Quiz]"
                 + "WHERE quiz_id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -331,6 +385,7 @@ public class QuizDAO extends DBContext {
                     quiz.setQuizDescription(rs.getString("quiz_description"));
                     quiz.setQuizTime(rs.getInt("quiz_time"));
                     quiz.setPassScore(rs.getInt("pass_score"));
+                    quiz.setIs_active(rs.getBoolean("is_active"));
                 }
             }
         } catch (SQLException e) {
@@ -411,6 +466,164 @@ public class QuizDAO extends DBContext {
             }
         }
         return false;
+    }
+
+    // Method to get total number of quizzes in a course
+    public int getTotalQuizzesInCourse(int courseId) {
+        int totalQuizzes = 0;
+        String sql = "SELECT COUNT(*) FROM Quiz q JOIN Lesson l ON q.lesson_id = l.lesson_id JOIN Module m ON l.module_id = m.module_id WHERE m.course_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, courseId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalQuizzes = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalQuizzes;
+    }
+
+    // Method to get number of quizzes passed by user in a course
+    public int getPassedQuizzesByUserInCourse(int userId, int courseId) {
+        int passedQuizzes = 0;
+        String sql = "SELECT COUNT(*) FROM Quiz_User qu JOIN Quiz q ON qu.quiz_id = q.quiz_id JOIN Lesson l ON q.lesson_id = l.lesson_id JOIN Module m ON l.module_id = m.module_id WHERE m.course_id = ? AND qu.user_id = ? AND qu.is_passed = 1";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, courseId);
+            ps.setInt(2, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                passedQuizzes = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return passedQuizzes;
+    }
+
+    public Quiz getQuizDetails(int quizId) throws SQLException {
+        Quiz quiz = null;
+        String quizQuery = "SELECT [quiz_id]\n"
+                + "      ,[lesson_id]\n"
+                + "      ,[quiz_name]\n"
+                + "      ,[quiz_description]\n"
+                + "      ,[quiz_time]\n"
+                + "      ,[pass_score]\n"
+                + "      ,[is_active]\n"
+                + "  FROM [dbo].[Quiz] WHERE [quiz_id] = ?";
+        String questionQuery = "SELECT [question_id]\n"
+                + "      ,[quiz_id]\n"
+                + "      ,[question_text]\n"
+                + "      ,[question_type]\n"
+                + "  FROM [dbo].[Question] WHERE quiz_id = ?";
+        String answerQuery = "SELECT [answer_choice_id]\n"
+                + "      ,[question_id]\n"
+                + "      ,[answer_choice_text]\n"
+                + "      ,[is_correct]\n"
+                + "  FROM [dbo].[AnswerChoice] WHERE question_id = ?";
+
+        try (PreparedStatement quizStmt = connection.prepareStatement(quizQuery); PreparedStatement questionStmt = connection.prepareStatement(questionQuery)) {
+            quizStmt.setInt(1, quizId);
+            try (ResultSet quizRs = quizStmt.executeQuery()) {
+                if (quizRs.next()) {
+                    quiz = new Quiz();
+                    quiz.setQuizId(quizId);
+                    quiz.setLessonId(quizRs.getInt("lesson_id"));
+                    quiz.setQuizName(quizRs.getString("quiz_name"));
+                    quiz.setQuizDescription(quizRs.getString("quiz_description"));
+                    quiz.setQuizTime(quizRs.getInt("quiz_time"));
+                    quiz.setPassScore(quizRs.getInt("pass_score"));
+                    quiz.setIs_active(quizRs.getBoolean("is_active")); // Assuming you have this setter
+
+                    questionStmt.setInt(1, quizId);
+                    try (ResultSet questionRs = questionStmt.executeQuery()) {
+                        List<Question> questions = new ArrayList<>();
+                        while (questionRs.next()) {
+                            Question question = new Question();
+                            question.setQuestionId(questionRs.getInt("question_id"));
+                            question.setQuestionText(questionRs.getString("question_text"));
+                            question.setQuestionType(questionRs.getString("question_type"));
+
+                            try (PreparedStatement answerStmt = connection.prepareStatement(answerQuery)) {
+                                answerStmt.setInt(1, question.getQuestionId());
+                                try (ResultSet answerRs = answerStmt.executeQuery()) {
+                                    List<AnswerChoice> answers = new ArrayList<>();
+                                    while (answerRs.next()) {
+                                        AnswerChoice answer = new AnswerChoice();
+                                        answer.setAnswerChoiceId(answerRs.getInt("answer_choice_id"));
+                                        answer.setAnswerChoiceText(answerRs.getString("answer_choice_text"));
+                                        answer.setCorrect(answerRs.getBoolean("is_correct"));
+                                        answers.add(answer);
+                                    }
+                                    question.setAnswers(answers);
+                                }
+                            }
+                            questions.add(question);
+                        }
+                        quiz.setQuestions(questions); // Set the questions list on the quiz
+                    }
+                }
+            }
+            return quiz;
+        }
+    }
+
+    public void deleteQuestion(int questionId) throws SQLException {
+        connection.setAutoCommit(false);
+
+        try {
+            // Xóa các câu trả lời liên quan đến câu hỏi
+            String deleteAnswersQuery = "DELETE FROM [AnswerChoice] WHERE [question_id] = ?";
+            try (PreparedStatement deleteAnswersStmt = connection.prepareStatement(deleteAnswersQuery)) {
+                deleteAnswersStmt.setInt(1, questionId);
+                deleteAnswersStmt.executeUpdate();
+            }
+
+            // Xóa câu hỏi
+            String deleteQuestionQuery = "DELETE FROM [Question] WHERE [question_id] = ?";
+            try (PreparedStatement deleteQuestionStmt = connection.prepareStatement(deleteQuestionQuery)) {
+                deleteQuestionStmt.setInt(1, questionId);
+                deleteQuestionStmt.executeUpdate();
+            }
+
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }
+    }
+
+    public void updateQuestion(int questionId, String questionText, List<AnswerChoice> answers) throws SQLException {
+        String updateQuestionQuery = "UPDATE Question SET question_text = ? WHERE question_id = ?";
+        String deleteAnswersQuery = "DELETE FROM AnswerChoice WHERE question_id = ?";
+        String insertAnswerQuery = "INSERT INTO AnswerChoice (question_id, answer_choice_text, is_correct) VALUES (?, ?, ?)";
+
+        try (PreparedStatement updateQuestionStmt = connection.prepareStatement(updateQuestionQuery); PreparedStatement deleteAnswersStmt = connection.prepareStatement(deleteAnswersQuery); PreparedStatement insertAnswerStmt = connection.prepareStatement(insertAnswerQuery)) {
+
+            connection.setAutoCommit(false);
+
+            updateQuestionStmt.setString(1, questionText);
+            updateQuestionStmt.setInt(2, questionId);
+            updateQuestionStmt.executeUpdate();
+
+            deleteAnswersStmt.setInt(1, questionId);
+            deleteAnswersStmt.executeUpdate();
+
+            for (AnswerChoice answer : answers) {
+                insertAnswerStmt.setInt(1, questionId);
+                insertAnswerStmt.setString(2, answer.getAnswerChoiceText());
+                insertAnswerStmt.setBoolean(3, answer.isCorrect());
+                insertAnswerStmt.addBatch();
+            }
+            insertAnswerStmt.executeBatch();
+
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(true);
+        }
     }
 
 }

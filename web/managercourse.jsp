@@ -19,11 +19,12 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="./css/footer.css"/>
         <link rel="stylesheet" href="./css/manager.css"/>
+        <link href="admin/css/sidebar-admin.css" rel="stylesheet" type="text/css"/>
         <title>Manager Course</title>
     </head>
 
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
+        <jsp:include page="admin/SideBarAdmin.jsp"></jsp:include>
             <div class="container">
                 <div class="table-wrapper">
                     <div class="table-title">
@@ -95,10 +96,6 @@
                                 <label>Description</label>
                                 <textarea name="description" class="form-control" id="default" required></textarea>
                             </div>
-                            <div class="form-group" hidden="">
-                                <label>Price</label>
-                                <input name="price" type="text" class="form-control" value="0">
-                            </div>
                             <div class="form-group">
                                 <label>Image</label>
                                 <input name="image" type="text" class="form-control" required>
@@ -156,7 +153,6 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="Footer.jsp"></jsp:include>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -193,3 +189,4 @@
         </script>
     </body>
 </html>
+<script src="admin/js/SideBar.js" type="text/javascript"></script>

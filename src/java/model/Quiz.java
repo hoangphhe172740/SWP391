@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Quiz {
 
     private int quizId;
@@ -12,7 +14,7 @@ public class Quiz {
     private boolean hasJoined;
     private int score;
     private boolean passed;
-
+    private List<Question> questions;
     public Quiz() {
     }
 
@@ -33,6 +35,14 @@ public class Quiz {
         this.quizDescription = quizDescription;
         this.quizTime = quizTime;
         this.passScore = passScore;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public boolean isHasJoined() {

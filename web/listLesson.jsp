@@ -97,9 +97,9 @@
                 <div class="lesson-content">
                     <button onclick="toggleVideo(this)"> <i class="fa-regular fa-circle-play"></i> Video</button>
                     <p>${o.lesson_video}</p>
-                    <button class="btn-success"><a href="list-quizzes-client?lessonId=${o.lesson_id}"> <i class="fa-regular fa-pencil-square">Do Quizzes</i> </a></button>
+                    <button class="btn-success" ><a href="list-quizzes-client?lessonId=${o.lesson_id}" style="color: white;text-decoration: none"> <i class="fas fa-language"></i> Do Quizzes</a></button>
                     <div class="video-content" style="display:none;">
-                        
+
                     </div>                    
                 </div>
             </c:forEach>

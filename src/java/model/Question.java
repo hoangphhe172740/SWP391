@@ -11,6 +11,9 @@ public class Question {
     private String questionType;
     private List<AnswerChoice> answers;
 
+    public Question() {
+    }
+
     // Constructor
     public Question(int questionId, int quizId, String questionText, String questionType) {
         this.questionId = questionId;
@@ -55,6 +58,10 @@ public class Question {
 
     public List<AnswerChoice> getAnswers() {
         return answers;
+    }
+
+    public void setAnswers(List<AnswerChoice> answers) {
+        this.answers = answers;
     }
 
     // Method to add an answer choice

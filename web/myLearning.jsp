@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -32,6 +33,7 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
         }
 
         .table-title {
@@ -39,12 +41,15 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            background: #435d7d;
+            color: #fff;
+            padding: 16px 30px;
+            border-radius: 3px 3px 0 0;
         }
 
         .table-title h2 {
             font-size: 24px;
             font-weight: bold;
-            color: #333;
         }
 
         /* Table Styles */
@@ -95,18 +100,37 @@
         .btn-primary {
             margin-top: 20px;
         }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar-fill {
+            display: block;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            font-weight: bold;
+            transition: width 0.4s ease;
+        }
     </style>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
-            <div class="container">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="d-flex justify-content-between">
-                            <div class="col-sm-6 pt-3">
-                                <a href="home" style="text-decoration: none;"><h2><b>My Learning</b></h2></a>
-                            </div>                           
+        <div class="container">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="d-flex justify-content-between">
+                        <div class="col-sm-6 pt-3">
+                            <a href="home" style="text-decoration: none; color: #fff;"><h2><b>My Learning</b></h2></a>
                         </div>
                     </div>
+                </div>
                 <c:if test="${listcourse.size() == 0}">
                     <h1 class="btn btn-danger" style=" padding: 10px 10px;"><i class="fa-solid fa-circle-exclamation"></i> You have not participated in any courses yet</h1>
                 </c:if>
@@ -117,11 +141,12 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Image</th>
+                                <th>Progress</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listcourse}" var="o">                              
+                            <c:forEach items="${listcourse}" var="o">
                                 <tr>
                                     <td>${o.courseID}</td>
                                     <td>${o.courseName}</td>
@@ -129,17 +154,24 @@
                                         <img src="${o.courseImage}" style="width: 300px; border-radius: 5px;">
                                     </td>
                                     <td>
+                                        <div class="progress-bar">
+                                            <div class="progress-bar-fill" style="width: ${o.courseProgress}%;">
+                                                ${o.courseProgress} %
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
                                         <button class="join-now-btn col">
                                             <b><a href="join-course?Courseid=${o.courseID}" style=" text-decoration: none; color: #fff;">Enrolled</a></b>
                                         </button>
                                     </td>
-                                </tr>                                   
+                                </tr>
                             </c:forEach>
-                        </c:if>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </c:if>
             </div>
-            <a href="home"><button type="button" class="btn btn-primary">Back To Home</button></a>
+           
         </div>
     </body>
 </html>

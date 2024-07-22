@@ -14,8 +14,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Account</title>
+        <link href="admin/css/sidebar-admin.css" rel="stylesheet" type="text/css"/>
         <style>
-            
+
             * {
                 margin: 0;
                 padding: 0;
@@ -44,7 +45,7 @@
             }
 
             .table-title {
-                background-color: #0056D2;
+                background-color: #435d7d;
                 color: #fff;
                 padding: 16px 30px;
                 border-radius: 8px 8px 0 0;
@@ -64,7 +65,7 @@
             }
 
             .modal-header {
-                background-color: #0056D2;
+                background-color: #435d7d;
                 color: #fff;
                 border-bottom: 1px solid #eee;
             }
@@ -138,18 +139,7 @@
     </head>
 
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
-            <div class="container">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6 d-flex justify-content-">
-                                <h2>Manage Account</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <jsp:include page="admin/SideBarAdmin.jsp"></jsp:include>
             <!-- Edit Modal HTML -->
             <div id="editEmployeeModal">
                 <div class="modal-dialog" style="max-width: 1000px;">
@@ -160,14 +150,14 @@
                                 <a href="manageMentor" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                             </div>
                             <div class="modal-body">					                               
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" name="name" value="${listM.mentorName}" class="form-control" required readonly>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="name" value="${listM.mentorName}" class="form-control" required readonly>
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
                                 <input type="text" name="image" value="${listM.image}" class="form-control" required readonly>
-                                <img src="${listM.image}" class="img-preview" style="width: 300px;"/>
+                                <img src="${listM.image}" class="img-preview" style="width: 200px; height: 200px;"/>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -175,7 +165,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Pass</label>
-                                <input  name="pass" type="text" class="form-control" required>
+                                <input  name="pass" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                                        oninvalid="this.setCustomValidity('Mật khẩu trên 8 kí tự và bao gồm chữ cái hoa, thường, chữ số, kí tự đặc biệt')" 
+                                        oninput="this.setCustomValidity('')" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -201,3 +193,4 @@
         </script>
     </body>
 </html>
+<script src="admin/js/SideBar.js" type="text/javascript"></script>

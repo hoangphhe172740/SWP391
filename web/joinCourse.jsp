@@ -1,8 +1,4 @@
-<%-- 
-    Document   : joinCourse
-    Created on : Jun 28, 2024, 2:50:02 PM
-    Author     : Admin
---%>
+
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,7 +15,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">        
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
         <title>Join Course</title>
@@ -283,8 +279,7 @@
                                     <option data-select2-id="3">Most Relevant</option>
                                     <option>Most Recent</option>
                                 </select>
-                                <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 188px;">
-                                    <span class="selection">
+                                <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 188px;"><span class="selection">
                                         <span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-qd66-container">
                                             <span class="select2-selection__rendered" id="select2-qd66-container" role="textbox" aria-readonly="true" title="Most Relevant">Most Relevant</span>
                                             <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
@@ -319,8 +314,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="progress-bar-container">
-                                                    <div class="fit-progressbar fit-progressbar-bar star-progress-bar">
-                                                        <div class="fit-progressbar-background">
+                                                    <div class="fit-progressbar fit-progressbar-bar star-progress-bar"><div class="fit-progressbar-background">
                                                             <span class="progress-fill" style="width: 2.2973%;"></span>
                                                         </div>
                                                     </div>
@@ -358,8 +352,7 @@
                                                 <td class="star-num">(0)</td>
                                             </tr>
                                             <tr class="">
-                                                <td>
-                                                    <span>
+                                                <td><span>
                                                         <button class="fit-button fit-button-color-blue fit-button-fill-ghost fit-button-size-medium stars-filter">5 Stars</button>
                                                     </span>
                                                 </td>
@@ -398,8 +391,7 @@
                                                             d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
                                                             ></path>
                                                         </svg>
-                                                        5.0
-                                                    </span>
+                                                        5.0</span>
                                                 </h4>
                                                 <div class="country d-flex align-items-center">
                                                     <span>
@@ -411,10 +403,10 @@
                                                         ${item.content}
                                                     </p>
                                                 </div>
-                                                    <span class="publish py-3 d-inline-block w-100">
-                                                        <fmt:parseDate value="${item.createdDate}" pattern="yyyy-MM-dd'T'HH:mm" var="detailTime" type="both" /> 
-                                                        <fmt:formatDate pattern="yyyy-MM-dd" value="${parsedDateTime}" />
-                                                    </span>
+                                                <span class="publish py-3 d-inline-block w-100">
+                                                    <fmt:parseDate value="${item.createdDate}" pattern="yyyy-MM-dd'T'HH:mm" var="detailTime" type="both" /> 
+                                                    <fmt:formatDate pattern="yyyy-MM-dd" value="${parsedDateTime}" />
+                                                </span>
                                             </div>
                                         </div>
                                     </li>

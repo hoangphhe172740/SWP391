@@ -20,14 +20,14 @@
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5"><a href="index.html">
-                    <img src="img/thu-vien-elearning-va-nhung-thong-tin-can-nam-bat.jpg"
-                         class="img-fluid" alt="Sample image">
+                        <img src="img/thu-vien-elearning-va-nhung-thong-tin-can-nam-bat.jpg"
+                             class="img-fluid" alt="Sample image">
                     </a></div>
                 <div class="col-md-3 col-lg-3 col-lg-3 offset-xl-1">
                     <form class="form-signup" action="Register" method="post">
                         <h1 class="h3 mb-3 font-weight-normal text-center bold-text">Sign Up</h1>
                         <p class="mess">${mess}</p>
-                        
+
                         <!---EMAIL---->
                         <div>
                             <b class="mb-3">EMAIL</b>
@@ -38,16 +38,23 @@
                             <b class="mb-3">USERNAME</b>
                             <input name="user" type="text" id="inputname" class="form-control form-control-lg mb-3 mt-2" placeholder="Enter Your Full Name" autofocus="" required="">
                         </div>
-                        
+
                         <!--Password -->
                         <div>
                             <b class="mb-3">PASSWORD</b>
-                            <input name="password" type="password" id="inputpass" class="form-control form-control-lg mb-3 mt-2" placeholder="Create password" required="" autofocus="">
+                            <input name="password" type="password" id="inputpass" class="form-control form-control-lg mb-3 mt-2" 
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                                   oninvalid="this.setCustomValidity('Mật khẩu trên 8 kí tự và bao gồm chữ cái hoa, thường, chữ số, kí tự đặc biệt')" 
+                                   oninput="this.setCustomValidity('')"
+
+                                   placeholder="Create password" required="" autofocus="">
 
                         </div>
                         <div>
                             <b class="mb-3">CONFIRM PASSWORD</b>
-                            <input name="repass" type="password"  class="form-control form-control-lg mb-3 mt-2" placeholder="Confirm password" required="" autofocus="">
+                            <input name="repass" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                                   oninvalid="this.setCustomValidity('Mật khẩu trên 8 kí tự và bao gồm chữ cái hoa, thường, chữ số, kí tự đặc biệt')" 
+                                   oninput="this.setCustomValidity('')" class="form-control form-control-lg mb-3 mt-2" placeholder="Confirm password" required="" autofocus="">
 
                         </div>
                         <!--Sign Up-->

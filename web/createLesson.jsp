@@ -33,7 +33,7 @@
                         <form action="create-lesson" method="post">
                             <div class="modal-header">						
                                 <h4> Create Lesson </h4>
-                                <a href="mentor-manager" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+                                <a href="display-modules?courseid=${listCourse.id}" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
                             </div>
                         <c:if test="${requestScope.report != nulls}">
                             <p style="color: #00c61c">${requestScope.report}</p>
@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label>Image</label>
                                 <input type="text" name="image" value="${listCourse.getImage()}" readonly class="form-control" required>
-                                <img src="${listCourse.getImage()}" alt="${listCourse.name}" class="img-preview" />
+                                <img src="${listCourse.getImage()}" style="width: 333px; height: 333px" alt="${listCourse.name}" class="img-preview" />
                             </div>
 
                             <div class="form-group">

@@ -96,6 +96,9 @@
         </form>
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <b><a class="nav-link" href="home">Home</a></b>
+                </li>
                 <c:if test="${sessionScope.acc.roleID == 2}">
                     <li class="nav-item">
                         <b><a class="nav-link" href="manageMentor">Manage Mentor</a></b>
@@ -125,7 +128,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li class="dropdown-header d-flex align-items-center">
-                                <h6>${acc.user}</h6>
+                                <h6>${acc.email}</h6>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -143,6 +146,15 @@
                                 <a class="dropdown-item d-flex align-items-center" href="wishlist">
                                     <i class="fa-solid fa-list"></i>
                                     <span style="padding-left: 10px;"> Wish List</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="certificate">
+                                    <i class="fa-solid fa-certificate"></i>
+                                    <span style="padding-left: 10px;"> certificate</span>
                                 </a>
                             </li>
                             <li>
