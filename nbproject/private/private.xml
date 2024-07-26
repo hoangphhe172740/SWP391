@@ -3,12 +3,59 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/khanh/Downloads/SWP391-master/SWP391-master/src/java/context/DBContext.java</file>
-            <file>file:/C:/Users/khanh/Downloads/SWP391-master/SWP391-master/src/java/control/AddQuizServlet.java</file>
-            <file>file:/C:/Users/khanh/Downloads/SWP391-master/SWP391-master/src/java/control/QuizByLessonServlet.java</file>
-            <file>file:/C:/Users/khanh/Downloads/SWP391-master/SWP391-master/src/java/dao/QuizDAO.java</file>
-            <file>file:/C:/Users/khanh/Downloads/SWP391-master/SWP391-master/web/createQuiz.jsp</file>
-            <file>file:/C:/Users/khanh/Downloads/SWP391-master/SWP391-master/web/quizbylesson.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/profile.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/resultPage.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/admin/SideBarAdmin.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/src/java/filter/filter/AutheticationFilterAdmin.java</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/errorPage.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/viewquizdetail.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/modulesAndLessons.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/editlesson.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/editquiz.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/createModule.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/home.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/addQuestion.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/index.html</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/myLearning.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/managerMentor.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/managercourse.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/search.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/quizbylesson.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/AddQuiz.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/left.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/edit.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/src/java/filter/filter/AutheticationFilterManager.java</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/src/java/context/DBContext.java</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/wishlist.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/src/java/control/mentee/SubmitQuizControl.java</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/listQuizClient.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/doQuiz.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/admin/dashboard.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/EditQuestion.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/manager.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/listLesson.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/editMentor.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/takequiz.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/opt-password.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/QuestionList.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/createAccount.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/newpassword.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/login.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/src/java/filter/filter/AutheticationFilterDashboard.java</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/Footer.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/src/java/control/CertificateGenerator.java</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/joinCourse.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/menu.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/scorePage.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/register.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/detail.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/menuAdmin.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/adminAccount.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/Certificate.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/forgotpassword.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/createQuiz.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/confirm.jsp</file>
+            <file>file:/E:/dao%20load/SWP391%20(3)/SWP391/web/createLesson.jsp</file>
         </group>
     </open-files>
 </project-private>

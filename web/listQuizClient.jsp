@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
         <meta charset="UTF-8">
         <title>List of Quizzes</title>
         <style>          

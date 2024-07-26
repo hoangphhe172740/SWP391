@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="./css/left.css"/>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <div class="col-sm-3">
     <div class="card bg-light mb-3">
         <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>Filter by</div>

@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Wishlist</title>
 
@@ -62,9 +64,9 @@
                 color: #7f8c8d;         /* Grey color for details */
                 font-size: 14px;
             }
-
+           
             /* Button Styling */
-            .wishlist-item button {
+            .wishlist-item .btn-remove {
                 background-color: #e74c3c; /* Red for remove button */
                 color: white;
                 padding: 10px 15px;
@@ -74,18 +76,15 @@
                 transition: background-color 0.3s;
             }
 
-            .wishlist-item button:hover {
+            .wishlist-item .btn-remove:hover {
                 background-color: #c0392b; /* Darker red on hover */
             }
-
         </style>
     </head>
-
     <body>
-
         <jsp:include page="menu.jsp"></jsp:include>
             <div class="container">
-                <h2>Wish list</h2>
+                <h2><b>Wish list</b></h2>
             <c:forEach var="course" items="${wishlist}">
                 <div class="wishlist-item">
                     <div>
@@ -96,7 +95,8 @@
                     </div>
                     <form action="addToWishlist" method="post">
                         <input type="hidden" name="courseId" value="${course.id}">
-                        <button type="submit">Remove</button>
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                        <b><button type="button" class="btn btn-success"><a href="load-historyjoin?Courseid=${course.id}" style="color: #fff; text-decoration: none; ">Join now</a></button></b>
                     </form>
                 </div>
             </c:forEach>

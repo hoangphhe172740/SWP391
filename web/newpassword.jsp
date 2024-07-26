@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
@@ -26,11 +28,15 @@
                         <p class="mess">${mess}</p>
                         <div>
                             <b class="mb-3">PASSWORD</b>
-                            <input name="password" type="pass" id="inputpass" class="form-control form-control-lg mb-3 mt-2" placeholder="Create Password" autofocus="" required="">
+                            <input name="password" type="password" id="inputpass" class="form-control form-control-lg mb-3 mt-2" placeholder="Create Password" autofocus="" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                                   oninvalid="this.setCustomValidity('Mật khẩu trên 8 kí tự và bao gồm chữ cái hoa, thường, chữ số, kí tự đặc biệt')" 
+                                   oninput="this.setCustomValidity('')">
                         </div>
                         <div>
                             <b class="mb-3">CONFIRM PASSWORD</b>
-                            <input name="repass" type="password"  class="form-control form-control-lg mb-3 mt-2" placeholder="Confirm password" required="" autofocus="">
+                            <input name="repass" type="password"  class="form-control form-control-lg mb-3 mt-2" placeholder="Confirm password" required="" autofocus="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                                   oninvalid="this.setCustomValidity('Mật khẩu trên 8 kí tự và bao gồm chữ cái hoa, thường, chữ số, kí tự đặc biệt')" 
+                                   oninput="this.setCustomValidity('')">
                         </div>
                         <div>
                             <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block mt-3">Submit</button>
